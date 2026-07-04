@@ -5,8 +5,8 @@
  * Built by tools/build-css.mjs from assets/css/src/**.
  * Edit the partials in assets/css/src/ and run `npm run build:css`.
  * =====================================================================
- * Built: 2026-07-04T05:28:33.796Z
- * Sources (21):
+ * Built: 2026-07-04T18:15:31.730Z
+ * Sources (22):
  *   - assets/css/src/01-settings/tokens.css
  *   - assets/css/src/02-generic/reset.css
  *   - assets/css/src/03-base/elements.css
@@ -20,6 +20,7 @@
  *   - assets/css/src/05-components/cta.css
  *   - assets/css/src/05-components/footer.css
  *   - assets/css/src/05-components/forms.css
+ *   - assets/css/src/05-components/gallery-grid.css
  *   - assets/css/src/05-components/header.css
  *   - assets/css/src/05-components/hero.css
  *   - assets/css/src/05-components/mobile-nav.css
@@ -1319,24 +1320,51 @@ tbody tr:hover {
 }
 
 /* -----------------------------------------------------------------------------
- * Variant — Service card (icon-led, no image)
+ * Variant — Service card (image and/or icon, whole-card clickable)
+ * -----------------------------------------------------------------------------
+ * Inherits the base card (border, radius, hover lift + shadow, image zoom and
+ * the .card__link::after "clickable block"). This modifier adds a consistent
+ * 4:3 media ratio, the accent icon, and a hover-nudged arrow affordance.
  * -------------------------------------------------------------------------- */
-.card--service {
-	text-align: center;
-	align-items: center;
-	padding: var(--space-lg);
-	gap: var(--space-sm);
-}
-
-.card--service .card__icon {
-	width: 3rem;
-	height: 3rem;
-	color: var(--color-accent);
+.card--service .card__media {
+	aspect-ratio: 4 / 3;                 /* uniform tiles regardless of source */
 }
 
 .card--service .card__body {
-	padding: 0;
+	gap: var(--space-xs);
+}
+
+/* Accent service icon (SVG from spn_cabinets_icon()). */
+.card--service .card__icon {
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-accent);
+}
+
+.card--service .card__title {
+	font-size: var(--font-size-lg);
+}
+
+/* Arrow affordance, pinned to the bottom of equal-height cards. */
+.card--service .card__arrow {
+	display: inline-flex;
 	align-items: center;
+	margin-top: auto;
+	padding-top: var(--space-2xs);
+	color: var(--color-primary);
+}
+
+.card--service .card__arrow-icon {
+	width: 1.25rem;
+	height: 1.25rem;
+	transition: transform var(--duration-base) var(--ease-standard);
+}
+
+/* Nudge the arrow on hover/keyboard focus (reduced-motion safe via the reset). */
+.card--service:hover .card__arrow-icon,
+.card--service:focus-within .card__arrow-icon {
+	transform: translateX(4px);
+	color: var(--color-accent);
 }
 
 /* -----------------------------------------------------------------------------
@@ -1387,36 +1415,106 @@ tbody tr:hover {
 
 /* -----------------------------------------------------------------------------
  * Variant — Testimonial card (quote-led, no media)
+ * -----------------------------------------------------------------------------
+ * Surface panel with a faint decorative quote mark behind the content, a gold
+ * star rating, an italic quote and an author row (optional rounded avatar).
  * -------------------------------------------------------------------------- */
 .card--testimonial {
+	isolation: isolate;                  /* contain the ::before quote mark */
 	padding: var(--space-lg);
-	gap: var(--space-md);
+	gap: var(--space-sm);
 	background-color: var(--color-surface);
 	border-color: transparent;
 }
 
-.card--testimonial:hover {
-	transform: none;
+.card--testimonial:hover,
+.card--testimonial:focus-within {
+	transform: none;                     /* quote-led card doesn't lift */
 	box-shadow: var(--shadow-md);
 }
 
+/* Decorative background quotation mark (behind the content, above the surface). */
+.card--testimonial::before {
+	content: "\201C";                    /* left double quotation mark */
+	position: absolute;
+	top: var(--space-2xs);
+	left: var(--space-sm);
+	z-index: -1;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 7rem;
+	line-height: 1;
+	color: var(--color-accent);
+	opacity: 0.14;                       /* faint */
+	pointer-events: none;
+}
+
+/* Star rating. */
+.card--testimonial .card__rating {
+	display: inline-flex;
+	gap: var(--space-3xs);
+}
+
+.card--testimonial .card__star {
+	width: 1.15rem;
+	height: 1.15rem;
+}
+
+.card--testimonial .card__star.is-filled {
+	color: var(--color-accent);          /* gold */
+}
+
+.card--testimonial .card__star.is-empty {
+	color: var(--color-border-strong);   /* faint / unearned */
+}
+
+/* Quote — reset the base blockquote chrome, add emphasis. */
 .card--testimonial .card__quote {
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: none;
+	border-radius: 0;
 	font-size: var(--font-size-md);
-	line-height: var(--line-height-snug);
+	line-height: var(--line-height-base);
+	font-style: italic;
 	color: var(--color-text);
 }
 
+.card--testimonial .card__quote p {
+	margin: 0;
+}
+
+/* Author row, pinned to the bottom of equal-height cards. */
 .card--testimonial .card__author {
 	display: flex;
 	align-items: center;
-	gap: var(--space-2xs);
+	gap: var(--space-sm);
+	margin-top: auto;
+	padding-top: var(--space-2xs);
+}
+
+.card--testimonial .card__avatar {
+	flex: none;
+	width: 3rem;
+	height: 3rem;
+	border-radius: var(--radius-full);
+	object-fit: cover;
+}
+
+.card--testimonial .card__author-meta {
+	display: flex;
+	flex-direction: column;
+}
+
+.card--testimonial .card__author-name {
+	font-style: normal;                  /* reset <cite> italic */
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-heading);
 }
 
-.card--testimonial .card__rating {
-	color: var(--color-accent);
-	letter-spacing: 0.1em;
+.card--testimonial .card__author-service {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
 }
 
 /* -----------------------------------------------------------------------------
@@ -1444,6 +1542,83 @@ tbody tr:hover {
 
 .card--cta .card__excerpt {
 	color: color-mix(in srgb, var(--color-primary-contrast) 85%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Project card (luxury full-bleed image + overlaid caption)
+ * -----------------------------------------------------------------------------
+ * The image fills the whole card (fixed 4:5 ratio); a token-derived gradient
+ * scrim keeps the bottom caption legible over any photo. Inherits the base
+ * card's overflow:hidden + image zoom-on-hover and the .card__link::after
+ * clickable block; the lift is disabled for a clean gallery feel.
+ * -------------------------------------------------------------------------- */
+.card--project {
+	/* Local, overridable scrim: dark at the bottom, fading up to transparent. */
+	--project-scrim: linear-gradient(
+		to top,
+		color-mix(in srgb, var(--color-text) 88%, transparent) 0%,
+		color-mix(in srgb, var(--color-text) 35%, transparent) 35%,
+		transparent 65%
+	);
+
+	aspect-ratio: 4 / 5;
+	height: auto;                 /* let the ratio govern height in a grid */
+	align-self: start;            /* don't stretch to row height */
+	border: none;
+	color: var(--color-primary-contrast);
+}
+
+/* Image fills the entire card. */
+.card--project .card__image {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Gradient scrim (decorative). */
+.card--project .card__overlay {
+	position: absolute;
+	inset: 0;
+	background-image: var(--project-scrim);
+	pointer-events: none;
+}
+
+/* Caption pinned to the bottom, layered over the image. */
+.card--project .card__caption {
+	position: absolute;
+	inset-inline: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3xs);
+	padding: var(--space-md);
+}
+
+.card--project .card__category {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wide);
+	color: var(--color-accent);
+}
+
+.card--project .card__title {
+	margin: 0;
+	font-size: var(--font-size-lg);
+	color: inherit;               /* white over the scrim */
+}
+
+.card--project .card__link,
+.card--project .card__link:hover {
+	color: inherit;               /* keep the title white on hover */
+}
+
+/* Gallery feel: keep only the image zoom on hover — no card lift. */
+.card--project:hover,
+.card--project:focus-within {
+	transform: none;
 }
 
 /* ==== src/05-components/contact.css ==== */
@@ -1970,6 +2145,69 @@ textarea[readonly] {
 	width: 1px;
 	height: 1px;
 	overflow: hidden;
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote form layout (uses the field hooks above; only spacing lives here)
+ * -------------------------------------------------------------------------- */
+.quote-form-wrap .form-message {
+	margin-bottom: var(--space-md);
+}
+
+.quote-form .field__hint {
+	margin-bottom: var(--space-md);
+}
+
+.quote-form__actions {
+	margin-top: var(--space-lg);
+}
+
+/* ==== src/05-components/gallery-grid.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Gallery Grid
+ * -----------------------------------------------------------------------------
+ * Pure-CSS-grid layout for project cards with a "masonry-lite" stagger — no
+ * JavaScript. Mobile: a single un-staggered column. Desktop (≥768px): the
+ * requested column count, with the offset column nudged down by --gallery-stagger
+ * to break the rigid horizontal line. Token-only.
+ * ========================================================================== */
+
+.gallery-grid {
+	/* Vertical offset for the staggered column(s). */
+	--gallery-stagger: var(--space-xl); /* 3rem */
+
+	display: grid;
+	grid-template-columns: 1fr;         /* mobile: single column */
+	gap: var(--space-md);
+	align-items: start;                 /* let the stagger offsets take effect */
+}
+
+/* -----------------------------------------------------------------------------
+ * Desktop columns + staggered offsets (≥768px)
+ * -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+	.gallery-grid--cols-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.gallery-grid--cols-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.gallery-grid--cols-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	/* Stagger: push the offset column(s) down. Two-column and four-column grids
+	 * sink every even child; three-column grids sink the middle column. */
+	.gallery-grid--cols-2 > :nth-child(2n),
+	.gallery-grid--cols-4 > :nth-child(2n) {
+		margin-top: var(--gallery-stagger);
+	}
+
+	.gallery-grid--cols-3 > :nth-child(3n + 2) {
+		margin-top: var(--gallery-stagger);
+	}
 }
 
 /* ==== src/05-components/header.css ==== */

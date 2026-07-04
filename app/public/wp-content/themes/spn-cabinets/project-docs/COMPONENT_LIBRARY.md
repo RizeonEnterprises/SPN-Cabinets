@@ -23,14 +23,14 @@ rules in [CLAUDE.md](CLAUDE.md) §14–15 and style them with tokens
 | 5 | Card (base) | Primitive | `template-parts/cards/card.php` | ✅ |
 | 6 | Hero | Section | `template-parts/hero/hero.php` | ✅ |
 | 7 | CTA Band | Section | `template-parts/components/cta.php` | ✅ |
-| 8 | Service Card | Composite | `template-parts/cards/service-card.php` | ⬜ |
+| 8 | Service Card | Composite | `template-parts/cards/service-card.php` | ✅ |
 | 9 | Feature Card | Composite | `template-parts/cards/feature-card.php` | ⬜ |
-| 10 | Gallery Grid | Section | `template-parts/gallery/gallery-grid.php` | ⬜ |
-| 11 | Project Card | Composite | `template-parts/cards/project-card.php` | ⬜ |
+| 10 | Gallery Grid | Section | `template-parts/components/gallery-grid.php` | ✅ |
+| 11 | Project Card | Composite | `template-parts/cards/project-card.php` | ✅ |
 | 12 | Testimonials | Section | `template-parts/sections/testimonials.php` | ⬜ |
 | 13 | Statistics / Trust Bar | Section | `template-parts/sections/stats.php` | ⬜ |
 | 14 | FAQ (Accordion) | Composite | `template-parts/faq/faq.php` | ⬜ |
-| 15 | Quote Form | Composite | `template-parts/forms/quote-form.php` | ⬜ |
+| 15 | Quote Form | Composite | `template-parts/forms/quote-form.php` | ✅ |
 | 16 | Contact Card | Composite | `template-parts/cards/contact-card.php` | ⬜ |
 | 17 | Map | Composite | `template-parts/sections/map.php` | ⬜ |
 | 18 | Breadcrumbs | Global | `template-parts/global/breadcrumbs.php` | ✅ |
@@ -46,6 +46,7 @@ rules in [CLAUDE.md](CLAUDE.md) §14–15 and style them with tokens
 | 28 | Logo Strip / Accreditations | Section | `template-parts/sections/logos.php` | ⬜ |
 | 29 | Mobile Nav (off-canvas) | Global | `template-parts/header/mobile-nav.php` | ✅ |
 | 30 | Announcement Bar | Global | `template-parts/header/announcement-bar.php` | ✅ |
+| 31 | Testimonial Card | Composite | `template-parts/cards/testimonial-card.php` | ✅ |
 
 ---
 
@@ -153,29 +154,60 @@ desktop). **Reuses the button primitive** (accent variant, chosen via a
 theme→variant map so a future light theme maps differently). Text uses the
 matching contrast token; `--section-space-y` vertical padding.
 
-### 8. Service Card (Composite) ⬜
-**Responsibility:** summarise a service (Kitchens/Bedrooms) with icon, title,
-blurb, link. **Contract:** `icon`, `title`, `excerpt`, `url`. Built on Card.
+### 8. Service Card (Composite) ✅
+**Responsibility:** summarise a service (Kitchens/Bedrooms) as a whole-card-
+clickable tile for a grid. Built on the base card (`.card--service` modifier in
+`cards.css`). **Contract (args):** `title` (required), `description` (optional),
+`image_url` (optional — 4:3 `object-fit: cover` crop), `icon` (optional —
+`spn_cabinets_icon()` slug; unknown slugs degrade to nothing), `url` (required).
+**Interaction:** clickable-block pattern via the base `.card__link::after`
+(single accessible link = the title); hover/focus-within lift + shadow +
+arrow-nudge. **A11y:** decorative image (`alt=""`), decorative arrow
+(`aria-hidden`), `<h3>` title link.
 
 ### 9. Feature Card (Composite) ⬜
 **Responsibility:** highlight a benefit/USP (icon + short text) in feature grids.
 **Contract:** `icon`, `title`, `text`.
 
-### 10. Gallery Grid (Section) ⬜
-**Responsibility:** responsive portfolio grid of Project Cards, with optional
-Room-Type/Style filtering. **Contract:** query args (taxonomy, count, paged).
-**Perf:** lazy images, `srcset`. **A11y:** filters as accessible controls;
-grid is a list of links.
+### 10. Gallery Grid (Section) ✅
+**Responsibility:** lay out Project Cards in a pure-CSS-grid "masonry-lite"
+staggered grid (no JS masonry). Path: `template-parts/components/gallery-grid.php`.
+**Contract (args):** `projects` (required — array of project-card arg arrays,
+each passed straight to the project-card component; invalid entries are skipped),
+`columns` (int 1–4, default 3). **Design:** single un-staggered column on mobile;
+on desktop (≥768px) the requested columns with the offset column nudged down by
+`--gallery-stagger` (`--space-xl` = 3rem). Filtering (Room-Type/Style) can be
+layered on later. **A11y:** cards carry their own links/alt.
 
-### 11. Project Card (Composite) ⬜
-**Responsibility:** single portfolio item preview (image, title, room type).
-**Contract:** `project` (post) → title, thumb, terms, permalink. Built on Card.
+### 11. Project Card (Composite) ✅
+**Responsibility:** luxury full-bleed portfolio tile — image fills a 4:5 card with
+the category + title overlaid at the bottom over a gradient scrim. Built on the
+base card (`.card--project` modifier in `cards.css`).
+**Contract (args):** `title` (required), `image_url` (required), `category`
+(optional accent eyebrow), `url` (optional — clickable-block when set, otherwise
+a static gallery image), `image_alt` (optional — defaults to title).
+**Interaction:** `overflow: hidden` + base `.card__image` `scale(1.05)`
+zoom-on-hover (no card lift); `.card__link::after` clickable block when linked.
+**A11y:** meaningful image `alt`; decorative overlay (`aria-hidden`); `<h3>` title.
 
 ### 12. Testimonials (Section) ⬜
-**Responsibility:** display client reviews to build trust. **Contract:** query of
-`testimonial` CPT (name, quote, rating). **A11y:** if a slider, provide
-keyboard controls, pause, and no motion for reduced-motion users. Consider
-`Review`/`AggregateRating` schema (only for genuine, verifiable reviews).
+**Responsibility:** display client reviews to build trust — composes the
+**Testimonial Card (#31)** in a grid/slider. **Contract:** query of `testimonial`
+CPT (name, quote, rating). **A11y:** if a slider, provide keyboard controls,
+pause, and no motion for reduced-motion users. Consider `Review`/
+`AggregateRating` schema (only for genuine, verifiable reviews).
+
+### 31. Testimonial Card (Composite) ✅
+**Responsibility:** a single customer review. Built on the base card
+(`.card--testimonial` modifier in `cards.css`). Path:
+`template-parts/cards/testimonial-card.php`.
+**Contract (args):** `quote` (required), `author_name` (required), `service_name`
+(optional muted), `rating` (int 1–5, default 5; out-of-range → 5), `avatar_url`
+(optional — rounded, gracefully omitted). **Design:** gold `spn_cabinets_icon('star')`
+rating (filled up to `rating`, faint beyond), italic `<blockquote>` over a faint
+`::before` quotation mark, author row with `<cite>` + optional avatar.
+**A11y:** rating exposed as one labelled image ("Rated N out of 5") with the
+stars hidden; decorative avatar (`alt=""`); semantic blockquote/cite.
 
 ### 13. Statistics / Trust Bar (Section) ⬜
 **Responsibility:** headline numbers (years experience, projects completed, etc.)
@@ -188,13 +220,23 @@ of `faq` CPT or ACF repeater `{question, answer}`. **A11y:** button-controlled
 disclosure, `aria-expanded`/`aria-controls`, keyboard operable; content in DOM
 (not display-none-only for SEO/schema).
 
-### 15. Quote Form (Composite) ⬜ — *conversion-critical*
-**Responsibility:** the primary lead-capture form (see fields in
-[CLIENT_REQUIREMENTS.md](CLIENT_REQUIREMENTS.md) §5). **Contract:** recipient,
-success URL, source page. **Security:** nonce, honeypot, server-side sanitise +
-validate, spam protection; store lead in DB **and** email. **A11y:** labelled
-fields, `aria-invalid`/`aria-describedby` errors, no colour-only errors, clear
-success state. **Perf:** no heavy third-party JS.
+### 15. Quote Form (Composite) ✅ — *conversion-critical*
+**Responsibility:** the primary lead-capture form. **Native, no plugin.** Part:
+`template-parts/forms/quote-form.php`; handler: `inc/form-handlers.php` (registered
+in functions.php). **Fields:** Full Name, Email, Phone, Postcode (all required),
+Service Required (`<select>`, whitelist-validated against
+`spn_cabinets_quote_services()`), Project Details (optional). **Flow:** posts to
+`admin-post.php` (`action=spn_cabinets_quote`) → nonce check → honeypot → aggressive
+sanitise → server-side validate → on error, stash values+messages in a one-time
+transient and redirect `?status=error&sqf=<token>`; on success, `wp_mail()` the
+lead to `spn_cabinets_contact()['email']` (fallback `admin_email`, Reply-To =
+enquirer) and redirect `?status=success`. **Args:** `submit_label` (optional).
+**Security:** nonce, honeypot, sanitise-on-input, validate (required + email +
+service whitelist), same-site redirect via `wp_validate_redirect`. **Design:**
+reuses forms.css hooks; submit is the **button primitive** (`type=submit`,
+block). **A11y:** labelled fields, `aria-invalid`/`aria-describedby`, non-colour
+errors, `role="status"`/`role="alert"` banners. **Future:** hook
+`spn_cabinets_quote_submitted` to also store leads in a CPT.
 
 ### 16. Contact Card (Composite) ⬜
 **Responsibility:** compact contact details block (phone, WhatsApp, email, hours,

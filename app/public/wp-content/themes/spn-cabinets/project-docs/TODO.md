@@ -90,7 +90,8 @@ _Portfolio_
 - [ ] Project Card
 - [ ] Gallery Grid (+ optional filtering)
 _Conversion_
-- [ ] Quote Form (nonce, honeypot, sanitise/validate, email + store) — priority
+- [x] Quote Form — native: nonce, honeypot, sanitise/validate, email lead
+      (store-in-CPT deferred to the `spn_cabinets_quote_submitted` hook)
 - [ ] Contact Card
 - [ ] WhatsApp Button ⛳ (needs number)
 - [ ] Map (lazy/facade)

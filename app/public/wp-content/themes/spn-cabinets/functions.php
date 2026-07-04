@@ -86,6 +86,7 @@ $spn_cabinets_modules = array(
 	'inc/enqueue-assets.php',
 	'inc/cleanup.php',
 	'inc/security.php',
+	'inc/form-handlers.php',
 );
 
 foreach ( $spn_cabinets_modules as $spn_cabinets_module ) {

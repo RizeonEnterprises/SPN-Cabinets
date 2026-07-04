@@ -216,3 +216,18 @@ textarea[readonly] {
 	height: 1px;
 	overflow: hidden;
 }
+
+/* -----------------------------------------------------------------------------
+ * Quote form layout (uses the field hooks above; only spacing lives here)
+ * -------------------------------------------------------------------------- */
+.quote-form-wrap .form-message {
+	margin-bottom: var(--space-md);
+}
+
+.quote-form .field__hint {
+	margin-bottom: var(--space-md);
+}
+
+.quote-form__actions {
+	margin-top: var(--space-lg);
+}

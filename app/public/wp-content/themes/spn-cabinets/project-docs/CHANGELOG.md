@@ -19,6 +19,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Free Quote form (native, no plugin)** — conversion-critical.
+  `template-parts/forms/quote-form.php` + secure handler `inc/form-handlers.php`
+  (registered in `functions.php`) + shared `spn_cabinets_quote_services()` in
+  site-options. Fields: Full Name, Email, Phone, Postcode (required), Service
+  (whitelisted `<select>`), Project Details (optional). Posts to `admin-post.php`;
+  nonce + honeypot + aggressive sanitisation + server-side validation; on error
+  redirects `?status=error` (one-time transient repopulates values + per-field
+  messages), on success `wp_mail()`s the lead (Reply-To enquirer) and redirects
+  `?status=success`. Submit reuses the button primitive; uses existing forms.css
+  hooks (+ 3 small `.quote-form*` spacing rules); no inline styles.
+- **Testimonial Card component** (`template-parts/cards/testimonial-card.php`;
+  styles via the `.card--testimonial` modifier in `cards.css` — no new CSS file).
+  Customer review card: `quote` (required), `author_name` (required),
+  `service_name` (optional), `rating` (1–5, default 5), `avatar_url` (optional,
+  gracefully omitted). Gold SVG star rating, italic `<blockquote>` over a faint
+  decorative `::before` quotation mark, and a `<cite>` author row with optional
+  rounded avatar. Added a reusable `star` icon to `spn_cabinets_icon()`.
+- **Gallery Grid component** (`template-parts/components/gallery-grid.php` +
+  `assets/css/src/05-components/gallery-grid.css`). Pure-CSS-grid "masonry-lite"
+  layout for project cards: `projects` (required — array of project-card arg
+  arrays), `columns` (1–4, default 3). Single column on mobile; on desktop the
+  requested columns with the offset column nudged down by `--gallery-stagger`
+  (3rem). No JavaScript. Invalid project entries are skipped.
+- **Project Card component** (`template-parts/cards/project-card.php`; styles via
+  the `.card--project` modifier in `assets/css/src/05-components/cards.css` — no
+  new CSS file). Luxury full-bleed gallery tile: `title` (required), `image_url`
+  (required), `category` (optional), `url` (optional — clickable-block when set,
+  else a static gallery image), `image_alt` (optional). 4:5 image with
+  `object-fit: cover`, a token-derived gradient scrim, an overlaid bottom
+  caption, and the base card's contained zoom-on-hover.
+- **Service Card component** (`template-parts/cards/service-card.php`; styles via
+  the `.card--service` modifier in `assets/css/src/05-components/cards.css` — no
+  new CSS file). Whole-card-clickable service tile for grids: `title` (required),
+  `description`, `image_url` (optional, uniform 4:3 `object-fit: cover`), `icon`
+  (optional `spn_cabinets_icon()` slug), `url` (required). Reuses the base card's
+  clickable-block (`.card__link::after`) + hover-lift; adds accent icon and a
+  hover-nudged arrow affordance.
+
 - **CTA Band component** (`template-parts/components/cta.php` +
   `assets/css/src/05-components/cta.css`). Full-width conversion band: `title`
   (required), `description`, `button_text`+`button_url` (required), `theme`
@@ -98,6 +136,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     and submenu toggles.
 
 ### Changed
+- Registered `inc/form-handlers.php` in the functions.php module loader; added
+  `spn_cabinets_quote_services()` to site-options and small `.quote-form*`
+  spacing rules to `forms.css`.
+- Reworked the `.card--testimonial` variant in `cards.css` (decorative `::before`
+  quote mark, SVG star rating, italic quote, avatar/author row) and added a
+  `star` icon to the icon set.
+- Added the `.card--project` variant to `cards.css` (full-bleed 4:5 image tile
+  with gradient scrim + overlaid caption; reuses the base card zoom/clickable).
+- `.card--service` in `cards.css` reworked from icon-only/centred to support an
+  optional top image (4:3) and/or accent icon, left-aligned, with an arrow.
 - `assets/css/main.css` is now a **generated** file (compiled from
   `assets/css/src/**`); replaced the initial hand-written base stylesheet.
 - Moved the authoritative `CLAUDE.md` to the **theme root** so Claude Code

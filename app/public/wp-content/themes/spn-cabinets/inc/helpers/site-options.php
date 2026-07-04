@@ -78,6 +78,27 @@ function spn_cabinets_announcement() {
 }
 
 /**
+ * The Free Quote form's "Service required" options.
+ *
+ * Shared by the form (renders the <select>) and the handler (validates the
+ * submitted value against these keys), so the two can never drift. Filterable.
+ *
+ * @since 1.0.0
+ * @return array Map of value => label.
+ */
+function spn_cabinets_quote_services() {
+	return apply_filters(
+		'spn_cabinets_quote_services',
+		array(
+			'kitchen-installation' => __( 'Kitchen Installation', 'spn-cabinets' ),
+			'bedroom-fitting'      => __( 'Bedroom Fitting', 'spn-cabinets' ),
+			'bespoke-cabinets'     => __( 'Bespoke Cabinets', 'spn-cabinets' ),
+			'other'                => __( 'Other', 'spn-cabinets' ),
+		)
+	);
+}
+
+/**
  * Build a safe `tel:` href from a phone string.
  *
  * @since 1.0.0

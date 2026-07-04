@@ -47,6 +47,8 @@ function spn_cabinets_icon( $name, $args = array() ) {
 		'mail'         => '<rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/>',
 		'map-pin'      => '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
 		'arrow-right'  => '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
+		// Star is a filled glyph (rating displays).
+		'star'         => '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
 		// WhatsApp is a filled brand glyph (no stroke).
 		'whatsapp'     => '<path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M12 2a10 10 0 0 0-8.5 15.28L2 22l4.83-1.47A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-2.87.87.87-2.79-.19-.31A8.2 8.2 0 1 1 12 20.2z"/>',
 	);
@@ -55,7 +57,7 @@ function spn_cabinets_icon( $name, $args = array() ) {
 		return '';
 	}
 
-	$is_filled  = in_array( $name, array( 'whatsapp' ), true );
+	$is_filled  = in_array( $name, array( 'whatsapp', 'star' ), true );
 	$has_title  = '' !== $args['title'];
 	$class      = trim( 'icon icon--' . $name . ' ' . $args['class'] );
 	$size       = absint( $args['size'] );

@@ -1,0 +1,46 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Gallery Grid
+ * -----------------------------------------------------------------------------
+ * Pure-CSS-grid layout for project cards with a "masonry-lite" stagger — no
+ * JavaScript. Mobile: a single un-staggered column. Desktop (≥768px): the
+ * requested column count, with the offset column nudged down by --gallery-stagger
+ * to break the rigid horizontal line. Token-only.
+ * ========================================================================== */
+
+.gallery-grid {
+	/* Vertical offset for the staggered column(s). */
+	--gallery-stagger: var(--space-xl); /* 3rem */
+
+	display: grid;
+	grid-template-columns: 1fr;         /* mobile: single column */
+	gap: var(--space-md);
+	align-items: start;                 /* let the stagger offsets take effect */
+}
+
+/* -----------------------------------------------------------------------------
+ * Desktop columns + staggered offsets (≥768px)
+ * -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+	.gallery-grid--cols-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.gallery-grid--cols-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.gallery-grid--cols-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	/* Stagger: push the offset column(s) down. Two-column and four-column grids
+	 * sink every even child; three-column grids sink the middle column. */
+	.gallery-grid--cols-2 > :nth-child(2n),
+	.gallery-grid--cols-4 > :nth-child(2n) {
+		margin-top: var(--gallery-stagger);
+	}
+
+	.gallery-grid--cols-3 > :nth-child(3n + 2) {
+		margin-top: var(--gallery-stagger);
+	}
+}
