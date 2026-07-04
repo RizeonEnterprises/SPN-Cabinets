@@ -19,6 +19,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Section Heading component** (`template-parts/components/section-heading.php`
+  + `assets/css/src/05-components/section-heading.css`). Args-driven kicker +
+  title + description block for use above grids/galleries/testimonials/sections:
+  `kicker` (uppercase accent eyebrow), `title` (required), `title_tag` (h1–h6,
+  default h2), `description` (muted, constrained to 60ch), `alignment`
+  (left|center, default center). Token-only styling; new `template-parts/components/`
+  directory.
+
+- **Hero component** (`template-parts/hero/hero.php` + `assets/css/src/05-components/hero.css`).
+  Args-driven, reusable across homepage/service pages: `title` (+`title_tag`),
+  `subtitle`, `alignment` (left|center), `background_type` (image|solid),
+  `background_image_url`(+alt), and primary/secondary CTA text+URL. Dark surface
+  with responsive `min-height` (60vh mobile / 70vh desktop), a token-derived
+  `color-mix` overlay for image backgrounds, flex-centred content, and CTAs
+  reusing the button primitive (accent + light outline on the dark surface).
+  Background renders as a real `<img>` (LCP-friendly: fetchpriority/eager/async).
+
 - Documentation suite in `project-docs/`: `CLAUDE.md`, `PROJECT_GUIDE.md`,
   `CLIENT_REQUIREMENTS.md`, `SITE_ARCHITECTURE.md`, `DESIGN_SYSTEM.md`,
   `COMPONENT_LIBRARY.md`, `SEO_STRATEGY.md`, `DEVELOPMENT_WORKFLOW.md`,

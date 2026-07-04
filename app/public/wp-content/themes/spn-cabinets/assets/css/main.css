@@ -5,8 +5,8 @@
  * Built by tools/build-css.mjs from assets/css/src/**.
  * Edit the partials in assets/css/src/ and run `npm run build:css`.
  * =====================================================================
- * Built: 2026-07-03T18:50:40.252Z
- * Sources (18):
+ * Built: 2026-07-04T05:16:49.895Z
+ * Sources (20):
  *   - assets/css/src/01-settings/tokens.css
  *   - assets/css/src/02-generic/reset.css
  *   - assets/css/src/03-base/elements.css
@@ -20,8 +20,10 @@
  *   - assets/css/src/05-components/footer.css
  *   - assets/css/src/05-components/forms.css
  *   - assets/css/src/05-components/header.css
+ *   - assets/css/src/05-components/hero.css
  *   - assets/css/src/05-components/mobile-nav.css
  *   - assets/css/src/05-components/navigation.css
+ *   - assets/css/src/05-components/section-heading.css
  *   - assets/css/src/06-utilities/accessibility.css
  *   - assets/css/src/06-utilities/utilities.css
  *   - assets/css/src/07-animations/animations.css
@@ -1999,6 +2001,130 @@ textarea[readonly] {
 	}
 }
 
+/* ==== src/05-components/hero.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Hero
+ * -----------------------------------------------------------------------------
+ * Reusable hero band (homepage, service pages, …). Dark surface with light text
+ * for a premium feel; the solid variant uses the brand primary, the image
+ * variant lays a real <img> under a token-based scrim. Alignment (left/center)
+ * and CTAs are driven by the PHP args in template-parts/hero/hero.php.
+ * Token-only — no hard-coded colours, sizes or spacing.
+ * ========================================================================== */
+
+.hero {
+	/* Local, overridable scrim derived from the brand primary token. */
+	--hero-overlay: color-mix(in srgb, var(--color-primary) 62%, transparent);
+
+	position: relative;
+	display: flex;
+	align-items: center;                 /* vertical-centre the content */
+	min-height: max(60vh, 26rem);        /* mobile: 60vh with a sensible floor */
+	padding-block: var(--section-space-y);
+	overflow: hidden;                    /* clip the cover image */
+	isolation: isolate;                  /* local stacking context */
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary); /* solid default + image load fallback */
+}
+
+@media (min-width: 768px) {
+	.hero {
+		min-height: 70vh;                /* taller on tablet/desktop */
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Background image + overlay (image variant only)
+ * -------------------------------------------------------------------------- */
+.hero__bg-image {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.hero__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 0;                          /* above the image (later in source) */
+	background-color: var(--hero-overlay);
+}
+
+/* -----------------------------------------------------------------------------
+ * Content
+ * -------------------------------------------------------------------------- */
+.hero__inner {
+	position: relative;
+	z-index: 1;                          /* above image + overlay */
+	width: 100%;
+}
+
+.hero__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	max-width: 42rem;                    /* keep hero copy readable */
+}
+
+.hero__title {
+	margin: 0;
+	color: var(--color-primary-contrast); /* override base h1 (dark) colour */
+	font-size: var(--font-size-h1);
+}
+
+.hero__subtitle {
+	margin: 0;
+	max-width: 46ch;
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-snug);
+	color: color-mix(in srgb, var(--color-primary-contrast) 88%, transparent);
+}
+
+.hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm);
+	margin-top: var(--space-2xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment modifiers
+ * -------------------------------------------------------------------------- */
+.hero--left .hero__content {
+	align-items: flex-start;
+	text-align: left;
+	margin-inline: 0;
+}
+
+.hero--center .hero__content {
+	align-items: center;
+	text-align: center;
+	margin-inline: auto;
+}
+
+.hero--center .hero__subtitle {
+	margin-inline: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Buttons on the dark hero surface
+ * -----------------------------------------------------------------------------
+ * The button component exposes local custom properties, so we re-theme the
+ * outline CTA to read as light-on-dark without touching the button partial.
+ * (The primary CTA uses the accent variant, which already pops on dark.)
+ * -------------------------------------------------------------------------- */
+.hero .button--outline {
+	--button-fg: var(--color-primary-contrast);
+	--button-border: var(--color-primary-contrast);
+}
+
+.hero .button--outline:hover {
+	color: var(--color-primary);
+	background-color: var(--color-primary-contrast);
+}
+
 /* ==== src/05-components/mobile-nav.css ==== */
 /* =============================================================================
  * 05 · COMPONENTS — Off-canvas mobile navigation
@@ -2311,6 +2437,60 @@ body.is-menu-open {
 	visibility: visible;
 	transform: none;
 	pointer-events: auto;
+}
+
+/* ==== src/05-components/section-heading.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Section Heading
+ * -----------------------------------------------------------------------------
+ * Reusable heading block (kicker + title + description) used above grids,
+ * galleries, testimonials and page sections. Token-only. The caller controls
+ * outer width/placement; this component only handles the heading stack.
+ * ========================================================================== */
+
+.section-heading {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
+/* Small uppercase accent "eyebrow" above the title. */
+.section-heading__kicker {
+	margin: 0;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-tight);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+	color: var(--color-accent);
+}
+
+.section-heading__title {
+	margin: 0;
+	color: var(--color-heading);
+}
+
+/* Muted, readable supporting paragraph — constrained so centred text doesn't
+ * stretch the full width. */
+.section-heading__description {
+	margin: 0;
+	max-width: 60ch;
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-base);
+	color: var(--color-text-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment modifiers
+ * -------------------------------------------------------------------------- */
+.section-heading--left {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.section-heading--center {
+	align-items: center;
+	text-align: center;
 }
 
 /* ==== src/06-utilities/accessibility.css ==== */

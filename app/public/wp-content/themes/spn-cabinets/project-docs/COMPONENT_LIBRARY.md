@@ -21,7 +21,7 @@ rules in [CLAUDE.md](CLAUDE.md) §14–15 and style them with tokens
 | 3 | Primary Navigation | Global | (in header + nav walker) | ✅ |
 | 4 | Button / CTA | Primitive | `template-parts/buttons/button.php` | ✅ |
 | 5 | Card (base) | Primitive | `template-parts/cards/card.php` | ✅ |
-| 6 | Hero | Section | `template-parts/hero/hero.php` | ⬜ |
+| 6 | Hero | Section | `template-parts/hero/hero.php` | ✅ |
 | 7 | CTA Band | Section | `template-parts/sections/cta-band.php` | ⬜ |
 | 8 | Service Card | Composite | `template-parts/cards/service-card.php` | ⬜ |
 | 9 | Feature Card | Composite | `template-parts/cards/feature-card.php` | ⬜ |
@@ -41,7 +41,7 @@ rules in [CLAUDE.md](CLAUDE.md) §14–15 and style them with tokens
 | 23 | 404 Hero | Section | (in `404.php`) | ✅ |
 | 24 | Cookie Banner | Global | `template-parts/global/cookie-banner.php` | ⬜ |
 | 25 | Newsletter | Section | `template-parts/forms/newsletter.php` | ⬜ |
-| 26 | Section Heading | Primitive | `template-parts/sections/section-heading.php` | ⬜ |
+| 26 | Section Heading | Primitive | `template-parts/components/section-heading.php` | ✅ |
 | 27 | Social Links | Primitive | `template-parts/global/social-links.php` | ⬜ |
 | 28 | Logo Strip / Accreditations | Section | `template-parts/sections/logos.php` | ⬜ |
 | 29 | Mobile Nav (off-canvas) | Global | `template-parts/header/mobile-nav.php` | ✅ |
@@ -111,20 +111,36 @@ reused by archives and composed by richer cards. **Contract (args):** `title`,
 `url`, `image_id`, `image_size`, `excerpt`, `cta_label`, `classes[]`.
 **A11y:** semantic `<article>`, `<h3>` title, lazy image.
 
-### 26. Section Heading ⬜
-**Responsibility:** standardised eyebrow + heading + intro for sections, so every
-section header looks identical. **Contract:** `eyebrow`, `title`, `level`
-(h2/h3), `intro`, `align`. **A11y:** correct heading level per context.
+### 26. Section Heading ✅
+**Responsibility:** standardised kicker (eyebrow) + heading + description block
+so every section header looks identical. Path:
+`template-parts/components/section-heading.php`.
+**Contract (args):** `kicker` (optional, uppercase accent eyebrow), `title`
+(required — bails without it), `title_tag` (h1–h6, default `h2`), `description`
+(optional, muted + constrained to 60ch), `alignment` (left|center, default
+center). **A11y:** correct heading level per context (caller picks `title_tag`
+to keep the page's heading hierarchy valid).
 
 ---
 
 ## Composites & sections (planned)
 
-### 6. Hero (Section) ⬜
-**Responsibility:** above-the-fold headline, subcopy, primary + secondary CTA,
-hero image/media; the page's LCP element. **Contract:** `heading`, `subheading`,
-`cta_primary`, `cta_secondary`, `image_id`, `variant`. **Perf:** LCP image gets
-`fetchpriority="high"`, explicit dimensions. **A11y:** single `<h1>` on home.
+### 6. Hero (Section) ✅
+**Responsibility:** above-the-fold headline, subcopy, primary + secondary CTA and
+an optional background image; the page's LCP element. Dark surface (solid brand
+primary or image + token scrim) with light text for a premium feel.
+**Contract (args):** `title`, `title_tag` (h1|h2, default h1), `subtitle`,
+`alignment` (left|center), `background_type` (image|solid),
+`background_image_url`, `background_image_alt` (default ''=decorative),
+`primary_cta_text`/`primary_cta_url`, `secondary_cta_text`/`secondary_cta_url`.
+Bails without a `title`; falls back to solid if `image` has no URL; CTAs render
+only when text **and** URL are present.
+**Perf:** background renders as a real `<img>` with `fetchpriority="high"`,
+`loading="eager"`, `decoding="async"`.
+**A11y:** keep one `<h1>` per page — when the hero is the page heading, the
+header branding must not also be `<h1>`; otherwise pass `title_tag => 'h2'`.
+Decorative background image uses empty `alt`. CTAs reuse the button primitive
+(primary→accent, secondary→outline re-themed light on the dark surface).
 
 ### 7. CTA Band (Section) ⬜
 **Responsibility:** full-width "Get your free quote" conversion band, repeated

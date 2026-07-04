@@ -1,0 +1,122 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Hero
+ * -----------------------------------------------------------------------------
+ * Reusable hero band (homepage, service pages, …). Dark surface with light text
+ * for a premium feel; the solid variant uses the brand primary, the image
+ * variant lays a real <img> under a token-based scrim. Alignment (left/center)
+ * and CTAs are driven by the PHP args in template-parts/hero/hero.php.
+ * Token-only — no hard-coded colours, sizes or spacing.
+ * ========================================================================== */
+
+.hero {
+	/* Local, overridable scrim derived from the brand primary token. */
+	--hero-overlay: color-mix(in srgb, var(--color-primary) 62%, transparent);
+
+	position: relative;
+	display: flex;
+	align-items: center;                 /* vertical-centre the content */
+	min-height: max(60vh, 26rem);        /* mobile: 60vh with a sensible floor */
+	padding-block: var(--section-space-y);
+	overflow: hidden;                    /* clip the cover image */
+	isolation: isolate;                  /* local stacking context */
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary); /* solid default + image load fallback */
+}
+
+@media (min-width: 768px) {
+	.hero {
+		min-height: 70vh;                /* taller on tablet/desktop */
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Background image + overlay (image variant only)
+ * -------------------------------------------------------------------------- */
+.hero__bg-image {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.hero__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 0;                          /* above the image (later in source) */
+	background-color: var(--hero-overlay);
+}
+
+/* -----------------------------------------------------------------------------
+ * Content
+ * -------------------------------------------------------------------------- */
+.hero__inner {
+	position: relative;
+	z-index: 1;                          /* above image + overlay */
+	width: 100%;
+}
+
+.hero__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	max-width: 42rem;                    /* keep hero copy readable */
+}
+
+.hero__title {
+	margin: 0;
+	color: var(--color-primary-contrast); /* override base h1 (dark) colour */
+	font-size: var(--font-size-h1);
+}
+
+.hero__subtitle {
+	margin: 0;
+	max-width: 46ch;
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-snug);
+	color: color-mix(in srgb, var(--color-primary-contrast) 88%, transparent);
+}
+
+.hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm);
+	margin-top: var(--space-2xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment modifiers
+ * -------------------------------------------------------------------------- */
+.hero--left .hero__content {
+	align-items: flex-start;
+	text-align: left;
+	margin-inline: 0;
+}
+
+.hero--center .hero__content {
+	align-items: center;
+	text-align: center;
+	margin-inline: auto;
+}
+
+.hero--center .hero__subtitle {
+	margin-inline: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Buttons on the dark hero surface
+ * -----------------------------------------------------------------------------
+ * The button component exposes local custom properties, so we re-theme the
+ * outline CTA to read as light-on-dark without touching the button partial.
+ * (The primary CTA uses the accent variant, which already pops on dark.)
+ * -------------------------------------------------------------------------- */
+.hero .button--outline {
+	--button-fg: var(--color-primary-contrast);
+	--button-border: var(--color-primary-contrast);
+}
+
+.hero .button--outline:hover {
+	color: var(--color-primary);
+	background-color: var(--color-primary-contrast);
+}

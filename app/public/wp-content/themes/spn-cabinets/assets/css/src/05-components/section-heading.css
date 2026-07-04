@@ -1,0 +1,52 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Section Heading
+ * -----------------------------------------------------------------------------
+ * Reusable heading block (kicker + title + description) used above grids,
+ * galleries, testimonials and page sections. Token-only. The caller controls
+ * outer width/placement; this component only handles the heading stack.
+ * ========================================================================== */
+
+.section-heading {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
+/* Small uppercase accent "eyebrow" above the title. */
+.section-heading__kicker {
+	margin: 0;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-tight);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+	color: var(--color-accent);
+}
+
+.section-heading__title {
+	margin: 0;
+	color: var(--color-heading);
+}
+
+/* Muted, readable supporting paragraph — constrained so centred text doesn't
+ * stretch the full width. */
+.section-heading__description {
+	margin: 0;
+	max-width: 60ch;
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-base);
+	color: var(--color-text-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment modifiers
+ * -------------------------------------------------------------------------- */
+.section-heading--left {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.section-heading--center {
+	align-items: center;
+	text-align: center;
+}
