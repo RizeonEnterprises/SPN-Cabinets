@@ -83,6 +83,7 @@ $spn_cabinets_modules = array(
 	// Feature modules.
 	'inc/theme-support.php',
 	'inc/menus.php',
+	'inc/post-types.php',
 	'inc/enqueue-assets.php',
 	'inc/cleanup.php',
 	'inc/security.php',

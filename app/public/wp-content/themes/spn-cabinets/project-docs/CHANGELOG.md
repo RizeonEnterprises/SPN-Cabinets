@@ -19,6 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Portfolio backend (Phase 2)** — `inc/post-types.php` (registered in
+  functions.php). Registers the **`spn_project`** CPT (`public`, `show_in_rest`,
+  `has_archive: 'portfolio'`, `rewrite slug 'project'`; supports title/editor/
+  thumbnail/excerpt/revisions; `dashicons-portfolio`) and the hierarchical
+  **`spn_project_category`** taxonomy (`rewrite slug 'project-category'`,
+  `show_in_rest`, admin column). URLs: archive `/portfolio/`, singles
+  `/project/{slug}/`, terms `/project-category/{term}/`. Rewrite rules flush on
+  `after_switch_theme`; flushed now via WP-CLI.
 - **Free Quote form (native, no plugin)** — conversion-critical.
   `template-parts/forms/quote-form.php` + secure handler `inc/form-handlers.php`
   (registered in `functions.php`) + shared `spn_cabinets_quote_services()` in

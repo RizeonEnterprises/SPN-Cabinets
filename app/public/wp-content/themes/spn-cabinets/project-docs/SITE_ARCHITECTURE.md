@@ -38,40 +38,45 @@ Home (/)
 > **Service-area pages** (e.g. `/fitted-kitchens-{town}/`) may be added later for
 > local SEO once coverage is confirmed — see [SEO_STRATEGY.md](SEO_STRATEGY.md).
 
-## 3. Recommended custom post types (CPTs)
+## 3. Custom post types (CPTs)
 
-Registered in code (`inc/cpt/` module), not a plugin, following prefix rules.
+Registered in code (`inc/post-types.php`), not a plugin, following prefix rules.
 
-| CPT | Slug | Purpose | Public archive? |
-|---|---|---|---|
-| **Project** | `project` | Portfolio items (completed kitchens/bedrooms) | Yes → `/gallery/` |
-| **Service** | `service` | Structured service entries (optional; pages may suffice) | Optional |
-| **Testimonial** | `testimonial` | Client reviews for trust sections | No (used via query) |
-| **FAQ** | `faq` | Reusable Q&A for FAQ component + schema | No (used via query) |
+| CPT | Key | Purpose | Public archive? | Status |
+|---|---|---|---|---|
+| **Project** | `spn_project` | Portfolio items (completed kitchens/bedrooms) | Yes → `/portfolio/` | ✅ **Registered (Phase 2)** |
+| **Service** | `spn_service` | Structured service entries (optional; pages may suffice) | Optional | ⬜ future |
+| **Testimonial** | `spn_testimonial` | Client reviews for trust sections | No (used via query) | ⬜ future |
+| **FAQ** | `spn_faq` | Reusable Q&A for FAQ component + schema | No (used via query) | ⬜ future |
+
+**`spn_project` (registered)** — `public: true`, `show_in_rest: true`,
+`has_archive: 'portfolio'`, `rewrite: {slug: 'project'}` → **archive `/portfolio/`,
+singles `/project/{slug}/`**. Supports: `title`, `editor`, `thumbnail`, `excerpt`,
+`revisions`. Menu icon `dashicons-portfolio`. Rewrite rules flushed on
+`after_switch_theme` (no per-request flush). Gallery/spec fields come later via ACF.
 
 **Notes**
-- Start with **`project`** (essential for the gallery). Add others as needed.
-- `project` supports: title, editor, excerpt, featured image, **gallery (ACF)**,
-  and taxonomy terms below.
-- Set the `project` archive slug to **`gallery`** (or map the Gallery page to the
-  archive) so URLs read `/gallery/` and `/project/{slug}/`.
-- `testimonial` and `faq` are "utility" CPTs — not individually indexed; surfaced
-  through components. Consider `exclude_from_search` + `noindex` on singles.
+- Future utility CPTs (`spn_testimonial`, `spn_faq`) are surfaced through
+  components, not individually indexed — consider `exclude_from_search` +
+  `noindex` on singles when added.
 
-## 4. Recommended taxonomies
+## 4. Taxonomies
 
-| Taxonomy | Attached to | Terms (examples) | Purpose |
-|---|---|---|---|
-| **Room Type** (`room-type`) | `project` | Kitchen, Bedroom, Home Office, Media Wall | Filter/segment the gallery; SEO clusters |
-| **Style** (`project-style`) | `project` | Modern, Traditional, Shaker, Handleless, Gloss | Faceted browsing (phase 2) |
-| **Location** (`project-location`) | `project` | \[towns covered] | Local SEO signals (optional) |
-| **Service Category** (`service-cat`) | `service` | Kitchens, Bedrooms | Group services if CPT used |
+| Taxonomy | Key | Attached to | Terms (examples) | Status |
+|---|---|---|---|---|
+| **Project Category** | `spn_project_category` | `spn_project` | Kitchens, Bedrooms, Home Offices, Media Walls | ✅ **Registered (Phase 2)** |
+| **Style** | `spn_project_style` | `spn_project` | Modern, Traditional, Shaker, Handleless, Gloss | ⬜ future / optional |
+| **Location** | `spn_project_location` | `spn_project` | \[towns covered] | ⬜ future / optional |
 
-- Keep taxonomies **hierarchical where it aids IA** (Room Type), flat where
-  tag-like (Style).
-- Archive templates for `room-type` become natural landing pages (e.g.
-  `/room-type/kitchen/`) — decide indexation per [SEO_STRATEGY.md](SEO_STRATEGY.md)
-  to avoid thin/duplicate pages.
+**`spn_project_category` (registered)** — `hierarchical: true` (category-like),
+`public: true`, `show_in_rest: true`, `show_admin_column: true`,
+`rewrite: {slug: 'project-category'}` → term pages at
+**`/project-category/{term}/`**.
+
+- Archive templates for `project-category` become natural landing pages — decide
+  indexation per [SEO_STRATEGY.md](SEO_STRATEGY.md) to avoid thin/duplicate pages.
+- Add the optional taxonomies later only if faceted filtering / local pages need
+  them.
 
 ## 5. Navigation
 
@@ -123,9 +128,9 @@ pages, no stop-words bloat, stable (set up redirects if anything changes).
 |---|---|---|
 | Pages | `/{page-slug}/` | `/about/`, `/services/` |
 | Service children | `/services/{service}/` | `/services/fitted-kitchens/` |
-| Gallery archive | `/gallery/` | `/gallery/` |
+| Project archive (`spn_project`) | `/portfolio/` | `/portfolio/` |
 | Project single | `/project/{project-slug}/` | `/project/oakwood-shaker-kitchen/` |
-| Room-type archive | `/room-type/{term}/` | `/room-type/kitchen/` |
+| Project category | `/project-category/{term}/` | `/project-category/kitchens/` |
 | Blog (optional) | `/blog/`, `/blog/{post}/` | `/blog/planning-your-kitchen/` |
 
 - **Permalinks:** set to *Post name* (`/%postname%/`).

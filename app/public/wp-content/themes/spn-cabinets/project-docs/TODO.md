@@ -38,9 +38,9 @@ _Last updated: 2026-07-03_
 - [ ] Tooling: Composer + PHPCS + `wp-coding-standards/wpcs`; `.editorconfig`
 
 **Information architecture**
-- [ ] Register **Project** CPT (`inc/cpt/`)
-- [ ] Register taxonomies: Room Type, Style, (Location)
-- [ ] (Optional) Testimonial + FAQ CPTs
+- [x] Register **Project** CPT `spn_project` (`inc/post-types.php`) + flush rewrites
+- [x] Register hierarchical taxonomy `spn_project_category`
+- [ ] (Optional/future) Style + Location taxonomies; Testimonial + FAQ CPTs
 - [ ] Install & configure **ACF** + enable Local JSON (`acf-json/`)
 - [ ] Create page tree (Home, About, Services + children, Gallery, Contact, legal)
 - [ ] Build + assign Primary and Footer menus
