@@ -22,7 +22,7 @@ rules in [CLAUDE.md](CLAUDE.md) §14–15 and style them with tokens
 | 4 | Button / CTA | Primitive | `template-parts/buttons/button.php` | ✅ |
 | 5 | Card (base) | Primitive | `template-parts/cards/card.php` | ✅ |
 | 6 | Hero | Section | `template-parts/hero/hero.php` | ✅ |
-| 7 | CTA Band | Section | `template-parts/sections/cta-band.php` | ⬜ |
+| 7 | CTA Band | Section | `template-parts/components/cta.php` | ✅ |
 | 8 | Service Card | Composite | `template-parts/cards/service-card.php` | ⬜ |
 | 9 | Feature Card | Composite | `template-parts/cards/feature-card.php` | ⬜ |
 | 10 | Gallery Grid | Section | `template-parts/gallery/gallery-grid.php` | ⬜ |
@@ -142,9 +142,16 @@ header branding must not also be `<h1>`; otherwise pass `title_tag => 'h2'`.
 Decorative background image uses empty `alt`. CTAs reuse the button primitive
 (primary→accent, secondary→outline re-themed light on the dark surface).
 
-### 7. CTA Band (Section) ⬜
-**Responsibility:** full-width "Get your free quote" conversion band, repeated
-across pages. **Contract:** `heading`, `text`, `cta`, `background`. Uses Button.
+### 7. CTA Band (Section) ✅
+**Responsibility:** full-width conversion band (title + optional description +
+one button), repeated across pages. Path: `template-parts/components/cta.php`.
+**Contract (args):** `title` (required), `description` (optional),
+`button_text` + `button_url` (required — bails without them), `theme`
+(primary|secondary|dark, default primary — sets the band background),
+`alignment` (center|left, default center; left becomes a content|button row on
+desktop). **Reuses the button primitive** (accent variant, chosen via a
+theme→variant map so a future light theme maps differently). Text uses the
+matching contrast token; `--section-space-y` vertical padding.
 
 ### 8. Service Card (Composite) ⬜
 **Responsibility:** summarise a service (Kitchens/Bedrooms) with icon, title,

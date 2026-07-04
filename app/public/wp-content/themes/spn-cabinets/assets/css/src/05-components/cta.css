@@ -1,0 +1,95 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Call-to-action (CTA) band
+ * -----------------------------------------------------------------------------
+ * Full-width conversion band. Generous vertical rhythm via section-spacing
+ * tokens; the background reacts to the `theme` modifier and text uses the
+ * matching contrast token. The button is the shared primitive (accent variant),
+ * so nothing button-specific is restyled here. Token-only.
+ * ========================================================================== */
+
+.cta {
+	padding-block: var(--section-space-y);
+}
+
+/* -----------------------------------------------------------------------------
+ * Themes — background + contrasting text
+ * -------------------------------------------------------------------------- */
+.cta--primary {
+	background-color: var(--color-primary);
+	color: var(--color-primary-contrast);
+}
+
+.cta--secondary {
+	background-color: var(--color-secondary);
+	color: var(--color-secondary-contrast);
+}
+
+.cta--dark {
+	background-color: var(--color-text);      /* near-black surface */
+	color: var(--color-background);           /* light text */
+}
+
+/* -----------------------------------------------------------------------------
+ * Content
+ * -------------------------------------------------------------------------- */
+.cta__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+}
+
+.cta__title {
+	margin: 0;
+	color: inherit;                           /* override base heading colour */
+}
+
+.cta__description {
+	margin: 0;
+	max-width: 60ch;
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-base);
+	color: color-mix(in srgb, currentColor 85%, transparent);
+}
+
+.cta__actions {
+	flex: none;                               /* never shrink the button */
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment — centre (default)
+ * -------------------------------------------------------------------------- */
+.cta--center .cta__inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: var(--space-md);
+}
+
+.cta--center .cta__content {
+	align-items: center;
+}
+
+.cta--center .cta__description {
+	margin-inline: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment — left (stacks on mobile, content|button row on desktop)
+ * -------------------------------------------------------------------------- */
+.cta--left .cta__inner {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: left;
+	gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+	.cta--left .cta__inner {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-lg);
+	}
+}

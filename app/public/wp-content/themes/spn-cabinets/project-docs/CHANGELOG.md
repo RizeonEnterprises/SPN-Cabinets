@@ -19,6 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **CTA Band component** (`template-parts/components/cta.php` +
+  `assets/css/src/05-components/cta.css`). Full-width conversion band: `title`
+  (required), `description`, `button_text`+`button_url` (required), `theme`
+  (primary|secondary|dark — sets the background + contrast text), `alignment`
+  (center|left — left is a content|button row on desktop). **Reuses the button
+  primitive** (accent variant via a theme→variant map); `--section-space-y`
+  padding; token-only.
+
 - **Section Heading component** (`template-parts/components/section-heading.php`
   + `assets/css/src/05-components/section-heading.css`). Args-driven kicker +
   title + description block for use above grids/galleries/testimonials/sections:
