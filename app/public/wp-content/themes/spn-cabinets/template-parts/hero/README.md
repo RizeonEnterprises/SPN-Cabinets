@@ -1,0 +1,1 @@
+# Reserved: homepage HERO section template part(s). Added during the build phase, e.g. hero/hero.php consumed via spn_cabinets_component( 'hero/hero', array( ... ) ). No placeholder content committed in the foundation.

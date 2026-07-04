@@ -1,0 +1,184 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Off-canvas mobile navigation
+ * -----------------------------------------------------------------------------
+ * Slide-in panel + backdrop, shown below 1024px. Hidden and inert until opened
+ * by navigation.js (which also traps focus, handles Escape/outside-click and
+ * locks body scroll). Never shown on desktop.
+ * ========================================================================== */
+
+.mobile-nav {
+	position: fixed;
+	inset: 0;
+	z-index: var(--z-modal);
+	visibility: hidden;
+	pointer-events: none;
+}
+
+/* Desktop: the off-canvas never applies. */
+@media (min-width: 1024px) {
+	.mobile-nav {
+		display: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Backdrop
+ * -------------------------------------------------------------------------- */
+.mobile-nav__backdrop {
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel
+ * -------------------------------------------------------------------------- */
+.mobile-nav__panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	width: min(90vw, 400px);
+	height: 100%;
+	padding: var(--space-md);
+	background-color: var(--color-background);
+	box-shadow: var(--shadow-xl);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	transform: translateX(100%);
+	transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+/* Open state. */
+.mobile-nav.is-open {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.mobile-nav.is-open .mobile-nav__backdrop {
+	opacity: 1;
+}
+
+.mobile-nav.is-open .mobile-nav__panel {
+	transform: translateX(0);
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel head
+ * -------------------------------------------------------------------------- */
+.mobile-nav__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: var(--space-sm);
+	margin-bottom: var(--space-sm);
+	border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.mobile-nav__title {
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wide);
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+.mobile-nav__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-heading);
+	border-radius: var(--radius-sm);
+}
+
+.mobile-nav__close-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Menu (vertical, with accordion submenus)
+ * -------------------------------------------------------------------------- */
+.mobile-menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mobile-menu .menu-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 0;
+	border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.mobile-menu a {
+	flex: 1 1 auto;
+	display: block;
+	padding: var(--space-sm) var(--space-2xs);
+	color: var(--color-heading);
+	font-size: var(--font-size-md);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+}
+
+.mobile-menu a:hover,
+.mobile-menu [aria-current="page"] {
+	color: var(--color-primary);
+}
+
+/* Accordion toggle for submenu parents. */
+.mobile-menu .submenu-toggle {
+	flex: 0 0 auto;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-text-muted);
+}
+
+/* Submenus: hidden until expanded (simple, reduced-motion safe). */
+.mobile-menu .sub-menu {
+	flex-basis: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0 0 var(--space-2xs) var(--space-md);
+	list-style: none;
+	display: none;
+}
+
+.mobile-menu .has-submenu.is-expanded > .sub-menu {
+	display: block;
+}
+
+.mobile-menu .sub-menu a {
+	font-size: var(--font-size-base);
+	padding-block: var(--space-2xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel actions (phone / WhatsApp / CTA) — pinned to the bottom
+ * -------------------------------------------------------------------------- */
+.mobile-nav__actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+	margin-top: auto;
+	padding-top: var(--space-lg);
+}
+
+.mobile-nav__phone {
+	font-size: var(--font-size-md);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------------------------------------------------------
+ * Body scroll-lock while the menu is open (class set by navigation.js)
+ * -------------------------------------------------------------------------- */
+body.is-menu-open {
+	overflow: hidden;
+}

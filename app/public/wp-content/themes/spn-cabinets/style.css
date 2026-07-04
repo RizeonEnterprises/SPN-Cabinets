@@ -1,0 +1,30 @@
+/*!
+Theme Name:        SPN Cabinets
+Theme URI:         https://spncabinets.co.uk/
+Author:            SPN Cabinets Development Team
+Author URI:        https://spncabinets.co.uk/
+Description:       Bespoke, lightweight lead-generation and portfolio theme for SPN Cabinets (bedroom & kitchen fitters). Built with native WordPress, custom PHP templates, vanilla JavaScript and a modern CSS architecture. No page builder, no jQuery, no bloat.
+Version:           1.0.0
+Requires at least: 6.4
+Tested up to:      7.0
+Requires PHP:      7.4
+License:           GNU General Public License v2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:       spn-cabinets
+Tags:              custom-menu, featured-images, translation-ready, block-styles, wide-blocks, accessibility-ready
+*/
+
+/*
+ * -----------------------------------------------------------------------------
+ * NOTE ON STYLING
+ * -----------------------------------------------------------------------------
+ * This file exists ONLY to register the theme with WordPress (the header above
+ * is required by the core). It intentionally contains no visual styles.
+ *
+ * All front-end styling lives in:  assets/css/main.css
+ * All block-editor styling lives in: assets/css/editor.css
+ *
+ * Keeping the compiled/authored CSS out of style.css lets us version, cache-bust
+ * and organise our styles independently of the theme-registration metadata.
+ * -----------------------------------------------------------------------------
+ */

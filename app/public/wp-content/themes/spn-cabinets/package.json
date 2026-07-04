@@ -1,0 +1,16 @@
+{
+  "name": "spn-cabinets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Build tooling for the SPN Cabinets custom WordPress theme.",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build:css": "node tools/build-css.mjs",
+    "watch:css": "node tools/build-css.mjs --watch",
+    "build": "npm run build:css"
+  }
+}

@@ -1,0 +1,2728 @@
+/*!
+ * SPN Cabinets — main.css
+ * =====================================================================
+ * ⚠ GENERATED FILE — DO NOT EDIT DIRECTLY.
+ * Built by tools/build-css.mjs from assets/css/src/**.
+ * Edit the partials in assets/css/src/ and run `npm run build:css`.
+ * =====================================================================
+ * Built: 2026-07-03T18:50:40.252Z
+ * Sources (18):
+ *   - assets/css/src/01-settings/tokens.css
+ *   - assets/css/src/02-generic/reset.css
+ *   - assets/css/src/03-base/elements.css
+ *   - assets/css/src/03-base/typography.css
+ *   - assets/css/src/04-layout/layout.css
+ *   - assets/css/src/05-components/announcement.css
+ *   - assets/css/src/05-components/breadcrumbs.css
+ *   - assets/css/src/05-components/buttons.css
+ *   - assets/css/src/05-components/cards.css
+ *   - assets/css/src/05-components/contact.css
+ *   - assets/css/src/05-components/footer.css
+ *   - assets/css/src/05-components/forms.css
+ *   - assets/css/src/05-components/header.css
+ *   - assets/css/src/05-components/mobile-nav.css
+ *   - assets/css/src/05-components/navigation.css
+ *   - assets/css/src/06-utilities/accessibility.css
+ *   - assets/css/src/06-utilities/utilities.css
+ *   - assets/css/src/07-animations/animations.css
+ */
+
+/* ==== src/01-settings/tokens.css ==== */
+/* =============================================================================
+ * 01 · SETTINGS — Design tokens
+ * -----------------------------------------------------------------------------
+ * The single source of truth for the visual system. Every component and page
+ * consumes these CSS custom properties — never hard-coded values.
+ *
+ * ⛳ BRAND COLOURS ARE PLACEHOLDERS. Only the values of the --color-* brand
+ * tokens change when the client's branding is confirmed; nothing else in the
+ * system should need to move. Token NAMES are stable and final.
+ * ========================================================================== */
+
+:root {
+
+	/* -------------------------------------------------------------------------
+	 * Colour — ⛳ PLACEHOLDER values (replace with the SPN Cabinets palette)
+	 * ---------------------------------------------------------------------- */
+
+	/* Brand */
+	--color-primary: #14213d;            /* ⛳ primary brand / main CTAs */
+	--color-primary-hover: #0e1830;      /* ⛳ darker primary for hover */
+	--color-primary-contrast: #ffffff;   /* text/icon on primary */
+
+	--color-secondary: #3a4a63;          /* ⛳ secondary brand */
+	--color-secondary-hover: #2c3a4f;    /* ⛳ */
+	--color-secondary-contrast: #ffffff; /* text/icon on secondary */
+
+	--color-accent: #c8a24b;             /* ⛳ accent / highlight */
+	--color-accent-hover: #b28f3f;       /* ⛳ */
+	--color-accent-contrast: #1a1a1a;    /* text/icon on accent */
+
+	/* Neutrals (placeholder greyscale — usually kept, but confirm with brand) */
+	--color-text: #1a1a1a;               /* body text */
+	--color-text-muted: #555555;         /* secondary text */
+	--color-heading: #14213d;            /* headings (defaults to primary) */
+	--color-background: #ffffff;         /* page background */
+	--color-surface: #f5f5f5;            /* cards / raised surfaces */
+	--color-surface-alt: #eeeeee;        /* alternating sections */
+	--color-border: #e2e2e2;             /* dividers / outlines */
+	--color-border-strong: #c9c9c9;      /* stronger dividers */
+
+	/* Feedback / state (⛳ placeholders — AA-checked pairs required) */
+	--color-success: #1f7a4d;
+	--color-success-surface: #e7f4ec;
+	--color-error: #b3261e;
+	--color-error-surface: #fbeae9;
+	--color-warning: #8a6100;
+	--color-warning-surface: #fdf3e0;
+	--color-info: #1a5fb4;
+	--color-info-surface: #e8f0fb;
+
+	/* Focus ring colour (must be highly visible against any background) */
+	--color-focus: #1a73e8;
+
+	/* -------------------------------------------------------------------------
+	 * Typography
+	 * ---------------------------------------------------------------------- */
+
+	/* Families — system stack until brand fonts are supplied & self-hosted */
+	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--font-heading: var(--font-body);
+	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+	/* Weights */
+	--font-weight-light: 300;
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Static size scale (use for UI text) */
+	--font-size-xs: 0.75rem;    /* 12px */
+	--font-size-sm: 0.875rem;   /* 14px */
+	--font-size-base: 1rem;     /* 16px */
+	--font-size-md: 1.125rem;   /* 18px */
+	--font-size-lg: 1.25rem;    /* 20px */
+	--font-size-xl: 1.5rem;     /* 24px */
+	--font-size-2xl: 1.875rem;  /* 30px */
+	--font-size-3xl: 2.25rem;   /* 36px */
+	--font-size-4xl: 3rem;      /* 48px */
+
+	/* Fluid heading scale (min → max via clamp) */
+	--font-size-h1: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+	--font-size-h2: clamp(1.6rem, 1.2rem + 2vw, 2.5rem);
+	--font-size-h3: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+	--font-size-h4: clamp(1.15rem, 1.05rem + 0.5vw, 1.375rem);
+	--font-size-h5: 1.125rem;
+	--font-size-h6: 1rem;
+
+	/* Line heights */
+	--line-height-tight: 1.15;
+	--line-height-heading: 1.2;
+	--line-height-snug: 1.4;
+	--line-height-base: 1.6;
+	--line-height-loose: 1.8;
+
+	/* Letter spacing */
+	--letter-spacing-tight: -0.01em;
+	--letter-spacing-normal: 0;
+	--letter-spacing-wide: 0.04em;
+	--letter-spacing-wider: 0.08em;
+
+	/* -------------------------------------------------------------------------
+	 * Spacing scale (8px baseline, rem-based)
+	 * ---------------------------------------------------------------------- */
+	--space-3xs: 0.25rem;  /* 4px  */
+	--space-2xs: 0.5rem;   /* 8px  */
+	--space-xs: 0.75rem;   /* 12px */
+	--space-sm: 1rem;      /* 16px */
+	--space-md: 1.5rem;    /* 24px */
+	--space-lg: 2rem;      /* 32px */
+	--space-xl: 3rem;      /* 48px */
+	--space-2xl: 4rem;     /* 64px */
+	--space-3xl: 6rem;     /* 96px */
+
+	/* -------------------------------------------------------------------------
+	 * Section spacing (fluid vertical rhythm for page bands)
+	 * ---------------------------------------------------------------------- */
+	--section-space-y: clamp(3rem, 2rem + 5vw, 6rem);
+	--section-space-y-sm: clamp(2rem, 1.5rem + 3vw, 4rem);
+	--section-space-y-lg: clamp(4rem, 2.5rem + 7vw, 8rem);
+
+	/* -------------------------------------------------------------------------
+	 * Layout — container widths & gutters
+	 * ---------------------------------------------------------------------- */
+	--container-max: 1200px;      /* main content column */
+	--container-narrow: 768px;    /* readable prose / forms */
+	--container-wide: 1400px;     /* wide / feature layouts */
+	--container-gutter: var(--space-md);
+
+	/* -------------------------------------------------------------------------
+	 * Border radius
+	 * ---------------------------------------------------------------------- */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	--radius-pill: 9999px;
+	--radius-full: 50%;
+
+	/* -------------------------------------------------------------------------
+	 * Border widths
+	 * ---------------------------------------------------------------------- */
+	--border-width: 1px;
+	--border-width-thick: 2px;
+
+	/* -------------------------------------------------------------------------
+	 * Shadow / elevation system
+	 * ---------------------------------------------------------------------- */
+	--shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.04);
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+	--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+	--shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.12);
+	--shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.16);
+
+	/* -------------------------------------------------------------------------
+	 * Motion — durations & easings
+	 * ---------------------------------------------------------------------- */
+	--duration-fast: 120ms;
+	--duration-base: 200ms;
+	--duration-slow: 350ms;
+
+	--ease-standard: cubic-bezier(0.2, 0, 0, 1);
+	--ease-in: cubic-bezier(0.4, 0, 1, 1);
+	--ease-out: cubic-bezier(0, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+	/* Composite transition shorthands (consume in components) */
+	--transition-base: all var(--duration-base) var(--ease-standard);
+	--transition-colors: color var(--duration-base) var(--ease-standard),
+		background-color var(--duration-base) var(--ease-standard),
+		border-color var(--duration-base) var(--ease-standard);
+	--transition-transform: transform var(--duration-base) var(--ease-standard);
+
+	/* -------------------------------------------------------------------------
+	 * Z-index scale (named layers — never use arbitrary z-index values)
+	 * ---------------------------------------------------------------------- */
+	--z-below: -1;
+	--z-base: 0;
+	--z-raised: 10;      /* hovered cards, tooltips within flow */
+	--z-dropdown: 1000;
+	--z-sticky: 1020;
+	--z-header: 1030;    /* sticky site header */
+	--z-overlay: 1040;   /* backdrop / scrim */
+	--z-modal: 1050;
+	--z-popover: 1060;
+	--z-toast: 1070;
+	--z-max: 2147483647; /* last resort only */
+
+	/* -------------------------------------------------------------------------
+	 * Opacity scale
+	 * ---------------------------------------------------------------------- */
+	--opacity-0: 0;
+	--opacity-25: 0.25;
+	--opacity-50: 0.5;
+	--opacity-75: 0.75;
+	--opacity-100: 1;
+	--opacity-disabled: 0.55;
+	--opacity-muted: 0.7;
+
+	/* -------------------------------------------------------------------------
+	 * Focus state tokens
+	 * ---------------------------------------------------------------------- */
+	--focus-ring-width: 3px;
+	--focus-ring-offset: 2px;
+	--focus-ring-color: var(--color-focus);
+	--focus-ring: var(--focus-ring-width) solid var(--focus-ring-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * Responsive breakpoints (reference).
+ * NOTE: CSS custom properties CANNOT be used inside @media queries, so media
+ * queries must use these literal values. They are documented here (and in
+ * DESIGN_SYSTEM.md) as the single agreed set — do not invent new breakpoints.
+ *
+ *   --breakpoint-sm:  480px   large phones
+ *   --breakpoint-md:  768px   tablets
+ *   --breakpoint-lg:  1024px  laptops
+ *   --breakpoint-xl:  1280px  desktops
+ *   --breakpoint-2xl: 1440px  large desktops
+ *
+ * These are also exposed below purely for JS to read via getComputedStyle.
+ * -------------------------------------------------------------------------- */
+:root {
+	--breakpoint-sm: 480px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1440px;
+}
+
+/* ==== src/02-generic/reset.css ==== */
+/* =============================================================================
+ * 02 · GENERIC — Reset / normalise
+ * -----------------------------------------------------------------------------
+ * Low-specificity, opinionated modern reset. No classes. Establishes sane
+ * defaults that the base and component layers build on.
+ * ========================================================================== */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margins; spacing is applied intentionally via tokens. */
+* {
+	margin: 0;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	-moz-tab-size: 4;
+	tab-size: 4;
+	scroll-behavior: smooth;
+	/* Offset anchored scrolling for a sticky header (adjust when header built). */
+	scroll-padding-top: var(--space-2xl);
+}
+
+body {
+	min-height: 100vh;
+	min-height: 100svh;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Media defaults: block-level, never overflow their container. */
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Inherit typography into form controls. */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+	letter-spacing: inherit;
+}
+
+/* Avoid text overflow on long words / URLs. */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+/* Remove list styling only where a role removes semantics (opt-in). */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+	padding: 0;
+}
+
+/* Anchor without href should not look interactive. */
+a:not([href]) {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Respect users who prefer reduced motion — global safety net. */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* ==== src/03-base/elements.css ==== */
+/* =============================================================================
+ * 03 · BASE — Elements (non-typographic)
+ * -----------------------------------------------------------------------------
+ * Global element behaviours: selection, focus, media, forms baseline. No
+ * classes. Component-specific styling lives in the components layer.
+ * ========================================================================== */
+
+/* Selection colour (uses accent by default). */
+::selection {
+	background-color: var(--color-accent);
+	color: var(--color-accent-contrast);
+}
+
+/* -----------------------------------------------------------------------------
+ * Global focus state
+ * -----------------------------------------------------------------------------
+ * Visible keyboard focus for ALL interactive elements. We only show the ring
+ * for keyboard users (:focus-visible), never removing focus outright.
+ * -------------------------------------------------------------------------- */
+:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-ring-offset);
+	border-radius: var(--radius-sm);
+}
+
+/* Remove the default outline only where :focus-visible is supported, so mouse
+ * clicks don't show a ring but keyboard focus still does. */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Media & embeds
+ * -------------------------------------------------------------------------- */
+img,
+svg {
+	vertical-align: middle;
+}
+
+figure {
+	margin: 0;
+}
+
+/* Responsive iframes/embeds keep aspect where possible. */
+iframe,
+embed,
+object {
+	max-width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+ * Form elements — baseline only (full styling in components/forms.css)
+ * -------------------------------------------------------------------------- */
+button {
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+
+button:disabled,
+[disabled] {
+	cursor: not-allowed;
+}
+
+label {
+	cursor: pointer;
+}
+
+fieldset {
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-md);
+	padding: var(--space-sm) var(--space-md);
+	min-width: 0;
+}
+
+legend {
+	padding: 0 var(--space-2xs);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* Remove inner spinner clutter on number inputs where undesired (opt-in). */
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * WordPress core alignment & caption support (html5 theme support)
+ * -------------------------------------------------------------------------- */
+.alignleft {
+	float: left;
+	margin: 0 var(--space-md) var(--space-sm) 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 var(--space-sm) var(--space-md);
+}
+
+.aligncenter {
+	display: block;
+	margin-inline: auto;
+}
+
+.alignwide,
+.alignfull {
+	/* Wide/full block support hooks; layout wrappers finalise these later. */
+	max-width: none;
+}
+
+.wp-caption {
+	max-width: 100%;
+}
+
+.wp-caption-text {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	margin-top: var(--space-2xs);
+}
+
+/* Sticky-post / WP body-class hooks reserved for later use. */
+.sticky,
+.updated:not(.published) {
+	/* intentionally empty — reserved */
+}
+
+/* ==== src/03-base/typography.css ==== */
+/* =============================================================================
+ * 03 · BASE — Typography
+ * -----------------------------------------------------------------------------
+ * Bare-element typographic defaults (no classes). Establishes the reading
+ * rhythm every page inherits: headings, paragraphs, lists, links, captions,
+ * small text, blockquotes and tables.
+ * ========================================================================== */
+
+body {
+	font-family: var(--font-body);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--line-height-base);
+	color: var(--color-text);
+	background-color: var(--color-background);
+}
+
+/* -----------------------------------------------------------------------------
+ * Headings
+ * -------------------------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-heading);
+	color: var(--color-heading);
+	letter-spacing: var(--letter-spacing-tight);
+	text-wrap: balance; /* avoid orphan words in headings */
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+h5 { font-size: var(--font-size-h5); }
+h6 {
+	font-size: var(--font-size-h6);
+	letter-spacing: var(--letter-spacing-wide);
+	text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------------------------
+ * Paragraph rhythm
+ * -------------------------------------------------------------------------- */
+p {
+	text-wrap: pretty; /* improves ragging, avoids single-word last lines */
+}
+
+/* Vertical rhythm within flowing content: space between stacked text blocks.
+ * Applied via the owl selector so the first child never gets a top margin. */
+p + p,
+p + ul,
+p + ol,
+ul + p,
+ol + p,
+p + blockquote,
+blockquote + p {
+	margin-top: var(--space-sm);
+}
+
+/* Lead paragraph helper (opt-in). */
+.lead {
+	font-size: var(--font-size-md);
+	color: var(--color-text-muted);
+	line-height: var(--line-height-snug);
+}
+
+/* -----------------------------------------------------------------------------
+ * Lists
+ * -------------------------------------------------------------------------- */
+ul,
+ol {
+	padding-left: var(--space-md);
+	line-height: var(--line-height-base);
+}
+
+li + li {
+	margin-top: var(--space-3xs);
+}
+
+/* Nested lists tighten slightly. */
+li > ul,
+li > ol {
+	margin-top: var(--space-3xs);
+}
+
+dl {
+	line-height: var(--line-height-base);
+}
+
+dt {
+	font-weight: var(--font-weight-semibold);
+}
+
+dd {
+	margin-left: 0;
+}
+
+dd + dt {
+	margin-top: var(--space-2xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Links
+ * -------------------------------------------------------------------------- */
+a {
+	color: var(--color-primary);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.15em;
+	transition: var(--transition-colors);
+}
+
+a:hover {
+	color: var(--color-accent);
+	text-decoration-thickness: 2px;
+}
+
+a:active {
+	color: var(--color-accent-hover);
+}
+
+/* -----------------------------------------------------------------------------
+ * Small text & captions
+ * -------------------------------------------------------------------------- */
+small,
+.text-small {
+	font-size: var(--font-size-sm);
+}
+
+.text-caption,
+figcaption {
+	display: block;
+	margin-top: var(--space-2xs);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-snug);
+	color: var(--color-text-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Inline elements
+ * -------------------------------------------------------------------------- */
+strong,
+b {
+	font-weight: var(--font-weight-semibold);
+}
+
+em,
+i {
+	font-style: italic;
+}
+
+mark {
+	background-color: var(--color-accent);
+	color: var(--color-accent-contrast);
+	padding: 0 0.2em;
+	border-radius: var(--radius-sm);
+}
+
+abbr[title] {
+	text-decoration: underline dotted;
+	cursor: help;
+}
+
+code,
+kbd,
+samp {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	background-color: var(--color-surface);
+	padding: 0.1em 0.35em;
+	border-radius: var(--radius-sm);
+}
+
+pre {
+	font-family: var(--font-mono);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-snug);
+	background-color: var(--color-surface);
+	padding: var(--space-sm);
+	border-radius: var(--radius-md);
+	overflow-x: auto;
+}
+
+pre code {
+	background: none;
+	padding: 0;
+}
+
+hr {
+	border: 0;
+	border-top: var(--border-width) solid var(--color-border);
+	margin-block: var(--space-lg);
+}
+
+/* -----------------------------------------------------------------------------
+ * Blockquotes
+ * -------------------------------------------------------------------------- */
+blockquote {
+	margin: 0;
+	padding: var(--space-sm) var(--space-md);
+	border-left: var(--border-width-thick) solid var(--color-accent);
+	background-color: var(--color-surface);
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+	color: var(--color-text);
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-snug);
+}
+
+blockquote p + p {
+	margin-top: var(--space-sm);
+}
+
+blockquote cite {
+	display: block;
+	margin-top: var(--space-2xs);
+	font-size: var(--font-size-sm);
+	font-style: normal;
+	color: var(--color-text-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Tables
+ * -------------------------------------------------------------------------- */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-snug);
+}
+
+caption {
+	caption-side: bottom;
+	margin-top: var(--space-2xs);
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	text-align: left;
+}
+
+th,
+td {
+	padding: var(--space-2xs) var(--space-sm);
+	text-align: left;
+	border-bottom: var(--border-width) solid var(--color-border);
+	vertical-align: top;
+}
+
+thead th {
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-heading);
+	border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+}
+
+tbody tr:hover {
+	background-color: var(--color-surface);
+}
+
+/* ==== src/04-layout/layout.css ==== */
+/* =============================================================================
+ * 04 · LAYOUT — Structural primitives
+ * -----------------------------------------------------------------------------
+ * Reusable, content-agnostic layout building blocks. These position things;
+ * they do not decorate them. No page-specific layouts here.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Container — centres content and applies responsive gutters
+ * -------------------------------------------------------------------------- */
+.container {
+	width: 100%;
+	max-width: var(--container-max);
+	margin-inline: auto;
+	padding-inline: var(--container-gutter);
+}
+
+.container--narrow {
+	max-width: var(--container-narrow);
+}
+
+.container--wide {
+	max-width: var(--container-wide);
+}
+
+.container--fluid {
+	max-width: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Section — a full-width vertical band with consistent rhythm
+ * -------------------------------------------------------------------------- */
+.section {
+	padding-block: var(--section-space-y);
+}
+
+.section--sm {
+	padding-block: var(--section-space-y-sm);
+}
+
+.section--lg {
+	padding-block: var(--section-space-y-lg);
+}
+
+.section--flush-top {
+	padding-top: 0;
+}
+
+.section--flush-bottom {
+	padding-bottom: 0;
+}
+
+/* Alternating surface background for visual separation. */
+.section--surface {
+	background-color: var(--color-surface);
+}
+
+.section--surface-alt {
+	background-color: var(--color-surface-alt);
+}
+
+/* -----------------------------------------------------------------------------
+ * Stack — vertical spacing between flow children (owl pattern)
+ * Use --stack-space to override the gap locally.
+ * -------------------------------------------------------------------------- */
+.stack > * + * {
+	margin-top: var(--stack-space, var(--space-md));
+}
+
+.stack--sm { --stack-space: var(--space-sm); }
+.stack--lg { --stack-space: var(--space-lg); }
+.stack--xl { --stack-space: var(--space-xl); }
+
+/* -----------------------------------------------------------------------------
+ * Cluster — horizontal group that wraps (nav rows, tag lists, button groups)
+ * -------------------------------------------------------------------------- */
+.cluster {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--cluster-space, var(--space-sm));
+	align-items: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Auto-grid — responsive card grid without media queries
+ * Set --grid-min to control the minimum column width.
+ * -------------------------------------------------------------------------- */
+.auto-grid {
+	display: grid;
+	gap: var(--grid-space, var(--space-md));
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(min(100%, var(--grid-min, 280px)), 1fr)
+	);
+}
+
+/* -----------------------------------------------------------------------------
+ * Center — horizontally centre a constrained block of content
+ * -------------------------------------------------------------------------- */
+.center {
+	box-sizing: content-box;
+	max-width: var(--center-measure, var(--container-narrow));
+	margin-inline: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Content region wrapper (the #content element in header/footer)
+ * -------------------------------------------------------------------------- */
+.site-content {
+	display: block;
+}
+
+/* -----------------------------------------------------------------------------
+ * Main content — default page spacing.
+ * Inner pages get vertical rhythm; the front page stays flush so it can compose
+ * full-bleed sections (each section provides its own padding).
+ * -------------------------------------------------------------------------- */
+.site-main {
+	padding-block: var(--section-space-y);
+}
+
+.site-main--front-page {
+	padding-block: 0;
+}
+
+.site-header__inner,
+.site-footer__inner {
+	width: 100%;
+	max-width: var(--container-max);
+	margin-inline: auto;
+	padding-inline: var(--container-gutter);
+}
+
+/* ==== src/05-components/announcement.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Announcement bar
+ * -----------------------------------------------------------------------------
+ * Slim promo/notice bar above the header. Rendered only when enabled (off by
+ * default). Styles are ready so enabling it needs no CSS changes.
+ * ========================================================================== */
+
+.announcement-bar {
+	background-color: var(--color-primary);
+	color: var(--color-primary-contrast);
+	font-size: var(--font-size-sm);
+}
+
+.announcement-bar__inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2xs);
+	min-height: 2.25rem;
+	padding-block: var(--space-3xs);
+	text-align: center;
+}
+
+.announcement-bar__text {
+	margin: 0;
+}
+
+.announcement-bar__link {
+	color: var(--color-accent);
+	font-weight: var(--font-weight-semibold);
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+.announcement-bar__link:hover {
+	color: var(--color-primary-contrast);
+}
+
+/* ==== src/05-components/breadcrumbs.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Breadcrumbs
+ * -----------------------------------------------------------------------------
+ * Compact, accessible breadcrumb trail shown on inner pages. Separators are
+ * decorative (CSS ::before) so they are not read by assistive technology.
+ * ========================================================================== */
+
+.breadcrumbs {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	border-bottom: var(--border-width) solid var(--color-border);
+	background-color: var(--color-background);
+}
+
+.breadcrumbs__inner {
+	padding-block: var(--space-sm);
+}
+
+.breadcrumbs__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-2xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.breadcrumbs__item {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2xs);
+	margin: 0;
+}
+
+/* Decorative separator before every item except the first. */
+.breadcrumbs__item + .breadcrumbs__item::before {
+	content: "/";
+	color: var(--color-border-strong);
+	user-select: none;
+}
+
+.breadcrumbs__link {
+	color: var(--color-text-muted);
+	text-decoration: none;
+}
+
+.breadcrumbs__link:hover {
+	color: var(--color-primary);
+	text-decoration: underline;
+}
+
+.breadcrumbs__current {
+	color: var(--color-text);
+	font-weight: var(--font-weight-medium);
+}
+
+/* ==== src/05-components/buttons.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Buttons
+ * -----------------------------------------------------------------------------
+ * The single button system, consumed by template-parts/buttons/button.php.
+ * BEM: .button (base) + .button--{variant} + .button--{size} + state hooks.
+ * Variants: primary, secondary, outline, ghost, text. States: hover, focus,
+ * active, disabled, loading.
+ * ========================================================================== */
+
+.button {
+	--button-bg: var(--color-primary);
+	--button-fg: var(--color-primary-contrast);
+	--button-bg-hover: var(--color-primary-hover);
+	--button-border: transparent;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2xs);
+	min-height: 2.75rem; /* 44px — accessible touch target */
+	padding: var(--space-2xs) var(--space-md);
+	font-family: inherit;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-tight);
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	color: var(--button-fg);
+	background-color: var(--button-bg);
+	border: var(--border-width) solid var(--button-border);
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors),
+		transform var(--duration-fast) var(--ease-standard),
+		box-shadow var(--duration-base) var(--ease-standard);
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.button:hover {
+	color: var(--button-fg);
+	background-color: var(--button-bg-hover);
+	text-decoration: none;
+}
+
+.button:active {
+	transform: translateY(1px);
+}
+
+/* Focus ring handled globally by :focus-visible; ensure offset reads well. */
+.button:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-ring-offset);
+}
+
+/* -----------------------------------------------------------------------------
+ * Variants
+ * -------------------------------------------------------------------------- */
+
+/* Primary is the base default (already set above). */
+.button--primary {
+	--button-bg: var(--color-primary);
+	--button-fg: var(--color-primary-contrast);
+	--button-bg-hover: var(--color-primary-hover);
+	--button-border: transparent;
+}
+
+.button--secondary {
+	--button-bg: var(--color-secondary);
+	--button-fg: var(--color-secondary-contrast);
+	--button-bg-hover: var(--color-secondary-hover);
+	--button-border: transparent;
+}
+
+.button--accent {
+	--button-bg: var(--color-accent);
+	--button-fg: var(--color-accent-contrast);
+	--button-bg-hover: var(--color-accent-hover);
+	--button-border: transparent;
+}
+
+/* Outline — transparent with a visible border; fills on hover. */
+.button--outline {
+	--button-bg: transparent;
+	--button-fg: var(--color-primary);
+	--button-border: var(--color-primary);
+}
+
+.button--outline:hover {
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary);
+}
+
+/* Ghost — no border, subtle surface tint on hover. */
+.button--ghost {
+	--button-bg: transparent;
+	--button-fg: var(--color-primary);
+	--button-border: transparent;
+}
+
+.button--ghost:hover {
+	color: var(--color-primary);
+	background-color: var(--color-surface);
+}
+
+/* Text — link-like button, no chrome. */
+.button--text {
+	--button-bg: transparent;
+	--button-fg: var(--color-primary);
+	--button-border: transparent;
+	min-height: auto;
+	padding-inline: var(--space-3xs);
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+.button--text:hover {
+	color: var(--color-accent);
+	background-color: transparent;
+	text-decoration-thickness: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Sizes
+ * -------------------------------------------------------------------------- */
+.button--sm {
+	min-height: 2.25rem;
+	padding: var(--space-3xs) var(--space-sm);
+	font-size: var(--font-size-sm);
+}
+
+.button--md {
+	/* default sizing */
+}
+
+.button--lg {
+	min-height: 3.25rem;
+	padding: var(--space-xs) var(--space-lg);
+	font-size: var(--font-size-md);
+}
+
+/* Full-width modifier (e.g. mobile CTAs). */
+.button--block {
+	display: flex;
+	width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+ * States — disabled & loading
+ * -------------------------------------------------------------------------- */
+.button:disabled,
+.button[disabled],
+.button[aria-disabled="true"],
+.button--disabled {
+	opacity: var(--opacity-disabled);
+	cursor: not-allowed;
+	pointer-events: none;
+	box-shadow: none;
+	transform: none;
+}
+
+/* Loading: hide the label, show a spinner, keep the button width stable.
+ * Markup: add .is-loading and aria-busy="true" to the button. */
+.button.is-loading {
+	position: relative;
+	color: transparent !important;
+	pointer-events: none;
+}
+
+.button.is-loading::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 1.15em;
+	height: 1.15em;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: var(--radius-full);
+	/* Spinner colour follows the would-be text colour via a data pattern. */
+	color: var(--button-fg);
+	animation: spn-spin 0.7s linear infinite;
+}
+
+/* Icon-only button accessibility helper (pair with .screen-reader-text label). */
+.button--icon {
+	padding: var(--space-2xs);
+	aspect-ratio: 1;
+}
+
+/* Icon + label inside a button. */
+.button__icon {
+	width: 1.15em;
+	height: 1.15em;
+	flex: none;
+}
+
+.button__label {
+	display: inline-block;
+}
+
+/* Placeholder button (non-interactive shell state, e.g. WhatsApp before config). */
+.button.is-placeholder {
+	opacity: var(--opacity-disabled);
+	cursor: default;
+	box-shadow: none;
+}
+
+.button.is-placeholder:hover {
+	background-color: var(--button-bg);
+	transform: none;
+}
+
+/* ==== src/05-components/cards.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Cards
+ * -----------------------------------------------------------------------------
+ * Reusable card system. Base .card + BEM elements, plus variant modifiers for
+ * the card types the site will use. These are the visual foundations only —
+ * the actual template parts (service-card, project-card, blog-card, …) are
+ * built in the components phase and inherit these styles.
+ *
+ * Element hooks match template-parts/cards/card.php:
+ *   .card > .card__media > .card__image
+ *   .card > .card__body  > .card__title (> .card__link) + .card__excerpt + .card__cta
+ * ========================================================================== */
+
+.card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: var(--color-background);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	box-shadow: var(--shadow-sm);
+	transition: box-shadow var(--duration-base) var(--ease-standard),
+		transform var(--duration-base) var(--ease-standard),
+		border-color var(--duration-base) var(--ease-standard);
+}
+
+/* Lift on hover/focus-within for interactive (linked) cards. */
+.card:hover,
+.card:focus-within {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-4px);
+	border-color: var(--color-border-strong);
+}
+
+/* -----------------------------------------------------------------------------
+ * Media
+ * -------------------------------------------------------------------------- */
+.card__media {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 3 / 2;
+	background-color: var(--color-surface);
+}
+
+.card__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.card:hover .card__image {
+	transform: scale(1.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * Body
+ * -------------------------------------------------------------------------- */
+.card__body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+	padding: var(--space-md);
+	flex: 1 1 auto; /* equal-height bodies in a grid */
+}
+
+.card__title {
+	font-size: var(--font-size-lg);
+	line-height: var(--line-height-snug);
+	margin: 0;
+}
+
+.card__link {
+	color: var(--color-heading);
+	text-decoration: none;
+}
+
+.card__link:hover {
+	color: var(--color-primary);
+}
+
+/* Make the whole card clickable while keeping the link the accessible target. */
+.card__link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+
+.card__excerpt {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-base);
+}
+
+.card__meta {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+/* Push the CTA to the bottom of an equal-height card. */
+.card__cta {
+	margin-top: auto;
+	align-self: flex-start;
+}
+
+/* Relative context so .card__link::after overlay works. */
+.card {
+	position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Standard (default, no modifier needed)
+ * -------------------------------------------------------------------------- */
+.card--flat {
+	box-shadow: none;
+}
+
+.card--flat:hover,
+.card--flat:focus-within {
+	box-shadow: var(--shadow-sm);
+	transform: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Service card (icon-led, no image)
+ * -------------------------------------------------------------------------- */
+.card--service {
+	text-align: center;
+	align-items: center;
+	padding: var(--space-lg);
+	gap: var(--space-sm);
+}
+
+.card--service .card__icon {
+	width: 3rem;
+	height: 3rem;
+	color: var(--color-accent);
+}
+
+.card--service .card__body {
+	padding: 0;
+	align-items: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Gallery card (image-forward, minimal chrome)
+ * -------------------------------------------------------------------------- */
+.card--gallery {
+	border: none;
+	box-shadow: none;
+	border-radius: var(--radius-md);
+}
+
+.card--gallery .card__media {
+	aspect-ratio: 4 / 3;
+	border-radius: var(--radius-md);
+}
+
+.card--gallery .card__body {
+	padding: var(--space-sm) 0 0;
+}
+
+/* Optional caption overlay for gallery images. */
+.card--gallery .card__overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: flex-end;
+	padding: var(--space-sm);
+	color: #fff;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 60%);
+	opacity: 0;
+	transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.card--gallery:hover .card__overlay,
+.card--gallery:focus-within .card__overlay {
+	opacity: 1;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Blog card
+ * -------------------------------------------------------------------------- */
+.card--blog .card__meta {
+	order: -1; /* date/category above the title */
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wide);
+	font-size: var(--font-size-xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Testimonial card (quote-led, no media)
+ * -------------------------------------------------------------------------- */
+.card--testimonial {
+	padding: var(--space-lg);
+	gap: var(--space-md);
+	background-color: var(--color-surface);
+	border-color: transparent;
+}
+
+.card--testimonial:hover {
+	transform: none;
+	box-shadow: var(--shadow-md);
+}
+
+.card--testimonial .card__quote {
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-snug);
+	color: var(--color-text);
+}
+
+.card--testimonial .card__author {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2xs);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-heading);
+}
+
+.card--testimonial .card__rating {
+	color: var(--color-accent);
+	letter-spacing: 0.1em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — CTA card (emphasis panel, brand background)
+ * -------------------------------------------------------------------------- */
+.card--cta {
+	align-items: flex-start;
+	gap: var(--space-md);
+	padding: var(--space-xl);
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary);
+	border-color: transparent;
+	text-align: left;
+}
+
+.card--cta:hover {
+	transform: none;
+	box-shadow: var(--shadow-md);
+}
+
+.card--cta .card__title,
+.card--cta .card__link {
+	color: var(--color-primary-contrast);
+}
+
+.card--cta .card__excerpt {
+	color: color-mix(in srgb, var(--color-primary-contrast) 85%, transparent);
+}
+
+/* ==== src/05-components/contact.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Contact items
+ * -----------------------------------------------------------------------------
+ * Shared styling for phone / email / WhatsApp / address items rendered by
+ * spn_cabinets_contact_item(). Used in both the header and footer so the look
+ * is consistent. Placeholder (unconfigured) items are visually de-emphasised.
+ * ========================================================================== */
+
+.contact-item__wrap {
+	display: inline-flex;
+}
+
+.contact-item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2xs);
+	color: inherit;
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-snug);
+	transition: var(--transition-colors);
+}
+
+/* Only real links get the interactive hover treatment. */
+a.contact-item:hover {
+	color: var(--color-accent);
+}
+
+.contact-item__icon {
+	width: 1.15em;
+	height: 1.15em;
+	flex: none;
+	color: var(--color-accent);
+}
+
+/* Placeholder items: muted, non-interactive appearance. */
+.contact-item.is-placeholder {
+	color: var(--color-text-muted);
+	font-style: italic;
+	cursor: default;
+}
+
+.contact-item.is-placeholder .contact-item__icon {
+	color: currentColor;
+	opacity: var(--opacity-muted);
+}
+
+/* ==== src/05-components/footer.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Site footer
+ * -----------------------------------------------------------------------------
+ * Four-column footer + bottom bar. Dark (brand primary) surface with light
+ * text. Columns stack to 1 on mobile, 2 on tablet, 4 on desktop.
+ * ========================================================================== */
+
+.site-footer {
+	background-color: var(--color-primary);
+	color: var(--color-primary-contrast);
+}
+
+.site-footer__inner {
+	padding-block: var(--space-2xl);
+}
+
+/* Muted light text for secondary footer content. */
+.site-footer .footer-col__description,
+.site-footer .contact-item {
+	color: color-mix(in srgb, var(--color-primary-contrast) 82%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+ * Column grid
+ * -------------------------------------------------------------------------- */
+.footer-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-xl) var(--space-lg);
+}
+
+@media (min-width: 768px) {
+	.footer-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.footer-grid {
+		grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+	}
+}
+
+.footer-col {
+	min-width: 0;
+}
+
+.footer-col__title {
+	margin: 0 0 var(--space-sm);
+	font-size: var(--font-size-md);
+	color: var(--color-primary-contrast);
+}
+
+.footer-col__description {
+	margin: var(--space-sm) 0 0;
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-base);
+}
+
+/* Branding in the footer uses the light-on-dark treatment. */
+.site-footer .footer-branding .site-title a,
+.site-footer .footer-branding {
+	color: var(--color-primary-contrast);
+}
+
+.site-footer .custom-logo,
+.site-footer .footer-branding img {
+	max-height: 56px;
+	width: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Footer menus (Quick Links / Services)
+ * -------------------------------------------------------------------------- */
+.footer-menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+}
+
+.footer-menu a {
+	color: color-mix(in srgb, var(--color-primary-contrast) 82%, transparent);
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	transition: var(--transition-colors);
+}
+
+.footer-menu a:hover {
+	color: var(--color-accent);
+}
+
+/* Placeholder menu items (before the client assigns a menu). */
+.footer-menu--placeholder .is-placeholder span,
+.legal-menu--placeholder .is-placeholder span {
+	color: color-mix(in srgb, var(--color-primary-contrast) 55%, transparent);
+	font-style: italic;
+	font-size: var(--font-size-sm);
+}
+
+/* -----------------------------------------------------------------------------
+ * Contact column
+ * -------------------------------------------------------------------------- */
+.footer-contact {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+	font-style: normal; /* reset <address> italic */
+}
+
+.footer-contact .contact-item__wrap {
+	display: flex;
+}
+
+.footer-contact .contact-item {
+	align-items: flex-start;
+}
+
+/* -----------------------------------------------------------------------------
+ * Bottom bar
+ * -------------------------------------------------------------------------- */
+.site-footer__bottom {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-sm);
+	margin-top: var(--space-2xl);
+	padding-top: var(--space-md);
+	border-top: var(--border-width) solid
+		color-mix(in srgb, var(--color-primary-contrast) 20%, transparent);
+	font-size: var(--font-size-sm);
+}
+
+.site-footer__copyright {
+	margin: 0;
+	color: color-mix(in srgb, var(--color-primary-contrast) 75%, transparent);
+}
+
+.legal-menu {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-md);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.legal-menu a {
+	color: color-mix(in srgb, var(--color-primary-contrast) 82%, transparent);
+	text-decoration: none;
+}
+
+.legal-menu a:hover {
+	color: var(--color-accent);
+}
+
+/* ==== src/05-components/forms.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Forms
+ * -----------------------------------------------------------------------------
+ * Reusable form field system for the Quote Form, search, newsletter, etc.
+ * Accessible by construction: visible labels, clear focus, non-colour-only
+ * validation, adequate spacing and touch targets.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Field group — label + control + help/error, stacked with rhythm
+ * -------------------------------------------------------------------------- */
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+}
+
+.field + .field {
+	margin-top: var(--space-md);
+}
+
+.field__label {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-heading);
+}
+
+/* Required marker — text, not colour-only. */
+.field__required {
+	color: var(--color-error);
+	font-weight: var(--font-weight-regular);
+}
+
+.field__hint {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Text controls
+ * -------------------------------------------------------------------------- */
+.input,
+.textarea,
+.select,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="date"],
+textarea,
+select {
+	width: 100%;
+	min-height: 2.75rem; /* 44px touch target */
+	padding: var(--space-2xs) var(--space-sm);
+	font-family: inherit;
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-snug);
+	color: var(--color-text);
+	background-color: var(--color-background);
+	border: var(--border-width) solid var(--color-border-strong);
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors),
+		box-shadow var(--duration-base) var(--ease-standard);
+	appearance: none;
+}
+
+.textarea,
+textarea {
+	min-height: 8rem;
+	resize: vertical;
+	line-height: var(--line-height-base);
+}
+
+/* Placeholder is a hint, never a label substitute. */
+::placeholder {
+	color: var(--color-text-muted);
+	opacity: var(--opacity-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Select — custom caret via background SVG (currentColor-friendly)
+ * -------------------------------------------------------------------------- */
+.select,
+select {
+	padding-right: var(--space-xl);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23555' stroke-width='1.5'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right var(--space-sm) center;
+	background-size: 0.75rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Focus state
+ * -------------------------------------------------------------------------- */
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+	outline: none; /* replaced with a ring + border for form controls */
+	border-color: var(--color-focus);
+	box-shadow: 0 0 0 var(--focus-ring-width) color-mix(in srgb, var(--color-focus) 30%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+ * Validation states (non-colour-only: pair with text + aria-invalid)
+ * -------------------------------------------------------------------------- */
+.field.is-error .input,
+.field.is-error .textarea,
+.field.is-error .select,
+[aria-invalid="true"] {
+	border-color: var(--color-error);
+	background-color: var(--color-error-surface);
+}
+
+.field.is-success .input,
+.field.is-success .textarea,
+.field.is-success .select {
+	border-color: var(--color-success);
+	background-color: var(--color-success-surface);
+}
+
+.field__error {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3xs);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-error);
+}
+
+.field__success {
+	font-size: var(--font-size-sm);
+	color: var(--color-success);
+}
+
+/* Disabled / readonly */
+.input:disabled,
+.textarea:disabled,
+.select:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled,
+input[readonly],
+textarea[readonly] {
+	opacity: var(--opacity-disabled);
+	background-color: var(--color-surface);
+	cursor: not-allowed;
+}
+
+/* -----------------------------------------------------------------------------
+ * Checkbox & radio — custom, accessible, using accent-color for simplicity
+ * -------------------------------------------------------------------------- */
+.choice {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-2xs);
+	line-height: var(--line-height-snug);
+	cursor: pointer;
+}
+
+.choice + .choice {
+	margin-top: var(--space-2xs);
+}
+
+.choice input[type="checkbox"],
+.choice input[type="radio"] {
+	flex: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-top: 0.1em;
+	accent-color: var(--color-primary);
+	cursor: pointer;
+}
+
+.choice input[type="radio"] {
+	border-radius: var(--radius-full);
+}
+
+.choice__label {
+	font-size: var(--font-size-base);
+	color: var(--color-text);
+}
+
+/* -----------------------------------------------------------------------------
+ * Form-level messages (success / error banners)
+ * -------------------------------------------------------------------------- */
+.form-message {
+	padding: var(--space-sm) var(--space-md);
+	border-radius: var(--radius-md);
+	border: var(--border-width) solid transparent;
+	font-size: var(--font-size-sm);
+}
+
+.form-message--success {
+	color: var(--color-success);
+	background-color: var(--color-success-surface);
+	border-color: var(--color-success);
+}
+
+.form-message--error {
+	color: var(--color-error);
+	background-color: var(--color-error-surface);
+	border-color: var(--color-error);
+}
+
+/* Honeypot anti-spam field — visually and semantically hidden from users. */
+.field--honeypot {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* ==== src/05-components/header.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Site header
+ * -----------------------------------------------------------------------------
+ * Premium, minimal, sticky header. Layout only sets structure; colours/spacing
+ * come from tokens. The desktop/mobile switch happens at the `lg` breakpoint
+ * (1024px). Responsive nav visibility is progressive-enhancement aware (.js).
+ * ========================================================================== */
+
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: var(--z-header);
+	background-color: var(--color-background);
+	border-bottom: var(--border-width) solid var(--color-border);
+	transition: box-shadow var(--duration-base) var(--ease-standard),
+		background-color var(--duration-base) var(--ease-standard);
+}
+
+/* Elevated state once the page is scrolled (toggled by navigation.js). */
+.site-header.is-scrolled {
+	box-shadow: var(--shadow-md);
+}
+
+.site-header__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-md);
+	padding-block: var(--space-sm);
+}
+
+/* -----------------------------------------------------------------------------
+ * Branding
+ * -------------------------------------------------------------------------- */
+.site-header__branding {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+}
+
+.site-header .custom-logo,
+.site-header .custom-logo-link img {
+	display: block;
+	max-height: 48px;
+	width: auto;
+}
+
+.site-header .site-title {
+	margin: 0;
+	font-size: var(--font-size-lg);
+	line-height: 1;
+}
+
+.site-header .site-title a {
+	color: var(--color-heading);
+	text-decoration: none;
+}
+
+/* Tagline is not shown in the header (kept for the branding helper elsewhere). */
+.site-header .site-description {
+	display: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Header actions (phone / WhatsApp / CTA)
+ * -------------------------------------------------------------------------- */
+.header-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.header-actions__phone {
+	font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------------------------------------------------------
+ * Mobile menu toggle (hamburger)
+ * -----------------------------------------------------------------------------
+ * Hidden by default; shown only on mobile when JS is available (so no-JS users
+ * never see a non-functional button and instead use the inline nav fallback).
+ * -------------------------------------------------------------------------- */
+.menu-toggle {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	flex: 0 0 auto;
+	color: var(--color-heading);
+	border-radius: var(--radius-sm);
+}
+
+.menu-toggle__icon {
+	width: 1.75rem;
+	height: 1.75rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Responsive switch (desktop ≥ 1024px vs mobile < 1024px)
+ * -------------------------------------------------------------------------- */
+
+/* Desktop */
+@media (min-width: 1024px) {
+	.menu-toggle {
+		display: none;
+	}
+}
+
+/* Mobile */
+@media (max-width: 1023px) {
+	/* Header actions move into the off-canvas panel. */
+	.header-actions {
+		display: none;
+	}
+
+	/* With JS: swap the inline nav for the hamburger + off-canvas. */
+	.js .primary-nav {
+		display: none;
+	}
+
+	.js .menu-toggle {
+		display: inline-flex;
+	}
+}
+
+/* ==== src/05-components/mobile-nav.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Off-canvas mobile navigation
+ * -----------------------------------------------------------------------------
+ * Slide-in panel + backdrop, shown below 1024px. Hidden and inert until opened
+ * by navigation.js (which also traps focus, handles Escape/outside-click and
+ * locks body scroll). Never shown on desktop.
+ * ========================================================================== */
+
+.mobile-nav {
+	position: fixed;
+	inset: 0;
+	z-index: var(--z-modal);
+	visibility: hidden;
+	pointer-events: none;
+}
+
+/* Desktop: the off-canvas never applies. */
+@media (min-width: 1024px) {
+	.mobile-nav {
+		display: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Backdrop
+ * -------------------------------------------------------------------------- */
+.mobile-nav__backdrop {
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel
+ * -------------------------------------------------------------------------- */
+.mobile-nav__panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	width: min(90vw, 400px);
+	height: 100%;
+	padding: var(--space-md);
+	background-color: var(--color-background);
+	box-shadow: var(--shadow-xl);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	transform: translateX(100%);
+	transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+/* Open state. */
+.mobile-nav.is-open {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.mobile-nav.is-open .mobile-nav__backdrop {
+	opacity: 1;
+}
+
+.mobile-nav.is-open .mobile-nav__panel {
+	transform: translateX(0);
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel head
+ * -------------------------------------------------------------------------- */
+.mobile-nav__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: var(--space-sm);
+	margin-bottom: var(--space-sm);
+	border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.mobile-nav__title {
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wide);
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+.mobile-nav__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-heading);
+	border-radius: var(--radius-sm);
+}
+
+.mobile-nav__close-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Menu (vertical, with accordion submenus)
+ * -------------------------------------------------------------------------- */
+.mobile-menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mobile-menu .menu-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 0;
+	border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.mobile-menu a {
+	flex: 1 1 auto;
+	display: block;
+	padding: var(--space-sm) var(--space-2xs);
+	color: var(--color-heading);
+	font-size: var(--font-size-md);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+}
+
+.mobile-menu a:hover,
+.mobile-menu [aria-current="page"] {
+	color: var(--color-primary);
+}
+
+/* Accordion toggle for submenu parents. */
+.mobile-menu .submenu-toggle {
+	flex: 0 0 auto;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-text-muted);
+}
+
+/* Submenus: hidden until expanded (simple, reduced-motion safe). */
+.mobile-menu .sub-menu {
+	flex-basis: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0 0 var(--space-2xs) var(--space-md);
+	list-style: none;
+	display: none;
+}
+
+.mobile-menu .has-submenu.is-expanded > .sub-menu {
+	display: block;
+}
+
+.mobile-menu .sub-menu a {
+	font-size: var(--font-size-base);
+	padding-block: var(--space-2xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel actions (phone / WhatsApp / CTA) — pinned to the bottom
+ * -------------------------------------------------------------------------- */
+.mobile-nav__actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+	margin-top: auto;
+	padding-top: var(--space-lg);
+}
+
+.mobile-nav__phone {
+	font-size: var(--font-size-md);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------------------------------------------------------
+ * Body scroll-lock while the menu is open (class set by navigation.js)
+ * -------------------------------------------------------------------------- */
+body.is-menu-open {
+	overflow: hidden;
+}
+
+/* ==== src/05-components/navigation.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Primary navigation (desktop)
+ * -----------------------------------------------------------------------------
+ * Horizontal primary menu with dropdown-ready submenus. Submenus reveal on
+ * hover AND keyboard focus (:focus-within) AND explicit toggle (.is-expanded),
+ * so the menu is fully operable by mouse, touch and keyboard.
+ * ========================================================================== */
+
+.primary-nav {
+	display: flex;
+}
+
+.primary-menu {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.primary-menu .menu-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: 0;
+}
+
+.primary-menu a {
+	display: inline-flex;
+	align-items: center;
+	padding: var(--space-2xs) var(--space-xs);
+	color: var(--color-heading);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors);
+}
+
+.primary-menu a:hover,
+.primary-menu .menu-item:focus-within > a {
+	color: var(--color-primary);
+}
+
+/* Current page indicator. */
+.primary-menu [aria-current="page"] {
+	color: var(--color-primary);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.3em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Submenu toggle (chevron)
+ * -------------------------------------------------------------------------- */
+.submenu-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--space-3xs);
+	color: inherit;
+	border-radius: var(--radius-sm);
+	cursor: pointer;
+}
+
+.submenu-toggle__icon {
+	display: inline-flex;
+	width: 1em;
+	height: 1em;
+	/* rotation on .is-expanded handled in the animations layer */
+}
+
+.submenu-toggle__chevron {
+	width: 1em;
+	height: 1em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Dropdown submenus
+ * -------------------------------------------------------------------------- */
+.primary-menu .sub-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: var(--z-dropdown);
+	min-width: 220px;
+	margin: 0;
+	padding: var(--space-2xs);
+	list-style: none;
+	background-color: var(--color-background);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+
+	/* Hidden until revealed. */
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(6px);
+	pointer-events: none;
+	transition: opacity var(--duration-base) var(--ease-standard),
+		transform var(--duration-base) var(--ease-standard),
+		visibility var(--duration-base) var(--ease-standard);
+}
+
+.primary-menu .sub-menu .menu-item {
+	width: 100%;
+}
+
+.primary-menu .sub-menu a {
+	width: 100%;
+	padding: var(--space-2xs) var(--space-sm);
+}
+
+.primary-menu .sub-menu a:hover {
+	background-color: var(--color-surface);
+}
+
+/* Reveal: hover, keyboard focus, or explicit expanded state. */
+.primary-menu .menu-item:hover > .sub-menu,
+.primary-menu .menu-item:focus-within > .sub-menu,
+.primary-menu .has-submenu.is-expanded > .sub-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	pointer-events: auto;
+}
+
+/* ==== src/06-utilities/accessibility.css ==== */
+/* =============================================================================
+ * 06 · UTILITIES — Accessibility helpers
+ * -----------------------------------------------------------------------------
+ * Functional a11y utilities used across templates and components. These are
+ * requirements, not decoration.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Screen-reader-only text (WordPress-standard class name)
+ * -------------------------------------------------------------------------- */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	position: absolute !important;
+	word-wrap: normal !important;
+}
+
+/* Alias for the same behaviour. */
+.visually-hidden {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	position: absolute !important;
+	word-wrap: normal !important;
+}
+
+/* Visually hidden until focused (e.g. skip links). */
+.screen-reader-text:focus,
+.visually-hidden-focusable:focus {
+	clip: auto !important;
+	clip-path: none;
+	width: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+}
+
+/* -----------------------------------------------------------------------------
+ * Skip link — becomes visible on keyboard focus
+ * -------------------------------------------------------------------------- */
+.skip-link.screen-reader-text:focus {
+	display: block;
+	top: var(--space-2xs);
+	left: var(--space-2xs);
+	z-index: var(--z-max);
+	padding: var(--space-2xs) var(--space-sm);
+	color: var(--color-primary);
+	background-color: var(--color-background);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+	font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------------------------------------------------------
+ * Focus management helpers
+ * -------------------------------------------------------------------------- */
+
+/* Explicit, reusable focus ring (for custom widgets that manage their own). */
+.focus-ring:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-ring-offset);
+}
+
+/* For elements made focusable via tabindex that shouldn't show a mouse ring. */
+[tabindex="-1"]:focus {
+	outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Motion & interaction preferences
+ * -------------------------------------------------------------------------- */
+
+/* Utility to opt an element out of motion entirely. */
+.motion-safe-only {
+	transition: none;
+	animation: none;
+}
+
+/* Give any element a comfortable minimum touch target. */
+.tap-target {
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+}
+
+/* ==== src/06-utilities/utilities.css ==== */
+/* =============================================================================
+ * 06 · UTILITIES — Single-purpose helpers
+ * -----------------------------------------------------------------------------
+ * Low-count, high-value utility classes. Deliberately NOT a full atomic
+ * framework (we are not Bootstrap/Tailwind) — just the helpers components and
+ * templates genuinely reuse. All values come from tokens.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Spacing utilities (margin-top / padding) — token-based
+ * -------------------------------------------------------------------------- */
+.mt-0 { margin-top: 0; }
+.mt-2xs { margin-top: var(--space-2xs); }
+.mt-xs { margin-top: var(--space-xs); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+.mx-auto { margin-inline: auto; }
+.my-0 { margin-block: 0; }
+
+.p-0 { padding: 0; }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+
+/* -----------------------------------------------------------------------------
+ * Flex utilities
+ * -------------------------------------------------------------------------- */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1 1 0%; }
+.flex-none { flex: none; }
+
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+
+.gap-2xs { gap: var(--space-2xs); }
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+
+/* -----------------------------------------------------------------------------
+ * Grid utilities (fixed column counts; prefer .auto-grid for responsive)
+ * -------------------------------------------------------------------------- */
+.grid { display: grid; gap: var(--space-md); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Collapse multi-column grids to a single column on small screens. */
+@media (max-width: 767px) {
+	.grid-2,
+	.grid-3,
+	.grid-4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Two-up that becomes 3/4-up on larger screens. */
+@media (min-width: 768px) {
+	.grid-md-2 { grid-template-columns: repeat(2, 1fr); }
+	.grid-md-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+	.grid-lg-3 { grid-template-columns: repeat(3, 1fr); }
+	.grid-lg-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Text utilities
+ * -------------------------------------------------------------------------- */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+.text-muted { color: var(--color-text-muted); }
+.text-primary { color: var(--color-primary); }
+.text-accent { color: var(--color-accent); }
+
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.uppercase { text-transform: uppercase; letter-spacing: var(--letter-spacing-wide); }
+
+.fs-sm { font-size: var(--font-size-sm); }
+.fs-lg { font-size: var(--font-size-lg); }
+
+/* Truncate to a single line. */
+.truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Clamp to N lines (set --lines). */
+.line-clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: var(--lines, 3);
+	line-clamp: var(--lines, 3);
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* -----------------------------------------------------------------------------
+ * Visual / surface utilities
+ * -------------------------------------------------------------------------- */
+.bg-surface { background-color: var(--color-surface); }
+.bg-primary { background-color: var(--color-primary); color: var(--color-primary-contrast); }
+.radius-sm { border-radius: var(--radius-sm); }
+.radius-md { border-radius: var(--radius-md); }
+.radius-lg { border-radius: var(--radius-lg); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* -----------------------------------------------------------------------------
+ * Visibility helpers
+ * -------------------------------------------------------------------------- */
+.hidden { display: none !important; }
+
+/* Hide below / above a breakpoint. */
+@media (max-width: 767px) {
+	.hidden-mobile { display: none !important; }
+}
+
+@media (min-width: 768px) {
+	.hidden-desktop { display: none !important; }
+}
+
+/* Hide only when JS is available (progressive enhancement). */
+.js .is-js-hidden { display: none !important; }
+
+/* Full-bleed helper: break an element out to the viewport edges. */
+.full-bleed {
+	width: 100vw;
+	margin-inline: calc(50% - 50vw);
+}
+
+/* Aspect-ratio helpers. */
+.ratio-square { aspect-ratio: 1; }
+.ratio-video { aspect-ratio: 16 / 9; }
+.ratio-photo { aspect-ratio: 3 / 2; }
+
+/* ==== src/07-animations/animations.css ==== */
+/* =============================================================================
+ * 07 · ANIMATIONS — Keyframes, motion utilities & guidelines
+ * -----------------------------------------------------------------------------
+ * Motion philosophy: purposeful, subtle, fast. Animate transform/opacity only
+ * (GPU-friendly). Everything here is enhancement-only and MUST respect
+ * prefers-reduced-motion (handled globally in 02-generic + reinforced below).
+ *
+ * See DESIGN_SYSTEM.md → Animation guidelines for when/how to use these.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+@keyframes spn-spin {
+	to { transform: rotate(360deg); }
+}
+
+@keyframes spn-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes spn-fade-in-up {
+	from { opacity: 0; transform: translateY(1rem); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spn-scale-in {
+	from { opacity: 0; transform: scale(0.96); }
+	to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spn-pulse {
+	50% { opacity: var(--opacity-50); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Micro-interactions — reusable transition hooks
+ * -------------------------------------------------------------------------- */
+
+/* Smooth colour transition (links, icons, chips). */
+.transition-colors { transition: var(--transition-colors); }
+
+/* Smooth transform transition (hover lifts, arrows). */
+.transition-transform { transition: var(--transition-transform); }
+
+/* Lift an element on hover (cards, tiles). */
+.hover-lift {
+	transition: transform var(--duration-base) var(--ease-standard),
+		box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.hover-lift:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* Nudge on hover (link arrows, "read more"). */
+.hover-nudge {
+	transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.hover-nudge:hover {
+	transform: translateX(3px);
+}
+
+/* Image zoom-on-hover wrapper (clip the overflow on the parent). */
+.img-zoom {
+	overflow: hidden;
+}
+
+.img-zoom > img {
+	transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.img-zoom:hover > img,
+.img-zoom:focus-within > img {
+	transform: scale(1.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * Entrance / reveal utilities (JS-driven progressive enhancement)
+ * -----------------------------------------------------------------------------
+ * Pattern: elements start with [data-animate], JS (IntersectionObserver) adds
+ * .is-visible when they enter the viewport. Without JS they are simply visible.
+ * -------------------------------------------------------------------------- */
+.js [data-animate] {
+	opacity: 0;
+	transform: translateY(1rem);
+	transition: opacity var(--duration-slow) var(--ease-out),
+		transform var(--duration-slow) var(--ease-out);
+	will-change: opacity, transform;
+}
+
+.js [data-animate].is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* Stagger helper — set --delay inline or via nth-child in a component. */
+[data-animate] { transition-delay: var(--delay, 0ms); }
+
+/* Named one-shot animation utilities. */
+.animate-fade-in { animation: spn-fade-in var(--duration-slow) var(--ease-out) both; }
+.animate-fade-in-up { animation: spn-fade-in-up var(--duration-slow) var(--ease-out) both; }
+.animate-scale-in { animation: spn-scale-in var(--duration-base) var(--ease-out) both; }
+
+/* -----------------------------------------------------------------------------
+ * Navigation animation hooks
+ * -----------------------------------------------------------------------------
+ * Structural state classes toggled by navigation.js. Submenu reveal transitions
+ * live with the navigation component; here we handle the toggle-icon rotation.
+ * -------------------------------------------------------------------------- */
+.menu-toggle__icon,
+.submenu-toggle__icon {
+	transition: transform var(--duration-base) var(--ease-standard);
+}
+
+/* Rotate the submenu caret when expanded. */
+.has-submenu.is-expanded > .submenu-toggle .submenu-toggle__icon {
+	transform: rotate(180deg);
+}
+
+/* -----------------------------------------------------------------------------
+ * Reduced-motion reinforcement
+ * -----------------------------------------------------------------------------
+ * The global reset already neutralises durations; this makes the intent
+ * explicit for the reveal utilities so content is never hidden from users who
+ * prefer reduced motion.
+ * -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	.js [data-animate],
+	.animate-fade-in,
+	.animate-fade-in-up,
+	.animate-scale-in {
+		opacity: 1 !important;
+		transform: none !important;
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.hover-lift:hover,
+	.img-zoom:hover > img,
+	.hover-nudge:hover {
+		transform: none !important;
+	}
+}
+

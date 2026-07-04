@@ -1,0 +1,147 @@
+/* =============================================================================
+ * 07 · ANIMATIONS — Keyframes, motion utilities & guidelines
+ * -----------------------------------------------------------------------------
+ * Motion philosophy: purposeful, subtle, fast. Animate transform/opacity only
+ * (GPU-friendly). Everything here is enhancement-only and MUST respect
+ * prefers-reduced-motion (handled globally in 02-generic + reinforced below).
+ *
+ * See DESIGN_SYSTEM.md → Animation guidelines for when/how to use these.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+@keyframes spn-spin {
+	to { transform: rotate(360deg); }
+}
+
+@keyframes spn-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes spn-fade-in-up {
+	from { opacity: 0; transform: translateY(1rem); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spn-scale-in {
+	from { opacity: 0; transform: scale(0.96); }
+	to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spn-pulse {
+	50% { opacity: var(--opacity-50); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Micro-interactions — reusable transition hooks
+ * -------------------------------------------------------------------------- */
+
+/* Smooth colour transition (links, icons, chips). */
+.transition-colors { transition: var(--transition-colors); }
+
+/* Smooth transform transition (hover lifts, arrows). */
+.transition-transform { transition: var(--transition-transform); }
+
+/* Lift an element on hover (cards, tiles). */
+.hover-lift {
+	transition: transform var(--duration-base) var(--ease-standard),
+		box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.hover-lift:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* Nudge on hover (link arrows, "read more"). */
+.hover-nudge {
+	transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.hover-nudge:hover {
+	transform: translateX(3px);
+}
+
+/* Image zoom-on-hover wrapper (clip the overflow on the parent). */
+.img-zoom {
+	overflow: hidden;
+}
+
+.img-zoom > img {
+	transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.img-zoom:hover > img,
+.img-zoom:focus-within > img {
+	transform: scale(1.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * Entrance / reveal utilities (JS-driven progressive enhancement)
+ * -----------------------------------------------------------------------------
+ * Pattern: elements start with [data-animate], JS (IntersectionObserver) adds
+ * .is-visible when they enter the viewport. Without JS they are simply visible.
+ * -------------------------------------------------------------------------- */
+.js [data-animate] {
+	opacity: 0;
+	transform: translateY(1rem);
+	transition: opacity var(--duration-slow) var(--ease-out),
+		transform var(--duration-slow) var(--ease-out);
+	will-change: opacity, transform;
+}
+
+.js [data-animate].is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* Stagger helper — set --delay inline or via nth-child in a component. */
+[data-animate] { transition-delay: var(--delay, 0ms); }
+
+/* Named one-shot animation utilities. */
+.animate-fade-in { animation: spn-fade-in var(--duration-slow) var(--ease-out) both; }
+.animate-fade-in-up { animation: spn-fade-in-up var(--duration-slow) var(--ease-out) both; }
+.animate-scale-in { animation: spn-scale-in var(--duration-base) var(--ease-out) both; }
+
+/* -----------------------------------------------------------------------------
+ * Navigation animation hooks
+ * -----------------------------------------------------------------------------
+ * Structural state classes toggled by navigation.js. Submenu reveal transitions
+ * live with the navigation component; here we handle the toggle-icon rotation.
+ * -------------------------------------------------------------------------- */
+.menu-toggle__icon,
+.submenu-toggle__icon {
+	transition: transform var(--duration-base) var(--ease-standard);
+}
+
+/* Rotate the submenu caret when expanded. */
+.has-submenu.is-expanded > .submenu-toggle .submenu-toggle__icon {
+	transform: rotate(180deg);
+}
+
+/* -----------------------------------------------------------------------------
+ * Reduced-motion reinforcement
+ * -----------------------------------------------------------------------------
+ * The global reset already neutralises durations; this makes the intent
+ * explicit for the reveal utilities so content is never hidden from users who
+ * prefer reduced motion.
+ * -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	.js [data-animate],
+	.animate-fade-in,
+	.animate-fade-in-up,
+	.animate-scale-in {
+		opacity: 1 !important;
+		transform: none !important;
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.hover-lift:hover,
+	.img-zoom:hover > img,
+	.hover-nudge:hover {
+		transform: none !important;
+	}
+}

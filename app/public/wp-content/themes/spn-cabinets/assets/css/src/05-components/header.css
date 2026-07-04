@@ -1,0 +1,125 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Site header
+ * -----------------------------------------------------------------------------
+ * Premium, minimal, sticky header. Layout only sets structure; colours/spacing
+ * come from tokens. The desktop/mobile switch happens at the `lg` breakpoint
+ * (1024px). Responsive nav visibility is progressive-enhancement aware (.js).
+ * ========================================================================== */
+
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: var(--z-header);
+	background-color: var(--color-background);
+	border-bottom: var(--border-width) solid var(--color-border);
+	transition: box-shadow var(--duration-base) var(--ease-standard),
+		background-color var(--duration-base) var(--ease-standard);
+}
+
+/* Elevated state once the page is scrolled (toggled by navigation.js). */
+.site-header.is-scrolled {
+	box-shadow: var(--shadow-md);
+}
+
+.site-header__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-md);
+	padding-block: var(--space-sm);
+}
+
+/* -----------------------------------------------------------------------------
+ * Branding
+ * -------------------------------------------------------------------------- */
+.site-header__branding {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+}
+
+.site-header .custom-logo,
+.site-header .custom-logo-link img {
+	display: block;
+	max-height: 48px;
+	width: auto;
+}
+
+.site-header .site-title {
+	margin: 0;
+	font-size: var(--font-size-lg);
+	line-height: 1;
+}
+
+.site-header .site-title a {
+	color: var(--color-heading);
+	text-decoration: none;
+}
+
+/* Tagline is not shown in the header (kept for the branding helper elsewhere). */
+.site-header .site-description {
+	display: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Header actions (phone / WhatsApp / CTA)
+ * -------------------------------------------------------------------------- */
+.header-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.header-actions__phone {
+	font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------------------------------------------------------
+ * Mobile menu toggle (hamburger)
+ * -----------------------------------------------------------------------------
+ * Hidden by default; shown only on mobile when JS is available (so no-JS users
+ * never see a non-functional button and instead use the inline nav fallback).
+ * -------------------------------------------------------------------------- */
+.menu-toggle {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	flex: 0 0 auto;
+	color: var(--color-heading);
+	border-radius: var(--radius-sm);
+}
+
+.menu-toggle__icon {
+	width: 1.75rem;
+	height: 1.75rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Responsive switch (desktop ≥ 1024px vs mobile < 1024px)
+ * -------------------------------------------------------------------------- */
+
+/* Desktop */
+@media (min-width: 1024px) {
+	.menu-toggle {
+		display: none;
+	}
+}
+
+/* Mobile */
+@media (max-width: 1023px) {
+	/* Header actions move into the off-canvas panel. */
+	.header-actions {
+		display: none;
+	}
+
+	/* With JS: swap the inline nav for the hamburger + off-canvas. */
+	.js .primary-nav {
+		display: none;
+	}
+
+	.js .menu-toggle {
+		display: inline-flex;
+	}
+}

@@ -1,0 +1,229 @@
+/* =============================================================================
+ * 01 · SETTINGS — Design tokens
+ * -----------------------------------------------------------------------------
+ * The single source of truth for the visual system. Every component and page
+ * consumes these CSS custom properties — never hard-coded values.
+ *
+ * ⛳ BRAND COLOURS ARE PLACEHOLDERS. Only the values of the --color-* brand
+ * tokens change when the client's branding is confirmed; nothing else in the
+ * system should need to move. Token NAMES are stable and final.
+ * ========================================================================== */
+
+:root {
+
+	/* -------------------------------------------------------------------------
+	 * Colour — ⛳ PLACEHOLDER values (replace with the SPN Cabinets palette)
+	 * ---------------------------------------------------------------------- */
+
+	/* Brand */
+	--color-primary: #14213d;            /* ⛳ primary brand / main CTAs */
+	--color-primary-hover: #0e1830;      /* ⛳ darker primary for hover */
+	--color-primary-contrast: #ffffff;   /* text/icon on primary */
+
+	--color-secondary: #3a4a63;          /* ⛳ secondary brand */
+	--color-secondary-hover: #2c3a4f;    /* ⛳ */
+	--color-secondary-contrast: #ffffff; /* text/icon on secondary */
+
+	--color-accent: #c8a24b;             /* ⛳ accent / highlight */
+	--color-accent-hover: #b28f3f;       /* ⛳ */
+	--color-accent-contrast: #1a1a1a;    /* text/icon on accent */
+
+	/* Neutrals (placeholder greyscale — usually kept, but confirm with brand) */
+	--color-text: #1a1a1a;               /* body text */
+	--color-text-muted: #555555;         /* secondary text */
+	--color-heading: #14213d;            /* headings (defaults to primary) */
+	--color-background: #ffffff;         /* page background */
+	--color-surface: #f5f5f5;            /* cards / raised surfaces */
+	--color-surface-alt: #eeeeee;        /* alternating sections */
+	--color-border: #e2e2e2;             /* dividers / outlines */
+	--color-border-strong: #c9c9c9;      /* stronger dividers */
+
+	/* Feedback / state (⛳ placeholders — AA-checked pairs required) */
+	--color-success: #1f7a4d;
+	--color-success-surface: #e7f4ec;
+	--color-error: #b3261e;
+	--color-error-surface: #fbeae9;
+	--color-warning: #8a6100;
+	--color-warning-surface: #fdf3e0;
+	--color-info: #1a5fb4;
+	--color-info-surface: #e8f0fb;
+
+	/* Focus ring colour (must be highly visible against any background) */
+	--color-focus: #1a73e8;
+
+	/* -------------------------------------------------------------------------
+	 * Typography
+	 * ---------------------------------------------------------------------- */
+
+	/* Families — system stack until brand fonts are supplied & self-hosted */
+	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--font-heading: var(--font-body);
+	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+	/* Weights */
+	--font-weight-light: 300;
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Static size scale (use for UI text) */
+	--font-size-xs: 0.75rem;    /* 12px */
+	--font-size-sm: 0.875rem;   /* 14px */
+	--font-size-base: 1rem;     /* 16px */
+	--font-size-md: 1.125rem;   /* 18px */
+	--font-size-lg: 1.25rem;    /* 20px */
+	--font-size-xl: 1.5rem;     /* 24px */
+	--font-size-2xl: 1.875rem;  /* 30px */
+	--font-size-3xl: 2.25rem;   /* 36px */
+	--font-size-4xl: 3rem;      /* 48px */
+
+	/* Fluid heading scale (min → max via clamp) */
+	--font-size-h1: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+	--font-size-h2: clamp(1.6rem, 1.2rem + 2vw, 2.5rem);
+	--font-size-h3: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+	--font-size-h4: clamp(1.15rem, 1.05rem + 0.5vw, 1.375rem);
+	--font-size-h5: 1.125rem;
+	--font-size-h6: 1rem;
+
+	/* Line heights */
+	--line-height-tight: 1.15;
+	--line-height-heading: 1.2;
+	--line-height-snug: 1.4;
+	--line-height-base: 1.6;
+	--line-height-loose: 1.8;
+
+	/* Letter spacing */
+	--letter-spacing-tight: -0.01em;
+	--letter-spacing-normal: 0;
+	--letter-spacing-wide: 0.04em;
+	--letter-spacing-wider: 0.08em;
+
+	/* -------------------------------------------------------------------------
+	 * Spacing scale (8px baseline, rem-based)
+	 * ---------------------------------------------------------------------- */
+	--space-3xs: 0.25rem;  /* 4px  */
+	--space-2xs: 0.5rem;   /* 8px  */
+	--space-xs: 0.75rem;   /* 12px */
+	--space-sm: 1rem;      /* 16px */
+	--space-md: 1.5rem;    /* 24px */
+	--space-lg: 2rem;      /* 32px */
+	--space-xl: 3rem;      /* 48px */
+	--space-2xl: 4rem;     /* 64px */
+	--space-3xl: 6rem;     /* 96px */
+
+	/* -------------------------------------------------------------------------
+	 * Section spacing (fluid vertical rhythm for page bands)
+	 * ---------------------------------------------------------------------- */
+	--section-space-y: clamp(3rem, 2rem + 5vw, 6rem);
+	--section-space-y-sm: clamp(2rem, 1.5rem + 3vw, 4rem);
+	--section-space-y-lg: clamp(4rem, 2.5rem + 7vw, 8rem);
+
+	/* -------------------------------------------------------------------------
+	 * Layout — container widths & gutters
+	 * ---------------------------------------------------------------------- */
+	--container-max: 1200px;      /* main content column */
+	--container-narrow: 768px;    /* readable prose / forms */
+	--container-wide: 1400px;     /* wide / feature layouts */
+	--container-gutter: var(--space-md);
+
+	/* -------------------------------------------------------------------------
+	 * Border radius
+	 * ---------------------------------------------------------------------- */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	--radius-pill: 9999px;
+	--radius-full: 50%;
+
+	/* -------------------------------------------------------------------------
+	 * Border widths
+	 * ---------------------------------------------------------------------- */
+	--border-width: 1px;
+	--border-width-thick: 2px;
+
+	/* -------------------------------------------------------------------------
+	 * Shadow / elevation system
+	 * ---------------------------------------------------------------------- */
+	--shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.04);
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+	--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+	--shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.12);
+	--shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.16);
+
+	/* -------------------------------------------------------------------------
+	 * Motion — durations & easings
+	 * ---------------------------------------------------------------------- */
+	--duration-fast: 120ms;
+	--duration-base: 200ms;
+	--duration-slow: 350ms;
+
+	--ease-standard: cubic-bezier(0.2, 0, 0, 1);
+	--ease-in: cubic-bezier(0.4, 0, 1, 1);
+	--ease-out: cubic-bezier(0, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+	/* Composite transition shorthands (consume in components) */
+	--transition-base: all var(--duration-base) var(--ease-standard);
+	--transition-colors: color var(--duration-base) var(--ease-standard),
+		background-color var(--duration-base) var(--ease-standard),
+		border-color var(--duration-base) var(--ease-standard);
+	--transition-transform: transform var(--duration-base) var(--ease-standard);
+
+	/* -------------------------------------------------------------------------
+	 * Z-index scale (named layers — never use arbitrary z-index values)
+	 * ---------------------------------------------------------------------- */
+	--z-below: -1;
+	--z-base: 0;
+	--z-raised: 10;      /* hovered cards, tooltips within flow */
+	--z-dropdown: 1000;
+	--z-sticky: 1020;
+	--z-header: 1030;    /* sticky site header */
+	--z-overlay: 1040;   /* backdrop / scrim */
+	--z-modal: 1050;
+	--z-popover: 1060;
+	--z-toast: 1070;
+	--z-max: 2147483647; /* last resort only */
+
+	/* -------------------------------------------------------------------------
+	 * Opacity scale
+	 * ---------------------------------------------------------------------- */
+	--opacity-0: 0;
+	--opacity-25: 0.25;
+	--opacity-50: 0.5;
+	--opacity-75: 0.75;
+	--opacity-100: 1;
+	--opacity-disabled: 0.55;
+	--opacity-muted: 0.7;
+
+	/* -------------------------------------------------------------------------
+	 * Focus state tokens
+	 * ---------------------------------------------------------------------- */
+	--focus-ring-width: 3px;
+	--focus-ring-offset: 2px;
+	--focus-ring-color: var(--color-focus);
+	--focus-ring: var(--focus-ring-width) solid var(--focus-ring-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * Responsive breakpoints (reference).
+ * NOTE: CSS custom properties CANNOT be used inside @media queries, so media
+ * queries must use these literal values. They are documented here (and in
+ * DESIGN_SYSTEM.md) as the single agreed set — do not invent new breakpoints.
+ *
+ *   --breakpoint-sm:  480px   large phones
+ *   --breakpoint-md:  768px   tablets
+ *   --breakpoint-lg:  1024px  laptops
+ *   --breakpoint-xl:  1280px  desktops
+ *   --breakpoint-2xl: 1440px  large desktops
+ *
+ * These are also exposed below purely for JS to read via getComputedStyle.
+ * -------------------------------------------------------------------------- */
+:root {
+	--breakpoint-sm: 480px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1440px;
+}

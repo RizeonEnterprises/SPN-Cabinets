@@ -1,0 +1,159 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Site footer
+ * -----------------------------------------------------------------------------
+ * Four-column footer + bottom bar. Dark (brand primary) surface with light
+ * text. Columns stack to 1 on mobile, 2 on tablet, 4 on desktop.
+ * ========================================================================== */
+
+.site-footer {
+	background-color: var(--color-primary);
+	color: var(--color-primary-contrast);
+}
+
+.site-footer__inner {
+	padding-block: var(--space-2xl);
+}
+
+/* Muted light text for secondary footer content. */
+.site-footer .footer-col__description,
+.site-footer .contact-item {
+	color: color-mix(in srgb, var(--color-primary-contrast) 82%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+ * Column grid
+ * -------------------------------------------------------------------------- */
+.footer-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-xl) var(--space-lg);
+}
+
+@media (min-width: 768px) {
+	.footer-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.footer-grid {
+		grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+	}
+}
+
+.footer-col {
+	min-width: 0;
+}
+
+.footer-col__title {
+	margin: 0 0 var(--space-sm);
+	font-size: var(--font-size-md);
+	color: var(--color-primary-contrast);
+}
+
+.footer-col__description {
+	margin: var(--space-sm) 0 0;
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-base);
+}
+
+/* Branding in the footer uses the light-on-dark treatment. */
+.site-footer .footer-branding .site-title a,
+.site-footer .footer-branding {
+	color: var(--color-primary-contrast);
+}
+
+.site-footer .custom-logo,
+.site-footer .footer-branding img {
+	max-height: 56px;
+	width: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Footer menus (Quick Links / Services)
+ * -------------------------------------------------------------------------- */
+.footer-menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+}
+
+.footer-menu a {
+	color: color-mix(in srgb, var(--color-primary-contrast) 82%, transparent);
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	transition: var(--transition-colors);
+}
+
+.footer-menu a:hover {
+	color: var(--color-accent);
+}
+
+/* Placeholder menu items (before the client assigns a menu). */
+.footer-menu--placeholder .is-placeholder span,
+.legal-menu--placeholder .is-placeholder span {
+	color: color-mix(in srgb, var(--color-primary-contrast) 55%, transparent);
+	font-style: italic;
+	font-size: var(--font-size-sm);
+}
+
+/* -----------------------------------------------------------------------------
+ * Contact column
+ * -------------------------------------------------------------------------- */
+.footer-contact {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+	font-style: normal; /* reset <address> italic */
+}
+
+.footer-contact .contact-item__wrap {
+	display: flex;
+}
+
+.footer-contact .contact-item {
+	align-items: flex-start;
+}
+
+/* -----------------------------------------------------------------------------
+ * Bottom bar
+ * -------------------------------------------------------------------------- */
+.site-footer__bottom {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-sm);
+	margin-top: var(--space-2xl);
+	padding-top: var(--space-md);
+	border-top: var(--border-width) solid
+		color-mix(in srgb, var(--color-primary-contrast) 20%, transparent);
+	font-size: var(--font-size-sm);
+}
+
+.site-footer__copyright {
+	margin: 0;
+	color: color-mix(in srgb, var(--color-primary-contrast) 75%, transparent);
+}
+
+.legal-menu {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-md);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.legal-menu a {
+	color: color-mix(in srgb, var(--color-primary-contrast) 82%, transparent);
+	text-decoration: none;
+}
+
+.legal-menu a:hover {
+	color: var(--color-accent);
+}

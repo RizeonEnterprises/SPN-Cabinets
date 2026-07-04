@@ -1,0 +1,126 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Primary navigation (desktop)
+ * -----------------------------------------------------------------------------
+ * Horizontal primary menu with dropdown-ready submenus. Submenus reveal on
+ * hover AND keyboard focus (:focus-within) AND explicit toggle (.is-expanded),
+ * so the menu is fully operable by mouse, touch and keyboard.
+ * ========================================================================== */
+
+.primary-nav {
+	display: flex;
+}
+
+.primary-menu {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.primary-menu .menu-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: 0;
+}
+
+.primary-menu a {
+	display: inline-flex;
+	align-items: center;
+	padding: var(--space-2xs) var(--space-xs);
+	color: var(--color-heading);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors);
+}
+
+.primary-menu a:hover,
+.primary-menu .menu-item:focus-within > a {
+	color: var(--color-primary);
+}
+
+/* Current page indicator. */
+.primary-menu [aria-current="page"] {
+	color: var(--color-primary);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.3em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Submenu toggle (chevron)
+ * -------------------------------------------------------------------------- */
+.submenu-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--space-3xs);
+	color: inherit;
+	border-radius: var(--radius-sm);
+	cursor: pointer;
+}
+
+.submenu-toggle__icon {
+	display: inline-flex;
+	width: 1em;
+	height: 1em;
+	/* rotation on .is-expanded handled in the animations layer */
+}
+
+.submenu-toggle__chevron {
+	width: 1em;
+	height: 1em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Dropdown submenus
+ * -------------------------------------------------------------------------- */
+.primary-menu .sub-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: var(--z-dropdown);
+	min-width: 220px;
+	margin: 0;
+	padding: var(--space-2xs);
+	list-style: none;
+	background-color: var(--color-background);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+
+	/* Hidden until revealed. */
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(6px);
+	pointer-events: none;
+	transition: opacity var(--duration-base) var(--ease-standard),
+		transform var(--duration-base) var(--ease-standard),
+		visibility var(--duration-base) var(--ease-standard);
+}
+
+.primary-menu .sub-menu .menu-item {
+	width: 100%;
+}
+
+.primary-menu .sub-menu a {
+	width: 100%;
+	padding: var(--space-2xs) var(--space-sm);
+}
+
+.primary-menu .sub-menu a:hover {
+	background-color: var(--color-surface);
+}
+
+/* Reveal: hover, keyboard focus, or explicit expanded state. */
+.primary-menu .menu-item:hover > .sub-menu,
+.primary-menu .menu-item:focus-within > .sub-menu,
+.primary-menu .has-submenu.is-expanded > .sub-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	pointer-events: auto;
+}

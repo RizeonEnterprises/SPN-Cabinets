@@ -1,0 +1,218 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Forms
+ * -----------------------------------------------------------------------------
+ * Reusable form field system for the Quote Form, search, newsletter, etc.
+ * Accessible by construction: visible labels, clear focus, non-colour-only
+ * validation, adequate spacing and touch targets.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Field group — label + control + help/error, stacked with rhythm
+ * -------------------------------------------------------------------------- */
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+}
+
+.field + .field {
+	margin-top: var(--space-md);
+}
+
+.field__label {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-heading);
+}
+
+/* Required marker — text, not colour-only. */
+.field__required {
+	color: var(--color-error);
+	font-weight: var(--font-weight-regular);
+}
+
+.field__hint {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Text controls
+ * -------------------------------------------------------------------------- */
+.input,
+.textarea,
+.select,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="date"],
+textarea,
+select {
+	width: 100%;
+	min-height: 2.75rem; /* 44px touch target */
+	padding: var(--space-2xs) var(--space-sm);
+	font-family: inherit;
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-snug);
+	color: var(--color-text);
+	background-color: var(--color-background);
+	border: var(--border-width) solid var(--color-border-strong);
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors),
+		box-shadow var(--duration-base) var(--ease-standard);
+	appearance: none;
+}
+
+.textarea,
+textarea {
+	min-height: 8rem;
+	resize: vertical;
+	line-height: var(--line-height-base);
+}
+
+/* Placeholder is a hint, never a label substitute. */
+::placeholder {
+	color: var(--color-text-muted);
+	opacity: var(--opacity-muted);
+}
+
+/* -----------------------------------------------------------------------------
+ * Select — custom caret via background SVG (currentColor-friendly)
+ * -------------------------------------------------------------------------- */
+.select,
+select {
+	padding-right: var(--space-xl);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23555' stroke-width='1.5'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right var(--space-sm) center;
+	background-size: 0.75rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Focus state
+ * -------------------------------------------------------------------------- */
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+	outline: none; /* replaced with a ring + border for form controls */
+	border-color: var(--color-focus);
+	box-shadow: 0 0 0 var(--focus-ring-width) color-mix(in srgb, var(--color-focus) 30%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+ * Validation states (non-colour-only: pair with text + aria-invalid)
+ * -------------------------------------------------------------------------- */
+.field.is-error .input,
+.field.is-error .textarea,
+.field.is-error .select,
+[aria-invalid="true"] {
+	border-color: var(--color-error);
+	background-color: var(--color-error-surface);
+}
+
+.field.is-success .input,
+.field.is-success .textarea,
+.field.is-success .select {
+	border-color: var(--color-success);
+	background-color: var(--color-success-surface);
+}
+
+.field__error {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3xs);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-error);
+}
+
+.field__success {
+	font-size: var(--font-size-sm);
+	color: var(--color-success);
+}
+
+/* Disabled / readonly */
+.input:disabled,
+.textarea:disabled,
+.select:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled,
+input[readonly],
+textarea[readonly] {
+	opacity: var(--opacity-disabled);
+	background-color: var(--color-surface);
+	cursor: not-allowed;
+}
+
+/* -----------------------------------------------------------------------------
+ * Checkbox & radio — custom, accessible, using accent-color for simplicity
+ * -------------------------------------------------------------------------- */
+.choice {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-2xs);
+	line-height: var(--line-height-snug);
+	cursor: pointer;
+}
+
+.choice + .choice {
+	margin-top: var(--space-2xs);
+}
+
+.choice input[type="checkbox"],
+.choice input[type="radio"] {
+	flex: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-top: 0.1em;
+	accent-color: var(--color-primary);
+	cursor: pointer;
+}
+
+.choice input[type="radio"] {
+	border-radius: var(--radius-full);
+}
+
+.choice__label {
+	font-size: var(--font-size-base);
+	color: var(--color-text);
+}
+
+/* -----------------------------------------------------------------------------
+ * Form-level messages (success / error banners)
+ * -------------------------------------------------------------------------- */
+.form-message {
+	padding: var(--space-sm) var(--space-md);
+	border-radius: var(--radius-md);
+	border: var(--border-width) solid transparent;
+	font-size: var(--font-size-sm);
+}
+
+.form-message--success {
+	color: var(--color-success);
+	background-color: var(--color-success-surface);
+	border-color: var(--color-success);
+}
+
+.form-message--error {
+	color: var(--color-error);
+	background-color: var(--color-error-surface);
+	border-color: var(--color-error);
+}
+
+/* Honeypot anti-spam field — visually and semantically hidden from users. */
+.field--honeypot {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}

@@ -1,0 +1,132 @@
+/* =============================================================================
+ * 04 · LAYOUT — Structural primitives
+ * -----------------------------------------------------------------------------
+ * Reusable, content-agnostic layout building blocks. These position things;
+ * they do not decorate them. No page-specific layouts here.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Container — centres content and applies responsive gutters
+ * -------------------------------------------------------------------------- */
+.container {
+	width: 100%;
+	max-width: var(--container-max);
+	margin-inline: auto;
+	padding-inline: var(--container-gutter);
+}
+
+.container--narrow {
+	max-width: var(--container-narrow);
+}
+
+.container--wide {
+	max-width: var(--container-wide);
+}
+
+.container--fluid {
+	max-width: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Section — a full-width vertical band with consistent rhythm
+ * -------------------------------------------------------------------------- */
+.section {
+	padding-block: var(--section-space-y);
+}
+
+.section--sm {
+	padding-block: var(--section-space-y-sm);
+}
+
+.section--lg {
+	padding-block: var(--section-space-y-lg);
+}
+
+.section--flush-top {
+	padding-top: 0;
+}
+
+.section--flush-bottom {
+	padding-bottom: 0;
+}
+
+/* Alternating surface background for visual separation. */
+.section--surface {
+	background-color: var(--color-surface);
+}
+
+.section--surface-alt {
+	background-color: var(--color-surface-alt);
+}
+
+/* -----------------------------------------------------------------------------
+ * Stack — vertical spacing between flow children (owl pattern)
+ * Use --stack-space to override the gap locally.
+ * -------------------------------------------------------------------------- */
+.stack > * + * {
+	margin-top: var(--stack-space, var(--space-md));
+}
+
+.stack--sm { --stack-space: var(--space-sm); }
+.stack--lg { --stack-space: var(--space-lg); }
+.stack--xl { --stack-space: var(--space-xl); }
+
+/* -----------------------------------------------------------------------------
+ * Cluster — horizontal group that wraps (nav rows, tag lists, button groups)
+ * -------------------------------------------------------------------------- */
+.cluster {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--cluster-space, var(--space-sm));
+	align-items: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Auto-grid — responsive card grid without media queries
+ * Set --grid-min to control the minimum column width.
+ * -------------------------------------------------------------------------- */
+.auto-grid {
+	display: grid;
+	gap: var(--grid-space, var(--space-md));
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(min(100%, var(--grid-min, 280px)), 1fr)
+	);
+}
+
+/* -----------------------------------------------------------------------------
+ * Center — horizontally centre a constrained block of content
+ * -------------------------------------------------------------------------- */
+.center {
+	box-sizing: content-box;
+	max-width: var(--center-measure, var(--container-narrow));
+	margin-inline: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Content region wrapper (the #content element in header/footer)
+ * -------------------------------------------------------------------------- */
+.site-content {
+	display: block;
+}
+
+/* -----------------------------------------------------------------------------
+ * Main content — default page spacing.
+ * Inner pages get vertical rhythm; the front page stays flush so it can compose
+ * full-bleed sections (each section provides its own padding).
+ * -------------------------------------------------------------------------- */
+.site-main {
+	padding-block: var(--section-space-y);
+}
+
+.site-main--front-page {
+	padding-block: 0;
+}
+
+.site-header__inner,
+.site-footer__inner {
+	width: 100%;
+	max-width: var(--container-max);
+	margin-inline: auto;
+	padding-inline: var(--container-gutter);
+}

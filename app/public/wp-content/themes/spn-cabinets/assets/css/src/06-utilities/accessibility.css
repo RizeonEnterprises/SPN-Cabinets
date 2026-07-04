@@ -1,0 +1,95 @@
+/* =============================================================================
+ * 06 · UTILITIES — Accessibility helpers
+ * -----------------------------------------------------------------------------
+ * Functional a11y utilities used across templates and components. These are
+ * requirements, not decoration.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Screen-reader-only text (WordPress-standard class name)
+ * -------------------------------------------------------------------------- */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	position: absolute !important;
+	word-wrap: normal !important;
+}
+
+/* Alias for the same behaviour. */
+.visually-hidden {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	position: absolute !important;
+	word-wrap: normal !important;
+}
+
+/* Visually hidden until focused (e.g. skip links). */
+.screen-reader-text:focus,
+.visually-hidden-focusable:focus {
+	clip: auto !important;
+	clip-path: none;
+	width: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+}
+
+/* -----------------------------------------------------------------------------
+ * Skip link — becomes visible on keyboard focus
+ * -------------------------------------------------------------------------- */
+.skip-link.screen-reader-text:focus {
+	display: block;
+	top: var(--space-2xs);
+	left: var(--space-2xs);
+	z-index: var(--z-max);
+	padding: var(--space-2xs) var(--space-sm);
+	color: var(--color-primary);
+	background-color: var(--color-background);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+	font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------------------------------------------------------
+ * Focus management helpers
+ * -------------------------------------------------------------------------- */
+
+/* Explicit, reusable focus ring (for custom widgets that manage their own). */
+.focus-ring:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-ring-offset);
+}
+
+/* For elements made focusable via tabindex that shouldn't show a mouse ring. */
+[tabindex="-1"]:focus {
+	outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Motion & interaction preferences
+ * -------------------------------------------------------------------------- */
+
+/* Utility to opt an element out of motion entirely. */
+.motion-safe-only {
+	transition: none;
+	animation: none;
+}
+
+/* Give any element a comfortable minimum touch target. */
+.tap-target {
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+}

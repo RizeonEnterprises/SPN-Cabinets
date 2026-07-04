@@ -1,0 +1,35 @@
+/**
+ * SPN Cabinets — Block editor styles.
+ * -----------------------------------------------------------------------------
+ * Loaded into the block editor via add_editor_style() so the editing experience
+ * reflects the front end. Keep this in sync with the relevant tokens/typography
+ * from assets/css/main.css. It should NOT contain full front-end layout — only
+ * what makes authored content look correct inside the editor canvas.
+ * -----------------------------------------------------------------------------
+ */
+
+/* Mirror the front-end design tokens the editor needs. */
+:root {
+	--color-text: #1a1a1a;
+	--color-primary: #14213d;
+	--color-accent: #c8a24b;
+	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--line-height-base: 1.6;
+	--line-height-heading: 1.2;
+}
+
+/* Editor content column: match the front-end reading measure. */
+.editor-styles-wrapper {
+	font-family: var(--font-body);
+	line-height: var(--line-height-base);
+	color: var(--color-text);
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+	line-height: var(--line-height-heading);
+}

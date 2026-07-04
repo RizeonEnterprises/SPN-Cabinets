@@ -1,0 +1,56 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Breadcrumbs
+ * -----------------------------------------------------------------------------
+ * Compact, accessible breadcrumb trail shown on inner pages. Separators are
+ * decorative (CSS ::before) so they are not read by assistive technology.
+ * ========================================================================== */
+
+.breadcrumbs {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	border-bottom: var(--border-width) solid var(--color-border);
+	background-color: var(--color-background);
+}
+
+.breadcrumbs__inner {
+	padding-block: var(--space-sm);
+}
+
+.breadcrumbs__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-2xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.breadcrumbs__item {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2xs);
+	margin: 0;
+}
+
+/* Decorative separator before every item except the first. */
+.breadcrumbs__item + .breadcrumbs__item::before {
+	content: "/";
+	color: var(--color-border-strong);
+	user-select: none;
+}
+
+.breadcrumbs__link {
+	color: var(--color-text-muted);
+	text-decoration: none;
+}
+
+.breadcrumbs__link:hover {
+	color: var(--color-primary);
+	text-decoration: underline;
+}
+
+.breadcrumbs__current {
+	color: var(--color-text);
+	font-weight: var(--font-weight-medium);
+}

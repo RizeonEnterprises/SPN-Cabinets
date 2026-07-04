@@ -1,0 +1,251 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Cards
+ * -----------------------------------------------------------------------------
+ * Reusable card system. Base .card + BEM elements, plus variant modifiers for
+ * the card types the site will use. These are the visual foundations only —
+ * the actual template parts (service-card, project-card, blog-card, …) are
+ * built in the components phase and inherit these styles.
+ *
+ * Element hooks match template-parts/cards/card.php:
+ *   .card > .card__media > .card__image
+ *   .card > .card__body  > .card__title (> .card__link) + .card__excerpt + .card__cta
+ * ========================================================================== */
+
+.card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: var(--color-background);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	box-shadow: var(--shadow-sm);
+	transition: box-shadow var(--duration-base) var(--ease-standard),
+		transform var(--duration-base) var(--ease-standard),
+		border-color var(--duration-base) var(--ease-standard);
+}
+
+/* Lift on hover/focus-within for interactive (linked) cards. */
+.card:hover,
+.card:focus-within {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-4px);
+	border-color: var(--color-border-strong);
+}
+
+/* -----------------------------------------------------------------------------
+ * Media
+ * -------------------------------------------------------------------------- */
+.card__media {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 3 / 2;
+	background-color: var(--color-surface);
+}
+
+.card__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.card:hover .card__image {
+	transform: scale(1.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * Body
+ * -------------------------------------------------------------------------- */
+.card__body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2xs);
+	padding: var(--space-md);
+	flex: 1 1 auto; /* equal-height bodies in a grid */
+}
+
+.card__title {
+	font-size: var(--font-size-lg);
+	line-height: var(--line-height-snug);
+	margin: 0;
+}
+
+.card__link {
+	color: var(--color-heading);
+	text-decoration: none;
+}
+
+.card__link:hover {
+	color: var(--color-primary);
+}
+
+/* Make the whole card clickable while keeping the link the accessible target. */
+.card__link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+
+.card__excerpt {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-base);
+}
+
+.card__meta {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+/* Push the CTA to the bottom of an equal-height card. */
+.card__cta {
+	margin-top: auto;
+	align-self: flex-start;
+}
+
+/* Relative context so .card__link::after overlay works. */
+.card {
+	position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Standard (default, no modifier needed)
+ * -------------------------------------------------------------------------- */
+.card--flat {
+	box-shadow: none;
+}
+
+.card--flat:hover,
+.card--flat:focus-within {
+	box-shadow: var(--shadow-sm);
+	transform: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Service card (icon-led, no image)
+ * -------------------------------------------------------------------------- */
+.card--service {
+	text-align: center;
+	align-items: center;
+	padding: var(--space-lg);
+	gap: var(--space-sm);
+}
+
+.card--service .card__icon {
+	width: 3rem;
+	height: 3rem;
+	color: var(--color-accent);
+}
+
+.card--service .card__body {
+	padding: 0;
+	align-items: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Gallery card (image-forward, minimal chrome)
+ * -------------------------------------------------------------------------- */
+.card--gallery {
+	border: none;
+	box-shadow: none;
+	border-radius: var(--radius-md);
+}
+
+.card--gallery .card__media {
+	aspect-ratio: 4 / 3;
+	border-radius: var(--radius-md);
+}
+
+.card--gallery .card__body {
+	padding: var(--space-sm) 0 0;
+}
+
+/* Optional caption overlay for gallery images. */
+.card--gallery .card__overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: flex-end;
+	padding: var(--space-sm);
+	color: #fff;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 60%);
+	opacity: 0;
+	transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.card--gallery:hover .card__overlay,
+.card--gallery:focus-within .card__overlay {
+	opacity: 1;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Blog card
+ * -------------------------------------------------------------------------- */
+.card--blog .card__meta {
+	order: -1; /* date/category above the title */
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wide);
+	font-size: var(--font-size-xs);
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — Testimonial card (quote-led, no media)
+ * -------------------------------------------------------------------------- */
+.card--testimonial {
+	padding: var(--space-lg);
+	gap: var(--space-md);
+	background-color: var(--color-surface);
+	border-color: transparent;
+}
+
+.card--testimonial:hover {
+	transform: none;
+	box-shadow: var(--shadow-md);
+}
+
+.card--testimonial .card__quote {
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-snug);
+	color: var(--color-text);
+}
+
+.card--testimonial .card__author {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2xs);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-heading);
+}
+
+.card--testimonial .card__rating {
+	color: var(--color-accent);
+	letter-spacing: 0.1em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Variant — CTA card (emphasis panel, brand background)
+ * -------------------------------------------------------------------------- */
+.card--cta {
+	align-items: flex-start;
+	gap: var(--space-md);
+	padding: var(--space-xl);
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary);
+	border-color: transparent;
+	text-align: left;
+}
+
+.card--cta:hover {
+	transform: none;
+	box-shadow: var(--shadow-md);
+}
+
+.card--cta .card__title,
+.card--cta .card__link {
+	color: var(--color-primary-contrast);
+}
+
+.card--cta .card__excerpt {
+	color: color-mix(in srgb, var(--color-primary-contrast) 85%, transparent);
+}

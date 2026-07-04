@@ -1,0 +1,124 @@
+/* =============================================================================
+ * 03 · BASE — Elements (non-typographic)
+ * -----------------------------------------------------------------------------
+ * Global element behaviours: selection, focus, media, forms baseline. No
+ * classes. Component-specific styling lives in the components layer.
+ * ========================================================================== */
+
+/* Selection colour (uses accent by default). */
+::selection {
+	background-color: var(--color-accent);
+	color: var(--color-accent-contrast);
+}
+
+/* -----------------------------------------------------------------------------
+ * Global focus state
+ * -----------------------------------------------------------------------------
+ * Visible keyboard focus for ALL interactive elements. We only show the ring
+ * for keyboard users (:focus-visible), never removing focus outright.
+ * -------------------------------------------------------------------------- */
+:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-ring-offset);
+	border-radius: var(--radius-sm);
+}
+
+/* Remove the default outline only where :focus-visible is supported, so mouse
+ * clicks don't show a ring but keyboard focus still does. */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Media & embeds
+ * -------------------------------------------------------------------------- */
+img,
+svg {
+	vertical-align: middle;
+}
+
+figure {
+	margin: 0;
+}
+
+/* Responsive iframes/embeds keep aspect where possible. */
+iframe,
+embed,
+object {
+	max-width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+ * Form elements — baseline only (full styling in components/forms.css)
+ * -------------------------------------------------------------------------- */
+button {
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+
+button:disabled,
+[disabled] {
+	cursor: not-allowed;
+}
+
+label {
+	cursor: pointer;
+}
+
+fieldset {
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-md);
+	padding: var(--space-sm) var(--space-md);
+	min-width: 0;
+}
+
+legend {
+	padding: 0 var(--space-2xs);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* Remove inner spinner clutter on number inputs where undesired (opt-in). */
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * WordPress core alignment & caption support (html5 theme support)
+ * -------------------------------------------------------------------------- */
+.alignleft {
+	float: left;
+	margin: 0 var(--space-md) var(--space-sm) 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 var(--space-sm) var(--space-md);
+}
+
+.aligncenter {
+	display: block;
+	margin-inline: auto;
+}
+
+.alignwide,
+.alignfull {
+	/* Wide/full block support hooks; layout wrappers finalise these later. */
+	max-width: none;
+}
+
+.wp-caption {
+	max-width: 100%;
+}
+
+.wp-caption-text {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	margin-top: var(--space-2xs);
+}
+
+/* Sticky-post / WP body-class hooks reserved for later use. */
+.sticky,
+.updated:not(.published) {
+	/* intentionally empty — reserved */
+}

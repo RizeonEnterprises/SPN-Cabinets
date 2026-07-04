@@ -1,0 +1,165 @@
+/* =============================================================================
+ * 06 · UTILITIES — Single-purpose helpers
+ * -----------------------------------------------------------------------------
+ * Low-count, high-value utility classes. Deliberately NOT a full atomic
+ * framework (we are not Bootstrap/Tailwind) — just the helpers components and
+ * templates genuinely reuse. All values come from tokens.
+ * ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Spacing utilities (margin-top / padding) — token-based
+ * -------------------------------------------------------------------------- */
+.mt-0 { margin-top: 0; }
+.mt-2xs { margin-top: var(--space-2xs); }
+.mt-xs { margin-top: var(--space-xs); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+.mx-auto { margin-inline: auto; }
+.my-0 { margin-block: 0; }
+
+.p-0 { padding: 0; }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+
+/* -----------------------------------------------------------------------------
+ * Flex utilities
+ * -------------------------------------------------------------------------- */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1 1 0%; }
+.flex-none { flex: none; }
+
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+
+.gap-2xs { gap: var(--space-2xs); }
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+
+/* -----------------------------------------------------------------------------
+ * Grid utilities (fixed column counts; prefer .auto-grid for responsive)
+ * -------------------------------------------------------------------------- */
+.grid { display: grid; gap: var(--space-md); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Collapse multi-column grids to a single column on small screens. */
+@media (max-width: 767px) {
+	.grid-2,
+	.grid-3,
+	.grid-4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Two-up that becomes 3/4-up on larger screens. */
+@media (min-width: 768px) {
+	.grid-md-2 { grid-template-columns: repeat(2, 1fr); }
+	.grid-md-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+	.grid-lg-3 { grid-template-columns: repeat(3, 1fr); }
+	.grid-lg-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Text utilities
+ * -------------------------------------------------------------------------- */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+.text-muted { color: var(--color-text-muted); }
+.text-primary { color: var(--color-primary); }
+.text-accent { color: var(--color-accent); }
+
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.uppercase { text-transform: uppercase; letter-spacing: var(--letter-spacing-wide); }
+
+.fs-sm { font-size: var(--font-size-sm); }
+.fs-lg { font-size: var(--font-size-lg); }
+
+/* Truncate to a single line. */
+.truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Clamp to N lines (set --lines). */
+.line-clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: var(--lines, 3);
+	line-clamp: var(--lines, 3);
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* -----------------------------------------------------------------------------
+ * Visual / surface utilities
+ * -------------------------------------------------------------------------- */
+.bg-surface { background-color: var(--color-surface); }
+.bg-primary { background-color: var(--color-primary); color: var(--color-primary-contrast); }
+.radius-sm { border-radius: var(--radius-sm); }
+.radius-md { border-radius: var(--radius-md); }
+.radius-lg { border-radius: var(--radius-lg); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* -----------------------------------------------------------------------------
+ * Visibility helpers
+ * -------------------------------------------------------------------------- */
+.hidden { display: none !important; }
+
+/* Hide below / above a breakpoint. */
+@media (max-width: 767px) {
+	.hidden-mobile { display: none !important; }
+}
+
+@media (min-width: 768px) {
+	.hidden-desktop { display: none !important; }
+}
+
+/* Hide only when JS is available (progressive enhancement). */
+.js .is-js-hidden { display: none !important; }
+
+/* Full-bleed helper: break an element out to the viewport edges. */
+.full-bleed {
+	width: 100vw;
+	margin-inline: calc(50% - 50vw);
+}
+
+/* Aspect-ratio helpers. */
+.ratio-square { aspect-ratio: 1; }
+.ratio-video { aspect-ratio: 16 / 9; }
+.ratio-photo { aspect-ratio: 3 / 2; }

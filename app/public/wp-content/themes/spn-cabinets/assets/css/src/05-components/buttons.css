@@ -1,0 +1,213 @@
+/* =============================================================================
+ * 05 · COMPONENTS — Buttons
+ * -----------------------------------------------------------------------------
+ * The single button system, consumed by template-parts/buttons/button.php.
+ * BEM: .button (base) + .button--{variant} + .button--{size} + state hooks.
+ * Variants: primary, secondary, outline, ghost, text. States: hover, focus,
+ * active, disabled, loading.
+ * ========================================================================== */
+
+.button {
+	--button-bg: var(--color-primary);
+	--button-fg: var(--color-primary-contrast);
+	--button-bg-hover: var(--color-primary-hover);
+	--button-border: transparent;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2xs);
+	min-height: 2.75rem; /* 44px — accessible touch target */
+	padding: var(--space-2xs) var(--space-md);
+	font-family: inherit;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-tight);
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	color: var(--button-fg);
+	background-color: var(--button-bg);
+	border: var(--border-width) solid var(--button-border);
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors),
+		transform var(--duration-fast) var(--ease-standard),
+		box-shadow var(--duration-base) var(--ease-standard);
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.button:hover {
+	color: var(--button-fg);
+	background-color: var(--button-bg-hover);
+	text-decoration: none;
+}
+
+.button:active {
+	transform: translateY(1px);
+}
+
+/* Focus ring handled globally by :focus-visible; ensure offset reads well. */
+.button:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-ring-offset);
+}
+
+/* -----------------------------------------------------------------------------
+ * Variants
+ * -------------------------------------------------------------------------- */
+
+/* Primary is the base default (already set above). */
+.button--primary {
+	--button-bg: var(--color-primary);
+	--button-fg: var(--color-primary-contrast);
+	--button-bg-hover: var(--color-primary-hover);
+	--button-border: transparent;
+}
+
+.button--secondary {
+	--button-bg: var(--color-secondary);
+	--button-fg: var(--color-secondary-contrast);
+	--button-bg-hover: var(--color-secondary-hover);
+	--button-border: transparent;
+}
+
+.button--accent {
+	--button-bg: var(--color-accent);
+	--button-fg: var(--color-accent-contrast);
+	--button-bg-hover: var(--color-accent-hover);
+	--button-border: transparent;
+}
+
+/* Outline — transparent with a visible border; fills on hover. */
+.button--outline {
+	--button-bg: transparent;
+	--button-fg: var(--color-primary);
+	--button-border: var(--color-primary);
+}
+
+.button--outline:hover {
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary);
+}
+
+/* Ghost — no border, subtle surface tint on hover. */
+.button--ghost {
+	--button-bg: transparent;
+	--button-fg: var(--color-primary);
+	--button-border: transparent;
+}
+
+.button--ghost:hover {
+	color: var(--color-primary);
+	background-color: var(--color-surface);
+}
+
+/* Text — link-like button, no chrome. */
+.button--text {
+	--button-bg: transparent;
+	--button-fg: var(--color-primary);
+	--button-border: transparent;
+	min-height: auto;
+	padding-inline: var(--space-3xs);
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+.button--text:hover {
+	color: var(--color-accent);
+	background-color: transparent;
+	text-decoration-thickness: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Sizes
+ * -------------------------------------------------------------------------- */
+.button--sm {
+	min-height: 2.25rem;
+	padding: var(--space-3xs) var(--space-sm);
+	font-size: var(--font-size-sm);
+}
+
+.button--md {
+	/* default sizing */
+}
+
+.button--lg {
+	min-height: 3.25rem;
+	padding: var(--space-xs) var(--space-lg);
+	font-size: var(--font-size-md);
+}
+
+/* Full-width modifier (e.g. mobile CTAs). */
+.button--block {
+	display: flex;
+	width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+ * States — disabled & loading
+ * -------------------------------------------------------------------------- */
+.button:disabled,
+.button[disabled],
+.button[aria-disabled="true"],
+.button--disabled {
+	opacity: var(--opacity-disabled);
+	cursor: not-allowed;
+	pointer-events: none;
+	box-shadow: none;
+	transform: none;
+}
+
+/* Loading: hide the label, show a spinner, keep the button width stable.
+ * Markup: add .is-loading and aria-busy="true" to the button. */
+.button.is-loading {
+	position: relative;
+	color: transparent !important;
+	pointer-events: none;
+}
+
+.button.is-loading::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 1.15em;
+	height: 1.15em;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: var(--radius-full);
+	/* Spinner colour follows the would-be text colour via a data pattern. */
+	color: var(--button-fg);
+	animation: spn-spin 0.7s linear infinite;
+}
+
+/* Icon-only button accessibility helper (pair with .screen-reader-text label). */
+.button--icon {
+	padding: var(--space-2xs);
+	aspect-ratio: 1;
+}
+
+/* Icon + label inside a button. */
+.button__icon {
+	width: 1.15em;
+	height: 1.15em;
+	flex: none;
+}
+
+.button__label {
+	display: inline-block;
+}
+
+/* Placeholder button (non-interactive shell state, e.g. WhatsApp before config). */
+.button.is-placeholder {
+	opacity: var(--opacity-disabled);
+	cursor: default;
+	box-shadow: none;
+}
+
+.button.is-placeholder:hover {
+	background-color: var(--button-bg);
+	transform: none;
+}
