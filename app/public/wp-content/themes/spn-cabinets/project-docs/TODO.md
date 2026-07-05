@@ -120,7 +120,7 @@ responsive check → ACF fields → document + tick in
 - [ ] About
 - [ ] Services (hub) + Fitted Kitchens + Fitted Bedrooms
 - [x] Single Project (`single-spn_project.php`) — assembled from components
-- [ ] Gallery (project archive: `archive-spn_project.php`)
+- [x] Gallery / project archive (`archive-spn_project.php` → `/portfolio/`)
 - [ ] Contact (+ Thank-You)
 - [ ] Legal pages (Privacy, Cookies, Terms)
 - [ ] 404 polish

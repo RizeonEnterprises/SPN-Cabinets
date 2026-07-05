@@ -5,8 +5,8 @@
  * Built by tools/build-css.mjs from assets/css/src/**.
  * Edit the partials in assets/css/src/ and run `npm run build:css`.
  * =====================================================================
- * Built: 2026-07-05T04:00:57.279Z
- * Sources (22):
+ * Built: 2026-07-05T04:12:21.938Z
+ * Sources (23):
  *   - assets/css/src/01-settings/tokens.css
  *   - assets/css/src/02-generic/reset.css
  *   - assets/css/src/03-base/elements.css
@@ -25,6 +25,7 @@
  *   - assets/css/src/05-components/hero.css
  *   - assets/css/src/05-components/mobile-nav.css
  *   - assets/css/src/05-components/navigation.css
+ *   - assets/css/src/05-components/pagination.css
  *   - assets/css/src/05-components/section-heading.css
  *   - assets/css/src/06-utilities/accessibility.css
  *   - assets/css/src/06-utilities/utilities.css
@@ -2779,6 +2780,60 @@ body.is-menu-open {
 	visibility: visible;
 	transform: none;
 	pointer-events: auto;
+}
+
+/* ==== src/05-components/pagination.css ==== */
+/* =============================================================================
+ * 05 · COMPONENTS — Pagination
+ * -----------------------------------------------------------------------------
+ * Styles WordPress core `the_posts_pagination()` output (nav.pagination >
+ * .nav-links > .page-numbers) as clean, touch-friendly chips. Token-only; used
+ * by every archive (projects, blog, category, search).
+ * ========================================================================== */
+
+.pagination {
+	margin-top: var(--space-xl);
+}
+
+.pagination .nav-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2xs);
+}
+
+.pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2.75rem;  /* 44px touch target */
+	min-height: 2.75rem;
+	padding: 0 var(--space-2xs);
+	color: var(--color-heading);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--radius-sm);
+	transition: var(--transition-colors);
+}
+
+.pagination a.page-numbers:hover {
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+
+/* Current page + non-link dots. */
+.pagination .page-numbers.current {
+	color: var(--color-primary-contrast);
+	background-color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+
+.pagination .page-numbers.dots {
+	border-color: transparent;
+	min-width: auto;
 }
 
 /* ==== src/05-components/section-heading.css ==== */

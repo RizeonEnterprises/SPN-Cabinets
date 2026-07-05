@@ -19,6 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Project Archive template (Phase 3)** — `archive-spn_project.php` (the
+  `/portfolio/` page). Hero ("Our Portfolio", solid) → portfolio grid (main
+  query looped into `$portfolio_projects` and passed to the reusable Gallery
+  Grid) → native `the_posts_pagination()` → CTA ("Ready to start your dream
+  project?" → `/quote/`). Empty state shows a friendly message. All output
+  escaped; verified live (empty archive renders 200, no PHP errors).
+- **Pagination component** — `assets/css/src/05-components/pagination.css`.
+  Styles core `the_posts_pagination()` as touch-friendly chips (used by every
+  archive).
 - **Single Project template (Phase 3)** — `single-spn_project.php`. Assembled
   entirely from reusable components: Hero (title = `get_the_title()`, subtitle =
   primary `spn_project_category` term, image = featured image) → Project specs

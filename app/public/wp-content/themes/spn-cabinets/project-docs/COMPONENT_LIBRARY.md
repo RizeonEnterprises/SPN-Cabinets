@@ -37,7 +37,7 @@ rules in [CLAUDE.md](CLAUDE.md) §14–15 and style them with tokens
 | 19 | WhatsApp Button | Global | `template-parts/buttons/whatsapp.php` | 🟡 |
 | 20 | Process / Steps | Section | `template-parts/sections/process.php` | ⬜ |
 | 21 | Blog Card | Composite | `template-parts/cards/blog-card.php` | ⬜ |
-| 22 | Pagination | Global | `template-parts/navigation/pagination.php` | 🟡 |
+| 22 | Pagination | Global | core `the_posts_pagination()` + `pagination.css` | ✅ |
 | 23 | 404 Hero | Section | (in `404.php`) | ✅ |
 | 24 | Cookie Banner | Global | `template-parts/global/cookie-banner.php` | ⬜ |
 | 25 | Newsletter | Section | `template-parts/forms/newsletter.php` | ⬜ |
