@@ -2,7 +2,7 @@
 /**
  * Global site options & contact details.
  *
- * A single, filterable source of truth for the business contact details, the
+ * A single filterable source of truth for the business contact details, the
  * global CTA and the announcement bar. The header AND footer both read from
  * here, so values are never duplicated in markup.
  *

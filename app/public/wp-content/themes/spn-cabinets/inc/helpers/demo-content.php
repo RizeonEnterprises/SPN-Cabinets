@@ -6,7 +6,7 @@
  * real content exists. Shared so the two templates never drift.
  *
  * REMOVE this module (and its functions.php loader entry) once services and
- * testimonials are sourced from real content / CPTs / ACF.
+ * testimonials are sourced from real content / CPTs/ACF.
  *
  * @package SPN_Cabinets
  * @since   1.0.0
