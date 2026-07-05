@@ -123,6 +123,12 @@
 	padding-block: 0;
 }
 
+/* Flush main — for templates composed entirely of full-bleed bands that each
+ * provide their own vertical padding (e.g. single-spn_project). */
+.site-main--flush {
+	padding-block: 0;
+}
+
 .site-header__inner,
 .site-footer__inner {
 	width: 100%;

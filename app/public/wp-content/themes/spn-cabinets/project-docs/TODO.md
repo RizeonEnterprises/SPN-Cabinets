@@ -41,7 +41,8 @@ _Last updated: 2026-07-03_
 - [x] Register **Project** CPT `spn_project` (`inc/post-types.php`) + flush rewrites
 - [x] Register hierarchical taxonomy `spn_project_category`
 - [ ] (Optional/future) Style + Location taxonomies; Testimonial + FAQ CPTs
-- [ ] Install & configure **ACF** + enable Local JSON (`acf-json/`)
+- [~] ACF field group defined in PHP (`inc/acf-fields.php`, guarded) — **install
+      ACF PRO** (gallery field) to activate; consider Local JSON later
 - [ ] Create page tree (Home, About, Services + children, Gallery, Contact, legal)
 - [ ] Build + assign Primary and Footer menus
 - ⛳ Confirm service-area/towns (affects local pages) — see CLIENT_REQUIREMENTS
@@ -118,7 +119,8 @@ responsive check → ACF fields → document + tick in
 - [ ] Homepage (`front-page.php`) via ACF flexible content
 - [ ] About
 - [ ] Services (hub) + Fitted Kitchens + Fitted Bedrooms
-- [ ] Gallery (project archive) + Single Project
+- [x] Single Project (`single-spn_project.php`) — assembled from components
+- [ ] Gallery (project archive: `archive-spn_project.php`)
 - [ ] Contact (+ Thank-You)
 - [ ] Legal pages (Privacy, Cookies, Terms)
 - [ ] 404 polish

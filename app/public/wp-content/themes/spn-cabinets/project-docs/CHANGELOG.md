@@ -19,6 +19,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Single Project template (Phase 3)** — `single-spn_project.php`. Assembled
+  entirely from reusable components: Hero (title = `get_the_title()`, subtitle =
+  primary `spn_project_category` term, image = featured image) → Project specs
+  (2-col `.grid-md-2`: `the_content()` + an ACF details card showing
+  Location/Materials/Client/Year, each only if set) → Project Gallery (Section
+  Heading + Gallery Grid, only when `project_gallery` has images) → CTA band
+  ("Ready to start your project?" → `/quote/`). ACF read via the guarded
+  `spn_cabinets_field()`; all output escaped.
+- **ACF field group (Phase 2)** — `inc/acf-fields.php` (registered in
+  functions.php). Registers the **"Project Details"** group
+  (`group_spn_project_details`) on `acf/init`, guarded by
+  `function_exists( 'acf_add_local_field_group' )`, shown only when
+  `post_type == spn_project`, `show_in_rest: true`. Fields: `project_gallery`
+  (gallery, `return_format: array` — **requires ACF PRO**), `project_location`
+  (text), `project_materials` (textarea), `project_client` (text),
+  `project_completion_year` (text). Definitions live in code (version-controlled);
+  no frontend consumption yet.
 - **Portfolio backend (Phase 2)** — `inc/post-types.php` (registered in
   functions.php). Registers the **`spn_project`** CPT (`public`, `show_in_rest`,
   `has_archive: 'portfolio'`, `rewrite slug 'project'`; supports title/editor/
@@ -144,6 +161,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     and submenu toggles.
 
 ### Changed
+- Added the guarded `spn_cabinets_field()` ACF helper (template-helpers) and a
+  reusable `.site-main--flush` layout modifier for full-bleed-band templates.
 - Registered `inc/form-handlers.php` in the functions.php module loader; added
   `spn_cabinets_quote_services()` to site-options and small `.quote-form*`
   spacing rules to `forms.css`.

@@ -84,6 +84,7 @@ $spn_cabinets_modules = array(
 	'inc/theme-support.php',
 	'inc/menus.php',
 	'inc/post-types.php',
+	'inc/acf-fields.php',
 	'inc/enqueue-assets.php',
 	'inc/cleanup.php',
 	'inc/security.php',

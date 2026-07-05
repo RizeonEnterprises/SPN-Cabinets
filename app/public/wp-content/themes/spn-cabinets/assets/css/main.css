@@ -5,7 +5,7 @@
  * Built by tools/build-css.mjs from assets/css/src/**.
  * Edit the partials in assets/css/src/ and run `npm run build:css`.
  * =====================================================================
- * Built: 2026-07-04T18:15:31.730Z
+ * Built: 2026-07-05T04:00:57.279Z
  * Sources (22):
  *   - assets/css/src/01-settings/tokens.css
  *   - assets/css/src/02-generic/reset.css
@@ -871,6 +871,12 @@ tbody tr:hover {
 }
 
 .site-main--front-page {
+	padding-block: 0;
+}
+
+/* Flush main — for templates composed entirely of full-bleed bands that each
+ * provide their own vertical padding (e.g. single-spn_project). */
+.site-main--flush {
 	padding-block: 0;
 }
 

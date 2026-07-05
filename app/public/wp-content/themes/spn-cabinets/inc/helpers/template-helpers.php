@@ -133,6 +133,25 @@ function spn_cabinets_copyright_year() {
 }
 
 /**
+ * Get an ACF field value safely, whether or not ACF is active.
+ *
+ * Wraps get_field() with a function_exists() guard so templates that read ACF
+ * data never fatal when the plugin is deactivated — they just get null.
+ *
+ * @since 1.0.0
+ *
+ * @param string   $selector The ACF field name or key.
+ * @param int|bool $post_id  Optional. Post ID. Default current post.
+ * @return mixed|null Field value, or null if ACF is unavailable.
+ */
+function spn_cabinets_field( $selector, $post_id = false ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return null;
+	}
+	return get_field( $selector, $post_id );
+}
+
+/**
  * Render a footer navigation menu, or a placeholder list if none is assigned.
  *
  * Keeps the footer columns visibly populated in the shell before the client has
