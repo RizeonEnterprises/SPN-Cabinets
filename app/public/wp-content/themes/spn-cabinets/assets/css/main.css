@@ -5,7 +5,7 @@
  * Built by tools/build-css.mjs from assets/css/src/**.
  * Edit the partials in assets/css/src/ and run `npm run build:css`.
  * =====================================================================
- * Built: 2026-07-05T04:12:21.938Z
+ * Built: 2026-07-05T05:58:56.462Z
  * Sources (23):
  *   - assets/css/src/01-settings/tokens.css
  *   - assets/css/src/02-generic/reset.css
@@ -1430,7 +1430,7 @@ tbody tr:hover {
 	isolation: isolate;                  /* contain the ::before quote mark */
 	padding: var(--space-lg);
 	gap: var(--space-sm);
-	background-color: var(--color-surface);
+	background-color: var(--color-background); /* white — reads on muted sections */
 	border-color: transparent;
 }
 

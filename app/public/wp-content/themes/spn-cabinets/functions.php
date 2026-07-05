@@ -79,6 +79,7 @@ $spn_cabinets_modules = array(
 	'inc/helpers/icons.php',
 	'inc/helpers/site-options.php',
 	'inc/helpers/template-helpers.php',
+	'inc/helpers/demo-content.php', // TEMPORARY placeholder data — remove with real content.
 
 	// Feature modules.
 	'inc/theme-support.php',

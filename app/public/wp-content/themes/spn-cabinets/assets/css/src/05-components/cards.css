@@ -226,7 +226,7 @@
 	isolation: isolate;                  /* contain the ::before quote mark */
 	padding: var(--space-lg);
 	gap: var(--space-sm);
-	background-color: var(--color-surface);
+	background-color: var(--color-background); /* white — reads on muted sections */
 	border-color: transparent;
 }
 

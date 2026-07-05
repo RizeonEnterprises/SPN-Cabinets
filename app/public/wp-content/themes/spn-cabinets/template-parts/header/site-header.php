@@ -18,10 +18,12 @@ defined( 'ABSPATH' ) || exit;
 
 		<div class="site-header__branding">
 			<?php
-			// Logo, or linked site title (uses <h1> only on the front page).
+			// Logo, or linked site title. Rendered as a <p> (not <h1>) — the
+			// page's <h1> belongs to its main content (hero / entry title), so
+			// there is exactly one <h1> per page.
 			spn_cabinets_site_branding(
 				array(
-					'is_home_heading' => is_front_page(),
+					'is_home_heading' => false,
 				)
 			);
 			?>

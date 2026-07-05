@@ -116,7 +116,8 @@ responsive check → ACF fields → document + tick in
 
 ## Milestone 4 — Pages — 🔴 not started
 
-- [ ] Homepage (`front-page.php`) via ACF flexible content
+- [x] Homepage (`front-page.php`) — composed from components (mock data for now;
+      Recent Projects via live `WP_Query`). ACF flexible-content sourcing later.
 - [ ] About
 - [ ] Services (hub) + Fitted Kitchens + Fitted Bedrooms
 - [x] Single Project (`single-spn_project.php`) — assembled from components

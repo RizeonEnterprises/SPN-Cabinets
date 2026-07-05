@@ -19,6 +19,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Homepage template (Phase 3)** — `front-page.php`. Fully composed landing
+  page: Hero (h1 + dual CTAs over a placeholder image) → Featured Services
+  (`.grid-lg-4`, 4 shared mock services) → **Recent Projects** (a scoped
+  `WP_Query` of the 6 latest `spn_project`, mapped into the Gallery Grid, with a
+  "View All Projects" button; the whole section is hidden when there are no
+  projects) → Testimonials (3 mock reviews) → primary CTA. Verified live
+  (renders 200, no PHP errors, exactly one `<h1>`).
+- **Demo-content module** — `inc/helpers/demo-content.php`:
+  `spn_cabinets_mock_services()` / `spn_cabinets_mock_testimonials()` (shared by
+  the Services + Homepage templates; clearly temporary, to be removed with real
+  content).
+- **Services page template (Phase 3)** — `page-services.php`
+  (`Template Name: Services Page`). Hero → services grid (Section Heading +
+  Service Cards from a `$mock_services` array) → testimonials (Section Heading +
+  Testimonial Cards from `$mock_testimonials`, on a muted `.section--surface`) →
+  dark CTA. Mock data is placeholder; all output escaped inside the components.
+  Verified live (renders 200, no PHP errors; throwaway page removed).
 - **Project Archive template (Phase 3)** — `archive-spn_project.php` (the
   `/portfolio/` page). Hero ("Our Portfolio", solid) → portfolio grid (main
   query looped into `$portfolio_projects` and passed to the reusable Gallery
@@ -170,6 +187,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     and submenu toggles.
 
 ### Changed
+- Header branding no longer renders as `<h1>` on the front page (now always a
+  `<p>`) — the page's single `<h1>` belongs to its main content (hero / entry
+  title), avoiding a double-`<h1>` on the homepage.
+- Extracted the Services-page mock arrays into the shared `demo-content` module
+  and refactored `page-services.php` to consume it (DRY; reused by the homepage).
+- Testimonial card background is now `--color-background` (white) so review cards
+  read clearly on muted sections; added `home`, `layers`, `briefcase` and
+  `monitor` icons to `spn_cabinets_icon()`.
 - Added the guarded `spn_cabinets_field()` ACF helper (template-helpers) and a
   reusable `.site-main--flush` layout modifier for full-bleed-band templates.
 - Registered `inc/form-handlers.php` in the functions.php module loader; added
