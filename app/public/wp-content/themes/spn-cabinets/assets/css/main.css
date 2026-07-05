@@ -482,10 +482,6 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 /* Sticky-post / WP body-class hooks reserved for later use. */
-.sticky,
-.updated:not(.published) {
-	/* intentionally empty — reserved */
-}
 
 /* ==== src/03-base/typography.css ==== */
 /* =============================================================================
@@ -1119,8 +1115,8 @@ tbody tr:hover {
 	font-size: var(--font-size-sm);
 }
 
-.button--md {
-	/* default sizing */
+.button--md { /* default sizing: inherits base .button styles */
+	font-size: inherit;
 }
 
 .button--lg {
