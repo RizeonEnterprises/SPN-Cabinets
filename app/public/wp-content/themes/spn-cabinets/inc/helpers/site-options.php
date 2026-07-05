@@ -20,20 +20,22 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @return array {
- *     @type string $phone    Human phone number, e.g. "01234 567890". Empty = placeholder.
- *     @type string $email    Email address. Empty = placeholder.
- *     @type string $whatsapp WhatsApp number in international digits, e.g. "441234567890".
- *     @type string $address  Full postal address (single line or with commas).
+ *     @type string $phone         Raw phone (digits) used to build the tel: link.
+ *     @type string $phone_display Formatted phone for display. Falls back to $phone.
+ *     @type string $email         Email address.
+ *     @type string $whatsapp      WhatsApp number in international digits, e.g. "441234567890".
+ *     @type string $address       Full postal address (single line or with commas).
  * }
  */
 function spn_cabinets_contact() {
 	return apply_filters(
 		'spn_cabinets_contact',
 		array(
-			'phone'    => '', // e.g. '01234 567890' — set via ACF/options later.
-			'email'    => '', // e.g. 'hello@spncabinets.co.uk'.
-			'whatsapp' => '', // e.g. '441234567890' (no +, no spaces).
-			'address'  => '', // e.g. '1 Example Road, Town, AB1 2CD'.
+			'phone'         => '07956084290',           // Raw — builds the tel: link.
+			'phone_display' => '07956 084 290',         // Formatted for display.
+			'email'         => 'spncabinets@yahoo.co.uk',
+			'whatsapp'      => '',                       // Not supplied yet (the mobile could double as WhatsApp).
+			'address'       => '',                       // Not supplied yet.
 		)
 	);
 }
@@ -153,8 +155,10 @@ function spn_cabinets_contact_item( $type, $args = array() ) {
 	// Map each type to its value, href, icon and placeholder label.
 	$map = array(
 		'phone'    => array(
-			'value'       => $contact['phone'],
-			'href'        => spn_cabinets_tel_href( $contact['phone'] ),
+			// Show the formatted number; fall back to the raw one. The tel: link
+			// always uses the raw digits.
+			'value'       => '' !== trim( (string) ( $contact['phone_display'] ?? '' ) ) ? $contact['phone_display'] : ( $contact['phone'] ?? '' ),
+			'href'        => spn_cabinets_tel_href( $contact['phone'] ?? '' ),
 			'icon'        => 'phone',
 			'placeholder' => __( 'Phone Number', 'spn-cabinets' ),
 		),

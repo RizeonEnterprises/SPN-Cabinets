@@ -18,7 +18,10 @@ get_header();
 <main id="primary" class="site-main site-main--front-page site-main--flush" role="main">
 
 	<?php
-	// 1) HERO — the homepage <h1> + dual CTAs over a placeholder image.
+	// 1) HERO — the homepage <h1> + dual CTAs. Background is the Home page's
+	// featured image (editable in the block editor); falls back to the solid
+	// variant if none is set.
+	$spn_hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
 	spn_cabinets_component(
 		'hero/hero',
 		array(
@@ -26,8 +29,8 @@ get_header();
 			'title_tag'            => 'h1',
 			'subtitle'             => __( 'Expertly crafted cabinetry designed and installed to perfection.', 'spn-cabinets' ),
 			'alignment'            => 'center',
-			'background_type'      => 'image',
-			'background_image_url' => 'https://placehold.co/1920x1080/333333/dddddd?text=SPN+Cabinets',
+			'background_type'      => $spn_hero_image ? 'image' : 'solid',
+			'background_image_url' => $spn_hero_image ? $spn_hero_image : '',
 			'primary_cta_text'     => __( 'View Our Work', 'spn-cabinets' ),
 			'primary_cta_url'      => home_url( '/portfolio/' ),
 			'secondary_cta_text'   => __( 'Get a Quote', 'spn-cabinets' ),

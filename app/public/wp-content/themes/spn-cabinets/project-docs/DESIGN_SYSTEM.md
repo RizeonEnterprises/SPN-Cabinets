@@ -5,10 +5,11 @@ The single source of truth for design decisions. Every value here maps to a
 `assets/css/src/01-settings/tokens.css` and compiled into `assets/css/main.css`.
 Components consume tokens — **never hard-coded values**.
 
-> **Brand colours are intentionally NOT chosen yet.** They are `⛳ PLACEHOLDER`
-> tokens below and will be finalised once the client supplies branding. Choose
-> nothing that assumes a palette. When branding lands, only the `--color-*`
-> brand token *values* change — nothing else in the system moves.
+> **Brand palette finalised (Phase 5):** deep slate **`--color-primary: #2c3e50`**
+> (+ `--color-heading`, `--color-secondary: #34495e`) and brushed gold
+> **`--color-accent: #c8a24b`**. Text-on-primary is `#ffffff` (≈10.9:1),
+> text-on-accent is `#1a1a1a` (≈7.3:1). Only the `--color-*` values changed —
+> nothing else in the system moved. Neutrals/state stay as documented below.
 
 > **Status:** the design system described here is **implemented** (v0.1). Files
 > and build are documented in §0. UI components (Hero, forms markup, etc.) are

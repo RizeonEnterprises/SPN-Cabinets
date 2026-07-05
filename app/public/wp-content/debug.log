@@ -1,2 +1,8 @@
 [05-Jul-2026 03:57:36 UTC] Automatic updates starting...
 [05-Jul-2026 03:57:39 UTC] Automatic updates complete.
+[05-Jul-2026 06:59:39 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): No connection could be made because the target machine actively refused it in C:\Users\Varun\Local Sites\spn-cabinets\app\public\wp-includes\class-wpdb.php on line 1988
+[05-Jul-2026 06:59:48 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): No connection could be made because the target machine actively refused it in C:\Users\Varun\Local Sites\spn-cabinets\app\public\wp-includes\class-wpdb.php on line 1988
+[05-Jul-2026 06:59:58 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): No connection could be made because the target machine actively refused it in C:\Users\Varun\Local Sites\spn-cabinets\app\public\wp-includes\class-wpdb.php on line 1988
+[05-Jul-2026 07:00:02 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): No connection could be made because the target machine actively refused it in C:\Users\Varun\Local Sites\spn-cabinets\app\public\wp-includes\class-wpdb.php on line 1988
+[05-Jul-2026 15:30:19 UTC] Automatic updates starting...
+[05-Jul-2026 15:30:23 UTC] Automatic updates complete.

@@ -15,6 +15,34 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Resolve a locally-hosted Media Library image URL by its key.
+ *
+ * Keys map to attachment IDs stored in the `spn_cabinets_media_map` option
+ * (populated when the client's Wix images were imported into the library, so we
+ * serve local uploads instead of hot-linking Wix). Falls back to the supplied
+ * URL when the image is not present (e.g. a fresh environment without the map).
+ *
+ * @since 1.0.0
+ * @param string $key      Map key, e.g. 'kitchen', 'bedroom', 'media-wall', 'storage'.
+ * @param string $fallback URL to use when the local image is unavailable.
+ * @param string $size     Registered image size. Default 'large'.
+ * @return string Image URL (local when available, otherwise the fallback).
+ */
+function spn_cabinets_media_url( $key, $fallback = '', $size = 'large' ) {
+	$map = get_option( 'spn_cabinets_media_map', array() );
+
+	if ( is_array( $map ) && ! empty( $map[ $key ] ) ) {
+		$url = wp_get_attachment_image_url( (int) $map[ $key ], $size );
+
+		if ( $url ) {
+			return $url;
+		}
+	}
+
+	return $fallback;
+}
+
+/**
  * Placeholder services (feeds the Service Card component).
  *
  * @since 1.0.0
@@ -24,32 +52,32 @@ defined( 'ABSPATH' ) || exit;
 function spn_cabinets_mock_services( $limit = 0 ) {
 	$services = array(
 		array(
-			'title'       => __( 'Bespoke Kitchens', 'spn-cabinets' ),
+			'title'       => __( 'Kitchens', 'spn-cabinets' ),
 			'icon'        => 'home',
-			'image_url'   => 'https://placehold.co/800x600/eeeeee/555555?text=Bespoke+Kitchens',
-			'description' => __( 'Handcrafted kitchens designed around how you live — from classic shaker to sleek handleless.', 'spn-cabinets' ),
-			'url'         => home_url( '/services/fitted-kitchens/' ),
+			'image_url'   => spn_cabinets_media_url( 'kitchen', 'https://static.wixstatic.com/media/11062b_76ac6b29841d4c7caba353e414ea4391~mv2.jpeg/v1/fill/w_800,h_600,al_c,q_85/kitchen.jpg' ),
+			'description' => __( 'As the heart of your home, your kitchen deserves furniture and fittings that last. Create a kitchen that fits your lifestyle, layout, and budget.', 'spn-cabinets' ),
+			'url'         => home_url( '/quote/' ),
 		),
 		array(
-			'title'       => __( 'Fitted Bedrooms', 'spn-cabinets' ),
+			'title'       => __( 'Bedrooms', 'spn-cabinets' ),
 			'icon'        => 'layers',
-			'image_url'   => 'https://placehold.co/800x600/eeeeee/555555?text=Fitted+Bedrooms',
-			'description' => __( 'Made-to-measure wardrobes and storage that make the most of every inch of your space.', 'spn-cabinets' ),
-			'url'         => home_url( '/services/fitted-bedrooms/' ),
-		),
-		array(
-			'title'       => __( 'Home Offices', 'spn-cabinets' ),
-			'icon'        => 'briefcase',
-			'image_url'   => 'https://placehold.co/800x600/eeeeee/555555?text=Home+Offices',
-			'description' => __( 'Purpose-built desks, shelving and storage for a workspace that works as hard as you do.', 'spn-cabinets' ),
-			'url'         => home_url( '/services/home-offices/' ),
+			'image_url'   => spn_cabinets_media_url( 'bedroom', 'https://static.wixstatic.com/media/11062b_f2b967d92a3643b68bb61c6d5ac6d111~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/bedroom.jpg' ),
+			'description' => __( 'Create your perfect fitted wardrobe with our expert design and installation service. Every inch is tailored to your needs to add style and elegance.', 'spn-cabinets' ),
+			'url'         => home_url( '/quote/' ),
 		),
 		array(
 			'title'       => __( 'Media Walls', 'spn-cabinets' ),
 			'icon'        => 'monitor',
-			'image_url'   => 'https://placehold.co/800x600/eeeeee/555555?text=Media+Walls',
-			'description' => __( 'Statement media walls with integrated storage and hidden cable management, built to fit.', 'spn-cabinets' ),
-			'url'         => home_url( '/services/media-walls/' ),
+			'image_url'   => spn_cabinets_media_url( 'media-wall', 'https://static.wixstatic.com/media/11062b_9be2d47ecfb542d5b88f6562ad1b9639~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/media-wall.jpg' ),
+			'description' => __( 'We design and fit custom media walls that bring together modern design and practical storage, tailored perfectly to your space and lifestyle.', 'spn-cabinets' ),
+			'url'         => home_url( '/quote/' ),
+		),
+		array(
+			'title'       => __( 'Custom Storage', 'spn-cabinets' ),
+			'icon'        => 'briefcase',
+			'image_url'   => spn_cabinets_media_url( 'storage', 'https://static.wixstatic.com/media/11062b_ee5add250ee643d1abc55ec22f16cf66~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/storage.jpg' ),
+			'description' => __( 'From bespoke home offices to hallway storage, we design and manufacture high-quality furniture tailored specifically to the dimensions of your home.', 'spn-cabinets' ),
+			'url'         => home_url( '/quote/' ),
 		),
 	);
 

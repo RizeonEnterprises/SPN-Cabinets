@@ -43,8 +43,10 @@ _Last updated: 2026-07-03_
 - [ ] (Optional/future) Style + Location taxonomies; Testimonial + FAQ CPTs
 - [~] ACF field group defined in PHP (`inc/acf-fields.php`, guarded) — **install
       ACF PRO** (gallery field) to activate; consider Local JSON later
-- [ ] Create page tree (Home, About, Services + children, Gallery, Contact, legal)
-- [ ] Build + assign Primary and Footer menus
+- [x] Create page tree (Home, About Us, Services, Contact, Get a Quote) + set
+      static front page (Home); Portfolio is the CPT archive
+- [x] Build + assign Primary (Home/About/Services/Portfolio/Contact) and Footer
+      (Services/Portfolio/Contact) menus; removed the QA scaffold menu
 - ⛳ Confirm service-area/towns (affects local pages) — see CLIENT_REQUIREMENTS
 
 ## Milestone 2 — Design system — 🟡 in progress (~70%)
@@ -118,7 +120,8 @@ responsive check → ACF fields → document + tick in
 
 - [x] Homepage (`front-page.php`) — composed from components (mock data for now;
       Recent Projects via live `WP_Query`). ACF flexible-content sourcing later.
-- [ ] About
+- [x] About (`page-about.php`) — media & text story + testimonials + CTA
+- [x] Contact (`page-contact.php`) — contact details + Quote Form
 - [ ] Services (hub) + Fitted Kitchens + Fitted Bedrooms
 - [x] Single Project (`single-spn_project.php`) — assembled from components
 - [x] Gallery / project archive (`archive-spn_project.php` → `/portfolio/`)

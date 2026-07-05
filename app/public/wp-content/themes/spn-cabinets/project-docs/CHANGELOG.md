@@ -19,6 +19,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Portfolio content + image localisation (Phase 6).** Imported the four client
+  photos (kitchen, bedroom, media wall, storage) from Wix into the **Media
+  Library**, then created four published `spn_project` posts — *Modern Kitchen
+  Installation*, *Bespoke Fitted Wardrobes*, *Living Room Media Wall*, *Custom
+  Hallway Storage* — each with its imported image as the **featured image** and a
+  `spn_project_category` term. The homepage **Recent Installations** section now
+  renders (the `WP_Query` finds real projects). Added `spn_cabinets_media_url()`
+  (resolves local uploads from the `spn_cabinets_media_map` option, Wix fallback).
+- **Quote page template (Phase 5)** — `page-quote.php`
+  (`Template Name: Get a Quote`). Hero → the reusable Quote Form in a narrow,
+  centred `.container--narrow` column, wrapped in the loop so the form redirect
+  resolves. Verified live at `/quote/`.
+- **About & Contact page templates (Phase 3)** — `page-about.php`
+  (`Template Name: About Us`) and `page-contact.php` (`Template Name: Contact
+  Page`). About: Hero → "media & text" story (`.grid-md-2` image + `the_content()`)
+  → testimonials → CTA. Contact: Hero → two-column layout (contact details via
+  `spn_cabinets_contact_item()` phone/email/whatsapp/address + the reusable Quote
+  Form). Both verified live (200, one `<h1>`, no PHP errors).
 - **Homepage template (Phase 3)** — `front-page.php`. Fully composed landing
   page: Hero (h1 + dual CTAs over a placeholder image) → Featured Services
   (`.grid-lg-4`, 4 shared mock services) → **Recent Projects** (a scoped
@@ -187,6 +205,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     and submenu toggles.
 
 ### Changed
+- **Stopped hot-linking Wix (Phase 6).** `front-page.php` hero now uses the **Home
+  page's featured image** (`get_the_post_thumbnail_url()`) and `page-about.php` the
+  **About page's featured image** — no hard-coded Wix URLs in either template. The
+  demo-content service cards resolve local uploads via `spn_cabinets_media_url()`
+  (keeping the Wix URLs only as fallbacks). Verified: the rendered homepage and
+  About page contain **zero `wixstatic` links**; all images serve from
+  `wp-content/uploads/`.
+- **Real images + About content.** `front-page.php` hero and the `page-about.php`
+  story image now use the client's real photos (Wix CDN) instead of `placehold.co`.
+  The About story image uses design-system classes — `.about-story__media.ratio-square`
+  wrapper + `.radius-lg.object-cover` img (a square, cover-cropped, rounded image) —
+  **no inline styles**, per CLAUDE.md §8. Added reusable `.object-cover` /
+  `.object-contain` utilities. The "About Us" page content was populated via WP-CLI
+  as native Gutenberg blocks (intro + three `<h3>` sections), so it stays editable.
+- **Real client content wired in.** `spn_cabinets_contact()` now returns the real
+  phone (`07956084290` raw + `07956 084 290` display) and email
+  (`spncabinets@yahoo.co.uk`); `spn_cabinets_contact_item()` shows the formatted
+  number while the `tel:` link uses the raw digits. `spn_cabinets_mock_services()`
+  replaced with the client's four real services (Kitchens, Bedrooms, Media Walls,
+  Custom Storage) + copy + images. (Service images are external Wix URLs for now —
+  migrate to the Media Library later.)
+- **Brand palette finalised (Phase 5)** in `01-settings/tokens.css`: `--color-primary`
+  `#14213d` → **`#2c3e50`** (deep slate), `--color-primary-hover` → `#1f2d3a`,
+  `--color-heading` → `#2c3e50`, `--color-secondary` → `#34495e` (`-hover` `#2c3e50`);
+  `--color-accent` confirmed **`#c8a24b`** (brushed gold). Contrast kept accessible:
+  white on primary ≈ 10.9:1, `#1a1a1a` on accent ≈ 7.3:1. Removed the ⛳ placeholder
+  markers; `main.css` recompiled. (Also created + published Privacy `/privacy/` and
+  Terms `/terms/` pages so the footer legal links resolve.)
 - Header branding no longer renders as `<h1>` on the front page (now always a
   `<p>`) — the page's single `<h1>` belongs to its main content (hero / entry
   title), avoiding a double-`<h1>` on the homepage.

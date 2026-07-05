@@ -4,34 +4,34 @@
  * The single source of truth for the visual system. Every component and page
  * consumes these CSS custom properties — never hard-coded values.
  *
- * ⛳ BRAND COLOURS ARE PLACEHOLDERS. Only the values of the --color-* brand
- * tokens change when the client's branding is confirmed; nothing else in the
- * system should need to move. Token NAMES are stable and final.
+ * BRAND COLOURS FINALISED (Phase 5): deep slate (#2c3e50) + brushed gold
+ * (#c8a24b) — a premium, bespoke palette. Token NAMES are stable and final;
+ * swap the --color-* values here to re-skin without touching any component.
  * ========================================================================== */
 
 :root {
 
 	/* -------------------------------------------------------------------------
-	 * Colour — ⛳ PLACEHOLDER values (replace with the SPN Cabinets palette)
+	 * Colour — SPN Cabinets brand palette (deep slate + brushed gold)
 	 * ---------------------------------------------------------------------- */
 
 	/* Brand */
-	--color-primary: #14213d;            /* ⛳ primary brand / main CTAs */
-	--color-primary-hover: #0e1830;      /* ⛳ darker primary for hover */
-	--color-primary-contrast: #ffffff;   /* text/icon on primary */
+	--color-primary: #2c3e50;            /* deep slate — primary brand / main CTAs */
+	--color-primary-hover: #1f2d3a;      /* darker slate for hover */
+	--color-primary-contrast: #ffffff;   /* text/icon on primary (AA ~10.9:1) */
 
-	--color-secondary: #3a4a63;          /* ⛳ secondary brand */
-	--color-secondary-hover: #2c3a4f;    /* ⛳ */
+	--color-secondary: #34495e;          /* lighter slate — secondary brand */
+	--color-secondary-hover: #2c3e50;    /* darker slate for hover */
 	--color-secondary-contrast: #ffffff; /* text/icon on secondary */
 
-	--color-accent: #c8a24b;             /* ⛳ accent / highlight */
-	--color-accent-hover: #b28f3f;       /* ⛳ */
-	--color-accent-contrast: #1a1a1a;    /* text/icon on accent */
+	--color-accent: #c8a24b;             /* brushed gold — accent / highlights */
+	--color-accent-hover: #b28f3f;       /* darker gold for hover */
+	--color-accent-contrast: #1a1a1a;    /* text/icon on accent (AA ~6.8:1) */
 
 	/* Neutrals (placeholder greyscale — usually kept, but confirm with brand) */
 	--color-text: #1a1a1a;               /* body text */
 	--color-text-muted: #555555;         /* secondary text */
-	--color-heading: #14213d;            /* headings (defaults to primary) */
+	--color-heading: #2c3e50;            /* headings — brand slate */
 	--color-background: #ffffff;         /* page background */
 	--color-surface: #f5f5f5;            /* cards / raised surfaces */
 	--color-surface-alt: #eeeeee;        /* alternating sections */
